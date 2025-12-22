@@ -15,11 +15,21 @@ const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Preload cursor images
+    // Debug: Log resolved paths
+    console.log("Cursor Debug - Flower Path:", flowerCursor);
+    console.log("Cursor Debug - Ghost Path:", ghostCursor);
+    console.log("Cursor Debug - Current Path:", pathname);
+
+    // Preload cursor images with error feedback
     const img1 = new Image();
     img1.src = flowerCursor;
+    img1.onload = () => console.log("Cursor Debug - Flower Loaded OK");
+    img1.onerror = (e) => console.error("Cursor Debug - Flower Failed to Load", e);
+
     const img2 = new Image();
     img2.src = ghostCursor;
+    img2.onload = () => console.log("Cursor Debug - Ghost Loaded OK");
+    img2.onerror = (e) => console.error("Cursor Debug - Ghost Failed to Load", e);
 
     const checkMobile = () => {
         setIsMobile(window.matchMedia("(max-width: 768px)").matches || 'ontouchstart' in window);
@@ -27,7 +37,7 @@ const CustomCursor = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [pathname]); // Re-run debug on path change
 
   useEffect(() => {
     const updateMousePosition = (e) => {
