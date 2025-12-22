@@ -1,0 +1,142 @@
+.books-section {
+    width: 100%;
+    padding: 4rem 10%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+.books-title {
+    font-family: 'Slackey', cursive;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #333;
+}
+
+.books-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* 3D Book Container */
+.book-container {
+    width: 200px;
+    height: 300px;
+    perspective: 1000px; /* Essential for 3D effect */
+    cursor: none;
+}
+
+.book {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.book-container:hover .book {
+    transform: rotateY(-15deg); /* Slight overall rotation on hover */
+}
+
+/* Common Face Styles */
+.book-cover, .book-page, .book-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-radius: 2px 4px 4px 2px;
+}
+
+/* Front Cover */
+.book-cover {
+    z-index: 10;
+    transform-origin: left; /* Open like a book */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-style: preserve-3d;
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px 4px 4px 2px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+.book-container:hover .book-cover {
+    transform: rotateY(-65deg); /* Open the cover */
+}
+
+/* Spine */
+.book-spine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    transform: rotateY(90deg) translateZ(-10px); /* Positioned at the hinge */
+    background-color: #333;
+}
+
+/* Inside Page */
+.book-page {
+    z-index: 5;
+    background: #fdfdfd;
+    box-shadow: inset 5px 0 10px rgba(0,0,0,0.05); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+    transform: translateZ(-2px);
+    box-sizing: border-box;
+    width: 96%;
+    height: 96%;
+    top: 2%;
+    left: 2%;
+    border: 1px solid #eee;
+}
+
+.book-page h4 {
+    font-family: 'Caveat Brush', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.book-page p {
+    font-family: 'Pangolin', cursive;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Back Cover */
+.book-back {
+    transform: translateZ(-20px);
+    background-color: #eee;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.1);
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .books-grid {
+        gap: 2rem;
+    }
+    .book-container {
+        width: 140px;
+        height: 210px;
+    }
+}

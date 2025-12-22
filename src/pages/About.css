@@ -1,0 +1,195 @@
+/* About Page Container */
+.about-container {
+    width: 100%;
+    /* min-height: 100vh;  Removed fixed height to allow scrolling to Contact */
+    background-color: #fff; /* or match body background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto; /* Allow vertical scroll */
+    width: 100vw;
+}
+
+.about-content-wrapper {
+    position: relative;
+    width: 100%;
+    /* Space for Navbar */
+    padding-left: 20%;
+    padding-right: 20%;
+    display: flex;
+    justify-content: center; /* Robust centering */
+    overflow: hidden;
+}
+.top-bar {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    
+}
+
+
+
+
+/* ... existing top-bar styles ... */
+
+
+/* Background Image Container */
+.about-bg-image {
+    width: 100%;
+    max-width: none; /* Removed constraint to fill screen (respecting 90% width in media query) */
+    height: auto;
+    aspect-ratio: 16/10;
+    min-height: 600px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 0;
+    margin: 0 auto;
+}
+
+/* Overlay Content inside the image area */
+.about-text-overlay {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    padding-right: 5%;
+    padding-left: 5%;
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.about-heading {
+   font-family: 'Slackey', cursive;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 0.9;
+    text-align: left;
+    flex: 1;
+    letter-spacing: -1px;
+}
+
+.about-description {
+    flex: 1;
+    font-family: Pangolin, sans-serif;
+    text-align: right;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    max-width: 700px; /* Increased to allow wider text block */
+    font-weight: 500;
+    color: #333;
+}
+
+/* Stats Section below the image */
+.stats-section {
+    width: 100%;
+    padding: 2rem 0;
+}
+
+/* Responsive Styles */
+@media (min-width: 1024px) {
+    .about-bg-image {
+        width: 100%; 
+        height: 100vh;
+        margin: 0 auto;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    .about-content-wrapper {
+       width: 70%;
+       padding-left: 0;
+       padding-right: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Tablet specific */
+    .about-content-wrapper {
+        width: 90%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .about-text-overlay {
+        top: 20%;
+        padding: 0 2rem;
+    }
+    .about-heading {
+        font-size: 2.5rem;
+    }
+    .top-bar {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-content-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 0;
+    }
+
+    .music-circle {
+        display: none;
+    }
+
+    .about-bg-image {
+        width: 100%; 
+        margin: 0;
+        border-radius: 0;
+        min-height: 500px; /* Taller to fit stacked content */
+        aspect-ratio: auto; /* Let content dictate height if needed */
+        height: 100vh;
+    }
+    
+    .top-bar {
+        top: 1rem;
+        padding: 0 0rem;
+        gap: 0.5rem;
+        flex-wrap: wrap; /* Allow wrapping if very small */
+    }
+
+    .about-text-overlay {
+        flex-direction: column;
+        top: 15%; /* Push down below navbar */
+        padding: 0 1.5rem;
+        gap: 0.5rem; /* Space between heading and desc */
+        height: 70%;
+        justify-content: flex-start;
+    }
+
+    .about-heading {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-top: 10%;
+        margin-bottom: 0;
+    }
+
+    .about-description {
+        text-align: center;
+        font-size: 1rem;
+        max-width: 100%;
+        margin-bottom: 40%;
+    }
+    
+    /* Adjust Navbar for mobile */
+    .navbar-container {
+        padding: 0.5rem 1rem;
+        gap: 1rem;
+    }
+    .nav-link {
+        font-size: 0.9rem;
+    }
+}

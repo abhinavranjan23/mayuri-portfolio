@@ -1,0 +1,221 @@
+.what-i-bring-section {
+    width: 100%;
+    padding: 2rem 10%;
+    background-color: #fff; /* or transparent */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.section-header-icon img {
+    width: 100px;
+    height: auto;
+    animation: swingRotate 2s ease-in-out infinite alternate;
+}
+
+@keyframes swingRotate {
+    from { transform: rotate(-20deg); }
+    to { transform: rotate(20deg); }
+}
+
+.section-title {
+    font-family: 'Slackey', cursive;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0.1rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #333;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(300px, auto); /* Taller rows */
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.bring-card {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 24px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Varied Layout items */
+.card-1 { grid-column: span 5; }
+.card-2 { grid-column: span 7; }
+.card-3 { grid-column: span 7; }
+.card-4 { grid-column: span 5; }
+
+/* Hover Effects */
+.bring-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    border-color: #fff;
+    z-index: 2;
+}
+
+/* Card Content */
+.card-top {
+    z-index: 2;
+}
+
+.card-title {
+    font-family: "Caveat Brush", cursive;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    margin-top: 0.1rem;
+    color: #111;
+}
+
+.card-desc {
+    font-family: 'Pangolin', cursive;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+/* Icons & Visuals - Absolute Positioning */
+.card-visuals {
+    margin-top: auto; /* Push to bottom if flex spacing allows */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.card-icon {
+    position: absolute;
+    transition: transform 0.5s ease;
+}
+
+.bring-card:hover .card-icon {
+    transform: scale(1.05); /* Gentle zoom on hover */
+}
+
+.card-tags {
+    position: relative;
+    z-index: 2;
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Specific Positions per card */
+/* Card 1: Bottom Rightish */
+.card-1 .card-icon {
+    bottom: -20px;
+    right: -20px;
+}
+.card-1 .card-icon img {
+    width: 140px;
+    height: auto;
+}
+.card-1:hover .card-icon {
+     transform: translateX(-10%) rotate(-10deg); /* Gentle zoom on hover */
+}
+
+/* Card 2: Bottom Right, Large */
+.card-2 .card-icon {
+    bottom: -30px;
+    right: 20px;
+}
+.card-2 .card-icon img {
+    width: 180px; /* Larger */
+    height: auto;
+}
+.card-2:hover .card-icon {
+     transform: translateX(10%) rotate(-30deg); /* Gentle zoom on hover */
+}
+
+/* Card 3: Bottom Center/Right */
+.card-3 .card-icon {
+    bottom: -20px;
+    right: 50px;
+}
+.card-3 .card-icon img {
+    width: 160px;
+    height: auto;
+}
+.card-3:hover .card-icon {
+     transform: translateX(10%) rotate(-30deg); /* Gentle zoom on hover */
+}
+
+
+/* Card 4: Bott.card3om Center */
+/* Card 4: Two Icons (Centered cluster) */
+.card-4 .card-icon.icon-1 {
+    bottom: 30px;
+    right: 30%;
+    transform: translateX(10%) rotate(-10deg); /* Hands slightly right and tilted */
+    z-index: 1;
+}
+.card-4 .card-icon.icon-2 {
+    bottom: 50px;
+    right: 40%;
+    transform: translateX(80%) rotate(10deg); /* Namaste/logo text slightly above and right */
+    z-index: 2;
+}
+
+.card-4:hover .card-icon.icon-1 {
+    transform: translateX(10%) rotate(-20deg) scale(1.05);
+}
+.card-4:hover .card-icon.icon-2 {
+    transform: translateX(80%) rotate(20deg) scale(1.1);
+}
+
+.card-4 .card-icon.icon-1 img {
+    width: 140px;
+    height: auto;
+}
+.card-4 .card-icon.icon-2 img {
+    width: 100px;
+    height: auto;
+}
+
+
+.tag {
+    background: #FFFAE5; /* Matches yellowish tag in image */
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    transform: rotate(-2deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.tag:nth-child(2) { transform: rotate(2deg); background: #EFE5FF; }
+.tag:nth-child(3) { transform: rotate(-1deg); background: #E5F6FF; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .card-1, .card-2, .card-3, .card-4 {
+        grid-column: span 1;
+    }
+
+    .what-i-bring-section {
+        padding: 3rem 5%;
+    }
+}

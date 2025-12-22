@@ -1,0 +1,292 @@
+/* Contact Section Container */
+.contact-section {
+    width: 100%;
+    /* min-height: 80vh; Takes up substantial space */
+    background-color: #fafafa; /* Light grey background  #f5f5f5*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    position: relative; /* For absolute positioning of cyclist */
+    overflow: hidden; /* Hide cyclist when off screen */
+    margin-bottom: 2rem;
+}
+
+.contact-wrapper {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Header */
+.contact-header {
+    margin-bottom: 3rem;
+}
+
+.contact-heading {
+    font-family: 'Slackey', cursive; /* Keeping consistent playful font? Or bold Sans */
+    /* Let's use a bold sans for "Let's talk" feel, or Slackey if user wants brand consistency. 
+       User image showed bold Sans. Let's stick to brand but clean. */
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-subheading {
+    font-family: 'Pangolin', sans-serif;
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Social Links */
+.social-links-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    z-index: 10;
+    position: relative;
+}
+
+.social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, color 0.3s;
+}
+
+.social-card:hover {
+    transform: translateY(-5px);
+    color: #000;
+}
+
+.social-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.3s, background 0.3s, color 0.3s;
+    font-size: 1.5rem;
+}
+
+.social-card:hover .social-icon {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.social-icon.linkedin { color: #0077b5; }
+.social-icon.youtube { color: #ff0000; }
+.social-icon.instagram { color: #e1306c; }
+
+.social-card:hover .social-icon.linkedin { background: #0077b5; color: white; }
+.social-card:hover .social-icon.youtube { background: #ff0000; color: white; }
+.social-card:hover .social-icon.instagram { background: #e1306c; color: white; }
+
+.social-text {
+     font-family: 'Pangolin', cursive;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.social-card:hover .social-text {
+    opacity: 1;
+}
+
+
+/* Selection Step (Radio Buttons) */
+.selection-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 10;
+}
+
+.option-btn {
+    background: transparent;
+    border: none;
+    cursor: none; /* Custom cursor handles interaction */
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0;
+    transition: transform 0.2s ease, opacity 0.2s;
+    opacity: 0.6;
+}
+
+.option-btn:hover, .option-btn.active {
+    opacity: 1;
+    transform: translateX(10px);
+}
+
+.radio-circle {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    overflow: hidden; /* Mask the rising dot */
+    position: relative; /* Context for absolute if needed, but flex handles center */
+}
+
+/* Hover effect: Peek from bottom? Or just click? User said click. 
+   But let's make it peek slightly on hover for juice if not active */
+.option-btn:hover .radio-circle::after {
+    transform: translateY(15px) scale(0.6); /* Peek state */
+}
+
+.radio-circle::after {
+    content: '';
+    width: 35px;
+    height: 35px;
+    background-color: #333;
+    border-radius: 50%;
+    
+    /* Initial State: Hidden Below */
+    transform: translateY(140px); 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy rise */
+}
+
+.radio-circle.selected::after {
+    /* Final State: Centered */
+    transform: translateY(0);
+}
+/* Override hover interference if selected */
+.option-btn.active:hover .radio-circle::after {
+    transform: translateY(0);
+}
+
+
+.option-text {
+    font-size: 3rem; /* Big aesthetic text */
+    font-weight: 700;
+    -webkit-text-stroke: 1px #333; /* Outline effect */
+    color: transparent;
+    transition: color 0.3s;
+    font-family: 'Oswald', sans-serif; /* Tall condensed font if avail, or Poppins */
+}
+
+.option-btn:hover .option-text, .option-btn.active .option-text {
+    color: #333; /* Fill on hover */
+}
+
+/* Form Steps */
+.form-container {
+    position: relative;
+    margin-top: 2rem;
+    z-index: 10;
+    
+}
+
+.input-group {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.minimal-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.minimal-input:focus {
+    border-bottom-color: #333;
+}
+
+.submit-btn {
+    background-color: #333;
+    color: white;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: none;
+    margin-top: 1rem;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.submit-btn:hover {
+    transform: scale(1.05);
+    background-color: #000;
+}
+
+.back-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: none;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.back-btn:hover {
+    color: #333;
+}
+
+/* Cyclist Animation */
+.cyclist-container {
+    position: absolute;
+    bottom: -10%;
+    left: 0%;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Let clicks pass through to footer if any */
+    z-index: 7;
+}
+
+.cyclist-wrapper {
+    display: block;
+    width: 100%;
+    transform: scaleX(-1); /* Flips the scene so she cycles on the right */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .option-text {
+        font-size: 2rem;
+    }
+    .contact-heading {
+        font-size: 2.5rem;
+    }
+    .radio-circle {
+        width: 30px;
+        height: 30px;
+    }
+}
+@media (min-width: 736px) {
+    .contact-section {
+        min-height:100vh;
+    }
+}

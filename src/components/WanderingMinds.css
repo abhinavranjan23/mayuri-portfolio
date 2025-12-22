@@ -1,0 +1,203 @@
+.wandering-minds-section {
+    width: 100%;
+    min-height: 100vh; /* Allow enough scroll space */
+    background-color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5vw;
+    overflow: hidden; /* Prevent horizontal scroll from pinned resizing */
+}
+
+.wandering-content {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    max-width: 1200px;
+    height: 100vh;
+    padding-top: 2vh; /* Top padding for breathing room */
+}
+
+/* Left Column: Sticky Title */
+.wandering-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    padding-top: 2vh;
+}
+
+.wandering-title {
+    font-family: 'Slackey', cursive;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: #333;
+    position: sticky;
+    top: 10vh;
+    border-left: 6px solid  #FF6B6B ; /* Accent vertical line */
+    padding-left: 30px; /* Space between line and text */
+}
+
+.highlight-text {
+    color: #FF6B6B; /* Accent color */
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 4rem;
+}
+
+/* Right Column: Card Deck */
+.wandering-right {
+    flex: 1.5;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Move from center to top */
+    padding-top: 5vh; /* Add buffer */
+}
+
+.cards-stack {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Card width constraint */
+    height: 600px; /* Height container for the stack */
+    display: flex; /* Helps align the absolute cards if needed, but we rely on absolute */
+}
+
+.wander-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0); /* Material depth */
+    border-radius: 24px; /* Slightly rounder */
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1), /* Top edge light */
+        0 10px 40px -10px rgba(0, 0, 0, 0.15); /* Deep clear shadow */
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle glass/paper edge */
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-emoji {
+    font-size: 1.5rem;
+}
+
+.card-heading {
+    font-family: 'Caveat Brush', cursive;
+    font-size: 1.5rem;
+    margin: 0;
+    color: #333;
+}
+
+.card-image-container {
+    width: 100%;
+    aspect-ratio: 1/1; /* Square image like Insta */
+    background-color: var(--card-color, #eee);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-actions {
+    display: flex;
+    gap: 1rem;
+    padding: 0.1rem 0;
+}
+
+.action-icon {
+    width: 24px;
+    height: 24px;
+    cursor: none;
+    transition: transform 0.2s;
+    color: #333;
+}
+
+.action-icon:hover {
+    transform: scale(1.4);
+}
+
+.action-icon.heart:hover {
+    fill: #ff4081;
+    color: #ff4081;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.card-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.card-oneliner {
+    font-family: 'Pangolin', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+}
+
+@media (max-height: 440px) {
+    .wandering-minds-section {
+        min-height: 886px;
+        height: 886px;
+    }
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .wandering-content {
+        flex-direction: column;
+        height: auto;
+    }
+    .wander-card{
+        padding: 0.5rem;
+    }
+    
+    .wandering-left {
+        max-height: 20%;
+        justify-content: center;
+        margin-bottom: 1rem;
+        padding-top: 0;
+    }
+    .highlight-text {
+        font-size: 2.5rem;
+    }
+
+    .wandering-title {
+        font-size: 2rem;
+        position: static;
+        text-align: center;
+        padding-left: 15px;
+    }
+
+    .wandering-right {
+        height: 600px; /* Maintain height for scroll pinning */
+        padding-top: 0;
+    }
+
+    .cards-stack {
+        height: 100%;
+        padding-top: 2rem;
+    }
+}
