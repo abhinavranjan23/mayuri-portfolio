@@ -143,7 +143,7 @@ const CustomCursor = () => {
             pointerEvents: 'none',
             zIndex: 9999,
            
-            backgroundImage: cursorText ? 'none' : (pathname === '/about' ? `url(${ghostCursor})` : `url(${flowerCursor})`), // Ghost for About, Flower for others
+            backgroundImage: cursorText ? 'none' : (pathname.replace(/\/$/, '') === '/about' ? `url(${ghostCursor})` : `url(${flowerCursor})`), // Ghost for About, Flower for others
             backgroundSize: 'contain',
          
             backgroundRepeat: 'no-repeat',
