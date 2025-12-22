@@ -15,6 +15,12 @@ const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Preload cursor images
+    const img1 = new Image();
+    img1.src = flowerCursor;
+    const img2 = new Image();
+    img2.src = ghostCursor;
+
     const checkMobile = () => {
         setIsMobile(window.matchMedia("(max-width: 768px)").matches || 'ontouchstart' in window);
     };
