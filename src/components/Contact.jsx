@@ -17,8 +17,8 @@ const Contact = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    // Web3Form Access Key (Placeholder)
-    const ACCESS_KEY = "YOUR_ACCESS_KEY_HERE"; 
+
+    const ACCESS_KEY = "7e21c9ac-7712-43e3-9a61-edcf5f14159d"; 
 
     // Handle Selection
     const handleSelection = (type) => {
@@ -281,7 +281,6 @@ const Contact = () => {
                             variants={fadeVariants}
                             initial="hidden"
                             animate="visible"
-                            style={{textAlign: 'center', marginTop: '3rem'}}
                         >
                             <h3 style={{fontSize: '2rem', marginBottom: '1rem'}}>Message Sent! ✨</h3>
                             <p>Thanks for reaching out, {formData.name}. I'll get back to you soon.</p>

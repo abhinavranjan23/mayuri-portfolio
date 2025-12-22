@@ -239,6 +239,13 @@
     background-color: #000;
 }
 
+.success-message {
+    position: relative;
+    z-index: 20; /* Ensure it appears above the cyclist animation */
+    text-align: center;
+    margin-top: 3rem;
+}
+
 .back-btn {
     background: transparent;
     border: none;
@@ -271,6 +278,7 @@
     width: 100%;
     transform: scaleX(-1); /* Flips the scene so she cycles on the right */
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {
