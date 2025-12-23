@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 // Use static paths from public/ directory to avoid inlining issues
 const flowerCursor = '/cursors/flower.svg';
@@ -9,7 +9,16 @@ const ghostCursor = '/cursors/cute-ghost.svg';
 const CustomCursor = () => {
   const { pathname } = useLocation();
   const [collisions, setCollisions] = useState([]);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  // OPTIMIZATION: Use MotionValues for high-performance updates without re-renders
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+  
+  // Smooth spring physics for the cursor movement
+  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
   const [isHovering, setIsHovering] = useState(false);
   const [isColliding, setIsColliding] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
@@ -17,21 +26,15 @@ const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Debug: Log resolved paths
+    // Debug paths once on mount/change
     console.log("Cursor Debug - Flower Path:", flowerCursor);
     console.log("Cursor Debug - Ghost Path:", ghostCursor);
-    console.log("Cursor Debug - Current Path:", pathname);
 
-    // Preload cursor images with error feedback
+    // Preload cursor images
     const img1 = new Image();
     img1.src = flowerCursor;
-    img1.onload = () => console.log("Cursor Debug - Flower Loaded OK");
-    img1.onerror = (e) => console.error("Cursor Debug - Flower Failed to Load", e);
-
     const img2 = new Image();
     img2.src = ghostCursor;
-    img2.onload = () => console.log("Cursor Debug - Ghost Loaded OK");
-    img2.onerror = (e) => console.error("Cursor Debug - Ghost Failed to Load", e);
 
     const checkMobile = () => {
         setIsMobile(window.matchMedia("(max-width: 768px)").matches || 'ontouchstart' in window);
@@ -39,22 +42,22 @@ const CustomCursor = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, [pathname]); // Re-run debug on path change
+  }, [pathname]);
 
   useEffect(() => {
     const updateMousePosition = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      // Update MotionValues directly - NO RE-RENDER
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
       
+      // Hit testing (still needs to run, but lightweight)
       const target = e.target;
       const isClickable = target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button');
       setIsHovering(!!isClickable);
 
-      // Check for spinner
       const spinTarget = target.getAttribute('data-cursor-spin') ? target : target.closest('[data-cursor-spin]');
       setIsSpinning(!!spinTarget);
 
-
-      // Check for custom cursor text
       const textTarget = target.getAttribute('data-cursor-text') ? target : target.closest('[data-cursor-text]');
       if (textTarget) {
         setCursorText(textTarget.getAttribute('data-cursor-text'));
@@ -64,19 +67,14 @@ const CustomCursor = () => {
     };
 
     const handleClick = (e) => {
-      // ... same logic ...
       const target = e.target;
       const isClickable = target.tagName === 'A' || target.tagName === 'BUTTON' || target.getAttribute('data-cursor-button') || target.closest('a') || target.closest('button') || target.closest('[data-cursor-button]');
 
       if (!isClickable) {
-          // ... collision logic ...
           const id = Date.now();
           setCollisions(prev => [...prev, { x: e.clientX, y: e.clientY, id }]);
-          
-          // Trigger generic recoil animation on cursor
           setIsColliding(true);
           setTimeout(() => setIsColliding(false), 200);
-
           setTimeout(() => {
               setCollisions(prev => prev.filter(c => c.id !== id));
           }, 1000);
@@ -96,31 +94,31 @@ const CustomCursor = () => {
 
   const variants = {
     default: {
-      x: mousePosition.x - 19,
-      y: mousePosition.y - 19,
       scale: 1,
       rotate: 0,
       width: '38px',
       height: '38px',
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      x: "-50%",
+      y: "-50%"
     },
     hover: {
-      x: mousePosition.x - 19,
-      y: mousePosition.y - 19,
       scale: 1.5,
       rotate: 45,
       width: '38px',
       height: '38px',
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      x: "-50%",
+      y: "-50%"
     },
     spinning: {
-        x: mousePosition.x - 19,
-        y: mousePosition.y - 19,
         scale: 1.5,
         rotate: 360,
         width: '38px',
         height: '38px',
         backgroundColor: 'transparent',
+        x: "-50%",
+        y: "-50%",
         transition: {
             rotate: {
                 repeat: Infinity,
@@ -130,19 +128,19 @@ const CustomCursor = () => {
         }
     },
     text: {
-        x: mousePosition.x - 60, // Center offset for 120px width
-        y: mousePosition.y - 50, // Move higher up to avoid blocking text
         width: '120px',
         height: '35px',
         scale: 1,
         rotate: 0,
         backgroundColor: 'transparent',
+        x: "-50%",
+        y: "-150%" // Move higher up above text
     },
     collision: {
-      x: mousePosition.x - 19,
-      y: mousePosition.y - 19,
-      scale: 0.9, // Compress on impact
-      rotate: [0, -20, 20, -20, 20, 0], // Aggressive shake
+      scale: 0.9, 
+      rotate: [0, -20, 20, -20, 20, 0], 
+      x: "-50%", 
+      y: "-50%",
       transition: { duration: 0.3 }
     }
   };
@@ -152,16 +150,17 @@ const CustomCursor = () => {
         <motion.div
         className="custom-cursor"
         variants={variants}
+        initial="default"
         animate={isColliding ? "collision" : (cursorText ? "text" : (isSpinning ? "spinning" : (isHovering ? "hover" : "default")))}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
         style={{
             position: 'fixed',
-            left: 0,
-            top: 0,
+            left: smoothX, // Driven by MotionValue directly
+            top: smoothY,
             pointerEvents: 'none',
             zIndex: 9999,
            
-            backgroundImage: cursorText ? 'none' : (pathname.replace(/\/$/, '') === '/about' ? `url(${ghostCursor})` : `url(${flowerCursor})`), // Ghost for About, Flower for others
+            // Ensure path is normalized for Vercel
+            backgroundImage: cursorText ? 'none' : (pathname.replace(/\/$/, '') === '/about' ? `url(${ghostCursor})` : `url(${flowerCursor})`), 
             backgroundSize: 'contain',
          
             backgroundRepeat: 'no-repeat',
@@ -173,9 +172,9 @@ const CustomCursor = () => {
             fontSize: '12px',
             fontWeight: 'bold',
             color: '#333',
-            boxShadow: 'none', // Remove box shadow for transparent look
-            textShadow: '0px 2px 4px rgba(255,255,255,0.8)', // Add glow/shadow for readability
-            padding: '0 10px' // Add padding for auto-ish sizing feel
+            boxShadow: 'none',
+            textShadow: '0px 2px 4px rgba(255,255,255,0.8)',
+            padding: '0 10px'
         }}
         >
             {cursorText && (
