@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import flowerCursor from '../assets/cursor/flower.svg?url'; // Force URL to avoid Data URI consistency issues
-import ghostCursor from '../assets/cursor/cute-ghost.svg';
+
+// Use static paths from public/ directory to avoid inlining issues
+const flowerCursor = '/cursors/flower.svg';
+const ghostCursor = '/cursors/cute-ghost.svg';
 
 const CustomCursor = () => {
   const { pathname } = useLocation();
