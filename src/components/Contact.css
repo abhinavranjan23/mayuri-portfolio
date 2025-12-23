@@ -292,6 +292,9 @@
         width: 30px;
         height: 30px;
     }
+    .cyclist-container {
+        bottom: 0;
+    }
 }
 @media (min-width: 736px) {
     .contact-section {
