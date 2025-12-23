@@ -3,12 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './WanderingMinds.css';
 
-import socialImg from '../assets/Mayuri/social2.png';
-import writingImg from '../assets/Mayuri/writing.jpeg';
-import travelImg from '../assets/Mayuri/travel.jpeg';
-import skincareImg from '../assets/Mayuri/skincare.jpeg';
-import friendsImg from '../assets/Mayuri/friends.jpeg';
-import foodieImg from '../assets/Mayuri/foodie.jpeg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +14,7 @@ const cardData = [
     oneLiner: "Turning everyday moments into reels, vlogs, and stories that feel real—not rehearsed.",
     color: "#FFD1DC", // Pastel Pink
     emoji: "📱",
-    image: socialImg
+    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/social2_vzaorb.png"
   },
   {
     id: 2,
@@ -29,7 +23,7 @@ const cardData = [
     oneLiner: "I write poems and quotes when thoughts need a place to breathe.",
     color: "#E0F7FA", // Pastel Cyan
     emoji: "✍️",
-    image: writingImg
+    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458314/writing_ovcuqj.jpg"
   },
   {
     id: 3,
@@ -38,7 +32,7 @@ const cardData = [
     oneLiner: "Exploring new places, new streets, and new versions of myself.",
     color: "#FFF9C4", // Pastel Yellow
     emoji: "✈️",
-    image: travelImg
+    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/travel_mgnfgi.jpg"
   },
   {
     id: 4,
@@ -47,7 +41,7 @@ const cardData = [
     oneLiner: "Testing products, routines, and rituals—because glowing skin is a lifestyle.",
     color: "#E1BEE7", // Pastel Purple
     emoji: "💅",
-    image: skincareImg
+    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/skincare_fxeczg.jpg"
   },
   {
     id: 5,
@@ -56,7 +50,7 @@ const cardData = [
     oneLiner: "Collecting laughs, late nights, and memories with the people who feel like home.",
     color: "#FFCCBC", // Pastel Orange
     emoji: "🫶",
-    image: friendsImg
+    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458314/friends_yy29hs.jpg"
   },
   {
     id: 6,
@@ -65,7 +59,7 @@ const cardData = [
     oneLiner: "From street snacks to café hopping—food is always the plan.",
     color: "#C8E6C9", // Pastel Green
     emoji: "🍔",
-    image: foodieImg
+    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/foodie_rxvwtg.jpg"
   }
 ];
 
@@ -109,6 +103,16 @@ const WanderingMinds = () => {
                     // markers: true
                 }
             });
+
+            // Animate Title: Only on desktop
+            if (window.matchMedia("(min-width: 768px)").matches) {
+                // Starts from top and moves to position
+                tl.from(".wandering-title", {
+                    y: -window.innerHeight * 0.3, // Start above
+                    duration: 2, 
+                    ease: "power2.out"
+                }, 0);
+            }
 
             cards.forEach((card, index) => {
                 const isMobile = window.innerWidth < 768;

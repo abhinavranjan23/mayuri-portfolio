@@ -164,6 +164,7 @@
         height: 886px;
     }
 }
+
 /* Responsive */
 @media (max-width: 768px) {
     .wandering-content {

@@ -3,11 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './BooksSection.css';
 
-// Import Book Covers
-import book1 from '../assets/Book/She-Swiped-Right-Into-My-Heart-Sudeep-Nagarkar-Buy-Online-Bookbins-.png';
-import book2 from '../assets/Book/our-impossible-love.jpg';
-import book3 from '../assets/Book/the-palace-of-illusions.jpg';
-import book4 from '../assets/Book/theKiteRunner.jpg';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,28 +12,28 @@ const books = [
     id: 1,
     title: "She Swiped Right into My Heart",
     author: "Sudeep Nagarkar",
-    cover: book1,
+    cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458371/She-Swiped-Right-Into-My-Heart-Sudeep-Nagarkar-Buy-Online-Bookbins-_nbv44x.png",
     color: "#f9f3f3ff" // Fallback/Spine color
   },
   {
     id: 2,
     title: "Our Impossible Love",
     author: "Durjoy Datta",
-    cover: book2,
+    cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458370/our-impossible-love_qrqoy5.jpg",
     color: "#d1210de6"
   },
   {
     id: 3,
     title: "The Palace of Illusions",
     author: "Chitra Banerjee Divakaruni",
-    cover: book3,
+    cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458373/the-palace-of-illusions_f1nkut.jpg",
     color: "#469047ff"
   },
   {
     id: 4,
     title: "The Kite Runner",
     author: "Khaled Hosseini",
-    cover: book4,
+    cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458372/theKiteRunner_qkgtwf.jpg",
     color: "#89c4ebff"
   }
 ];

@@ -2,12 +2,8 @@ import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './WhatIBring.css';
-import card1icon from '../assets/whatIBring/card1icon.png';
-import card2icon from '../assets/whatIBring/card2icon.png';
-import card3icon from '../assets/whatIBring/card3icon.png';
-import card4icon1 from '../assets/whatIBring/card4icon1.png';
-import card4icon2 from '../assets/whatIBring/card4icon2.png';
-import goodDesignIcon from '../assets/whatIBring/goodpost.png';
+
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +13,7 @@ const cardData = [
     title: "Strategy-backed creativity",
     description: "I don’t create content just to “post.” Every piece of content I create is backed by a clear goal. I understand what works on each platform and tailor ideas accordingly, instead of using a one-size-fits-all approach.",
     tags: [],
-    iconData: card1icon, 
+    iconData: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458527/card1icon_zc53ue.png", 
     className: "card-1"
   },
   {
@@ -25,7 +21,7 @@ const cardData = [
     title: "Audience-first storytelling",
     description: "I focus on creating content that speaks to people, not at them. I take time to understand the audience’s pain points, interests, and behavior, and then turn that into relatable, scroll-stopping content.",
     tags: [],
-    iconData: card2icon, 
+    iconData: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458528/card2icon_oikvsd.png", 
     className: "card-2"
   },
   {
@@ -33,7 +29,7 @@ const cardData = [
     title: "Consistency with quality",
     description: "I bring consistency in posting while maintaining quality. From visuals to captions to tone, I ensure the brand voice stays aligned across all content.",
     tags: [],
-    iconData: card3icon,
+    iconData: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458529/card3icon_njnmgv.png",
     className: "card-3"
   },
   {
@@ -41,7 +37,7 @@ const cardData = [
     title: "Adaptability to trends and platforms",
     description: "I stay updated with platform trends, content formats, and algorithm shifts.",
     tags: [],
-    iconData: [ card4icon2],
+    iconData: ["https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458531/card4icon2_bg7m2b.png"],
     className: "card-4"
   }
 ];

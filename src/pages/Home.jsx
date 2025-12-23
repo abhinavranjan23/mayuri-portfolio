@@ -6,22 +6,12 @@ import { DotLottiePlayer } from '@dotlottie/react-player';
 import '@dotlottie/react-player/dist/index.css';
 import './Home.css';
 
-// Assets
-import character from '../assets/homePageImages/mayuriChar.png';
-import background from '../assets/homePageImages/background.jpg';
-import mountain1 from '../assets/homePageImages/mountain1.avif';
-import mountain2 from '../assets/homePageImages/mountain2.avif';
-import mountain3 from '../assets/homePageImages/mountain3.avif';
-import mountain4 from '../assets/homePageImages/mountain4.png';
+
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
-import pandaIcon from '../assets/cute-panda-happy.svg';
+import pandaIcon from '/cute-panda-happy.svg';
 
 // Floating Icons
-import bagIcon from '../assets/above-head-icon/BAG.avif';
-import foodIcon from '../assets/above-head-icon/foodie.avif';
-import instaIcon from '../assets/above-head-icon/instagram-marketing.png';
-import palmIcon from '../assets/above-head-icon/palm-tree.png';
-import pookieIcon from '../assets/above-head-icon/pookie.svg';
+
 import pauseIcon from '../assets/pause.svg';
 import playIcon from '../assets/play.svg';
 
@@ -92,15 +82,15 @@ const FloatingIcon = ({ src, label, initialX, initialY, delay, emoji }) => {
 const navItems = [
     { label: "Content design", link: "/work", text: "Explore it!" },
     { label: "About me", link: "/about", text: "Who am I?" },
-    { label: "Resume", link: "#", text: "Hire Me!" }
+    { label: "Resume", link: "/resume", text: "Hire Me!" }
 ];
 
 const floatingIcons = [
-    { src: foodIcon, label: "Foodie By Birth", emoji: "🥟", x: '45%', y: '10%', delay: 0 },
-    { src: palmIcon, label: "Nature Pleaser", emoji: "🌵", x: '20%', y: '25%', delay: 0.5 },
-    { src: pookieIcon, label: "Finds peace in solitude !", emoji: "✌️", x: '70%', y: '25%', delay: 1 },
-    { src: instaIcon, label: "Social Enthusiast", emoji: "📸", x: '18%', y: '50%', delay: 1.5 },
-    { src: bagIcon, label: "Exploring, One Step at a Time ", emoji: "🏕", x: '70%', y: '50%', delay: 2 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473438/foodie_vaqw7f.avif", label: "Foodie By Birth", emoji: "🥟", x: '45%', y: '10%', delay: 0 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473439/palm-tree_ae5zuc.png", label: "Nature Pleaser", emoji: "🌵", x: '20%', y: '25%', delay: 0.5 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473441/pookie_eqwmqc.svg", label: "Finds peace in solitude !", emoji: "✌️", x: '70%', y: '25%', delay: 1 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473439/instagram-marketing_qxayx0.png", label: "Social Enthusiast", emoji: "📸", x: '18%', y: '50%', delay: 1.5 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473438/BAG_vyvato.avif", label: "Exploring, One Step at a Time ", emoji: "🏕", x: '70%', y: '50%', delay: 2 },
 ];
 
 const Home = () => {
@@ -292,7 +282,7 @@ const Home = () => {
                 <>
                     <div 
                         className="orange-strip" 
-                        style={{ backgroundImage: `url(${background})` }}
+                        style={{ backgroundImage: `url(https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/background_m9bzpx.jpg)` }}
                     ></div>
 
                     {/* Floating Icons around Character */}
@@ -309,7 +299,7 @@ const Home = () => {
                     ))}
                     
                     <motion.img 
-                        src={character} 
+                        src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457952/mayuriChar_jqehqn.png"} 
                         alt="Mayuri Character" 
                         className="character-image"
                         initial={{ y: 0 }}
@@ -329,7 +319,7 @@ const Home = () => {
             */}
             {isMobile && (
                  <motion.img 
-                    src={character} 
+                    src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457952/mayuriChar_jqehqn.png"} 
                     alt="Mayuri Character" 
                     className="character-image"
                     initial={{ y: 0 }}
@@ -345,10 +335,10 @@ const Home = () => {
 
         {/* --- MOUNTAINS --- */}
         <div className="mountains-container">
-            <img src={mountain4} className="mountain-img mountain-4" alt="Mountain" />
-            <img src={mountain3} className="mountain-img mountain-3" alt="Mountain" />
-            <img src={mountain2} className="mountain-img mountain-2" alt="Mountain" />
-            <img src={mountain1} className="mountain-img mountain-1" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/mountain4_qfqwbh.png"} className="mountain-img mountain-4" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/mountain3_lzfbki.avif"} className="mountain-img mountain-3" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457949/mountain2_l6sk50.avif"} className="mountain-img mountain-2" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/mountain1_xse8h4.avif"} className="mountain-img mountain-1" alt="Mountain" />
         </div>
 
     </div>
