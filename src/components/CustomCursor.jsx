@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import flowerCursor from '../assets/cursor/flower.svg';
+import flowerCursor from '../assets/cursor/flower.svg?url'; // Force URL to avoid Data URI consistency issues
 import ghostCursor from '../assets/cursor/cute-ghost.svg';
 
 const CustomCursor = () => {
