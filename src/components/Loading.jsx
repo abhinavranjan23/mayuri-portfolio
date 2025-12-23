@@ -1,5 +1,5 @@
 import React from 'react';
-import flowerCursor from '/cursors/flower.svg';
+const flowerCursor = '/cursors/flower.svg';
 
 const Loading = () => {
   return (
