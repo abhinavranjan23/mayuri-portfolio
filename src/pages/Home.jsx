@@ -86,11 +86,11 @@ const navItems = [
 ];
 
 const floatingIcons = [
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473438/foodie_vaqw7f.avif", label: "Foodie By Birth", emoji: "🥟", x: '45%', y: '10%', delay: 0 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473439/palm-tree_ae5zuc.png", label: "Nature Pleaser", emoji: "🌵", x: '20%', y: '25%', delay: 0.5 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473441/pookie_eqwmqc.svg", label: "Finds peace in solitude !", emoji: "✌️", x: '70%', y: '25%', delay: 1 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473439/instagram-marketing_qxayx0.png", label: "Social Enthusiast", emoji: "📸", x: '18%', y: '50%', delay: 1.5 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766473438/BAG_vyvato.avif", label: "Exploring, One Step at a Time ", emoji: "🏕", x: '70%', y: '50%', delay: 2 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473438/foodie_vaqw7f.avif", label: "Foodie By Birth", emoji: "🥟", x: '45%', y: '10%', delay: 0 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473439/palm-tree_ae5zuc.png", label: "Nature Pleaser", emoji: "🌵", x: '20%', y: '25%', delay: 0.5 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766473441/pookie_eqwmqc.svg", label: "Finds peace in solitude !", emoji: "✌️", x: '70%', y: '25%', delay: 1 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473439/instagram-marketing_qxayx0.png", label: "Social Enthusiast", emoji: "📸", x: '18%', y: '50%', delay: 1.5 },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473438/BAG_vyvato.avif", label: "Exploring, One Step at a Time ", emoji: "🏕", x: '70%', y: '50%', delay: 2 },
 ];
 
 const Home = () => {
@@ -282,7 +282,7 @@ const Home = () => {
                 <>
                     <div 
                         className="orange-strip" 
-                        style={{ backgroundImage: `url(https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/background_m9bzpx.jpg)` }}
+                        style={{ backgroundImage: `url(https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/background_m9bzpx.jpg)` }}
                     ></div>
 
                     {/* Floating Icons around Character */}
@@ -299,9 +299,10 @@ const Home = () => {
                     ))}
                     
                     <motion.img 
-                        src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457952/mayuriChar_jqehqn.png"} 
+                        src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457952/mayuriChar_jqehqn.png"} 
                         alt="Mayuri Character" 
                         className="character-image"
+                        fetchpriority="high"
                         initial={{ y: 0 }}
                         animate={{ y: [0, -20, 0] }} // Gentle float
                         transition={{ 
@@ -319,11 +320,12 @@ const Home = () => {
             */}
             {isMobile && (
                  <motion.img 
-                    src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457952/mayuriChar_jqehqn.png"} 
+                    src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_400,f_auto,q_auto/v1766457952/mayuriChar_jqehqn.png"} 
                     alt="Mayuri Character" 
                     className="character-image"
                     initial={{ y: 0 }}
-                    animate={{ y: [0, -10, 0] }} 
+                    animate={{ y: [0, -10, 0] }}
+                    fetchpriority="high"
                     transition={{ 
                         duration: 4, 
                         repeat: Infinity, 
@@ -335,10 +337,10 @@ const Home = () => {
 
         {/* --- MOUNTAINS --- */}
         <div className="mountains-container">
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/mountain4_qfqwbh.png"} className="mountain-img mountain-4" alt="Mountain" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/mountain3_lzfbki.avif"} className="mountain-img mountain-3" alt="Mountain" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457949/mountain2_l6sk50.avif"} className="mountain-img mountain-2" alt="Mountain" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/v1766457948/mountain1_xse8h4.avif"} className="mountain-img mountain-1" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1766457948/mountain4_qfqwbh.png"} className="mountain-img mountain-4" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1766457948/mountain3_lzfbki.avif"} className="mountain-img mountain-3" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457949/mountain2_l6sk50.avif"} className="mountain-img mountain-2" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/mountain1_xse8h4.avif"} className="mountain-img mountain-1" alt="Mountain" />
         </div>
 
     </div>

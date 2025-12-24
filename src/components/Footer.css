@@ -1,0 +1,111 @@
+.footer-container {
+    position: relative;
+    width: 100%;
+    margin-top: auto;
+    z-index: 10;
+    overflow: hidden;
+    
+    /* Grid Layout for stacking */
+    display: grid;
+    grid-template-areas: "stack";
+    place-items: center; /* Center horizontally */
+    /* padding-bottom: 20px; Slight breathing room at bottom of page */
+}
+
+.footer-watermark {
+    grid-area: stack;
+    align-self: end; /* Fix to bottom of the grid cell */
+    
+    font-size: clamp(60px, 20vw, 200px); /* Adjusted size */
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    font-family: sans-serif;
+    letter-spacing: 0.1em;
+    margin: 0;
+    line-height: 0.75;
+    
+    /* Ensure no transform interferes with grid self-alignment */
+    position: static; 
+    transform: none;
+    text-align: center;
+}
+
+.footer-pill {
+    grid-area: stack;
+    align-self: center; /* Fix to center of the grid cell */
+    
+    background-color: white;
+    border-radius: 50px;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    max-width: 95%;
+    flex-wrap: nowrap;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10px; /* Fine tune visual center against the text bulk */
+}
+
+.footer-email {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0; 
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-pill {
+        gap: 15px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 550px) {
+    .footer-pill {
+        width: auto;
+        gap: 10px;
+        padding: 8px 15px;
+        transform-origin: center center;
+    }
+    
+    /* Scale down slightly on mobile to fit */
+    .footer-pill {
+        transform: scale(0.9);
+    }
+    
+    .footer-email {
+        font-size: 0.85rem;
+    }
+    
+    .footer-email svg {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    /* Extreme small screen handling */
+    .footer-pill {
+        transform: scale(0.8);
+        width: 100%;
+        justify-content: space-between;
+    }
+    .footer-email span {
+        font-size: 0.75rem;
+    }
+}

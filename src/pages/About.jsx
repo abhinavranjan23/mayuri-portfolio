@@ -11,6 +11,7 @@ import pauseIcon from '../assets/pause.svg';
 import playIcon from '../assets/play.svg';
 import { Link } from 'react-router-dom';
 import Contact from '../components/Contact';
+import Footer from '../components/Footer';
 // Lazy load WhatIBring
 const WhatIBring = lazy(() => import('../components/WhatIBring'));
 const BooksSection = lazy(() => import('../components/BooksSection'));
@@ -229,6 +230,7 @@ const About = () => {
         <BooksSection />
         <WanderingMinds />
         <Contact />
+        <Footer />
       </Suspense>
             </motion.div>
             
