@@ -142,7 +142,7 @@ const PhotoContent = () => {
                     { y: -150, opacity: 0, duration: 1, immediateRender: false }, 0)
                   .fromTo(".hero-text-side.right", 
                     { y: 0, opacity: 1 }, 
-                    { y: 150, opacity: 0, duration: 1, immediateRender: false }, 0);
+                    { y: -150, opacity: 0, duration: 1, immediateRender: false }, 0);
             }
 
             // Shared Scroll Animations
