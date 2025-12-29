@@ -223,6 +223,7 @@
     .content-grid {
         grid-template-columns: 1fr; /* Stack on mobile */
         gap: 1.5rem;
+        width: 85%;
     }
     
     /* Reset spans for mobile */
