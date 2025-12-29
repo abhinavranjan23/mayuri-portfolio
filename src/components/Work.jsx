@@ -54,7 +54,7 @@ const Work = () => {
               marginTop: '20px',
               padding: '10px 20px',
               backgroundColor: '#333',
-              color: '#fff',
+              color: '#FAF8F1',
               textDecoration: 'none',
               borderRadius: '5px',
               fontSize: '1rem',

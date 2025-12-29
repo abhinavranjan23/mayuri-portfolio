@@ -248,11 +248,11 @@ const PhotoContent = () => {
             
             const stickers = [
                  // ALL STICKERS: Start IN -> Move OUT (Disperse)
-                 { id: 0, xMove: -500, yMove: 900, rot: 360 },   // Top Left -> Out Left/Down
-                 { id: 1, xMove: 500, yMove: 1000, rot: -180 },   // Top Right -> Out Right/Down
-                 { id: 2, xMove: 600, yMove: -100, rot: 90 },    // Mid Right -> Out Right/Up
-                 { id: 3, xMove: -600, yMove: 800, rot: -45 },   // Mid Left -> Out Left/Down
-                 { id: 4, xMove: 0, yMove: 800, rot: 200 }     // Center -> Out Up
+                 { id: 0, xMove: 50, yMove: 900, rot: 360 },   // Top Left -> Out Left/Down//cat
+                 { id: 1, xMove: 200, yMove: 1000, rot: -180 },   // Top Right -> Out Right/Down//flower
+                 { id: 2, xMove: -400, yMove: 300, rot: 90 },    // Mid Right -> Out Right/Up cat goggles
+                 { id: 3, xMove: 300, yMove: -800, rot: -45 },   // Mid Left -> Out Left/Down flower plant
+                 { id: 4, xMove: -200, yMove: 300, rot: 200 }     // Center -> Out Up //pea
             ];
 
             stickers.forEach((s, i) => {

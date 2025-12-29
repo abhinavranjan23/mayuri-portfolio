@@ -15,7 +15,7 @@ const NotFound = () => {
       justifyContent: 'center',
       maxHeight: '100vh',
       padding: '2rem',
-      backgroundColor: 'var(--background-color, #fff)', // Use CSS variable if valid, else white
+      backgroundColor: 'var(--background-color, #FAF8F1)', // Use CSS variable if valid, else white
       color: 'var(--text-primary, #333)'
     }}>
       <Helmet>

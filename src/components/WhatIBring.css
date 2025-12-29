@@ -1,7 +1,7 @@
 .what-i-bring-section {
     width: 100%;
     padding: 2rem 10%;
-    background-color: #fff; /* or transparent */
+    background-color: #FAF8F1; /* or transparent */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,7 +39,7 @@
 }
 
 .bring-card {
-    background: #fff;
+    background: #FAF9F6;
     border: 1px solid #f0f0f0;
     border-radius: 24px;
     padding: 1rem;

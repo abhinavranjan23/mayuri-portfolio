@@ -51,3 +51,11 @@
 .resume-icon {
     font-size: 0.9em;
 }
+
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 0.3rem 0.5rem;
+        border-radius: 40px;
+        gap: 0.5rem;
+    }
+}

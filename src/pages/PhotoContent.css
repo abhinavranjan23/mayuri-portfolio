@@ -1,7 +1,7 @@
 .photo-content-page {
     width: 100%;
     min-height: 100vh;
-    background-color: #ffffff;
+    background-color: #FAF8F1;
     overflow-x: hidden;
 }
 
@@ -14,7 +14,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    background-color: #fff;
+    background-color: #FAF8F1;
 }
 
 
@@ -231,10 +231,7 @@
     display: block;
 }
 
-.content-spacer {
-    height: 100vh; /* Allow scroll to continue */
-    background: #fff;
-}
+
 
 @media (max-width: 1440px) {
     /* Laptop Optimization: Prevent text cutoff */
@@ -254,6 +251,10 @@
 /* Responsive */
 @media (max-width: 768px) {
     /* Hero Text Repositioning: Top and Bottom */
+    .content-design-top-bar{
+        gap: 0.2rem;
+    }
+
     .hero-text-side {
         width: 100%;
         left: 0;
