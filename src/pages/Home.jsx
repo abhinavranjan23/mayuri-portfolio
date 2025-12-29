@@ -80,7 +80,7 @@ const FloatingIcon = ({ src, label, initialX, initialY, delay, emoji }) => {
 
 
 const navItems = [
-    { label: "Content design", link: "/work", text: "Explore it!" },
+    { label: "Content design", link: "/content-design", text: "Explore it!" },
     { label: "About me", link: "/about", text: "Who am I?" },
     { label: "Resume", link: "/resume", text: "Hire Me!" }
 ];

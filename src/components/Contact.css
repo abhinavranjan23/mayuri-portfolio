@@ -300,4 +300,12 @@
     .contact-section {
         min-height:100vh;
     }
+    .contact-header, 
+    .selection-container, 
+    .form-container,
+    .success-message {
+        margin-left: -5vw; /* Shift left using margin to avoid Framer Motion transform conflict */
+        transform: none !important; /* Ensure CSS transform doesnt conflict if any remains */
+    }
+    
 }

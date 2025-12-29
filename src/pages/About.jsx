@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import Stats from '../components/Stats';
 import './About.css';
-import aboutBg from '../assets/aboutPageImages/bgNew.jpeg'; 
+ 
 import { DotLottiePlayer } from '@dotlottie/react-player';
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
 import pauseIcon from '../assets/pause.svg';
@@ -16,7 +16,7 @@ import Footer from '../components/Footer';
 const WhatIBring = lazy(() => import('../components/WhatIBring'));
 const BooksSection = lazy(() => import('../components/BooksSection'));
 const WanderingMinds = lazy(() => import('../components/WanderingMinds'));
-
+const aboutBg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767025022/bgNew_wehssm.jpg";  
 const About = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);

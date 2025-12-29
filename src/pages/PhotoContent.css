@@ -1,0 +1,353 @@
+.photo-content-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.photo-hero {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+
+/* Navbar (Reused style) */
+.content-design-top-bar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0; /* Hidden initially for animation */
+}
+
+/* Side Text */
+.hero-text-side {
+    font-family: 'Oswald', sans-serif;
+    font-size: 8rem;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    white-space: nowrap;
+    line-height: 1; /* Tighten up line height for better centering */
+    margin: 0;      /* Remove default margins */
+    opacity: 0; /* Hidden initially for animation */
+    /* 3D Text Shadow */
+    text-shadow: 
+        1px 1px 0px #ddd,
+        2px 2px 0px #ccc,
+        3px 3px 0px #bbb,
+        4px 4px 6px rgba(0,0,0,0.3);
+}
+
+.hero-text-side.left {
+    right: calc(50% + 180px); /* Center based on iphone width */
+    text-align: right;
+}
+
+.hero-text-side.right {
+    left: calc(50% + 180px); /* Center based on iphone width */
+    text-align: left;
+}
+
+/* iPhone Wrapper */
+.iphone-wrapper {
+    position: relative;
+    width: 250px; /* Initial size reduced */
+    height: auto;
+    z-index: 5;
+    transform-origin: center center;
+    transform-origin: center center;
+    opacity: 0; /* Hidden initially for animation */
+}
+
+.iphone-frame {
+    width: 100%;
+    display: block;
+    pointer-events: none;
+    position: relative;
+    z-index: 10; /* Frame on top of screen content */
+}
+
+/* Screen Content Area */
+/* We place this BEHIND the frame if transparent, or OVER if frame has a cutout.
+   Standard approach: Frame is a cutout PNG -> Screen behind.
+   Or Frame is full image -> Screen absolute over it. 
+   Assuming standard mockup: Screen area needs to be positioned. */
+.iphone-screen {
+    position: absolute;
+    top: 2.5%; /* Adjust based on bezel */
+    left: 4.5%;
+    width: 91%;
+    height: 95%;
+    background: #000;
+    z-index: 5; /* Behind frame bezel */
+    border-radius: 35px; /* Match iphone corner radius roughly */
+    overflow: hidden;
+
+}
+
+.screen-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 4px;
+}
+
+.screen-inner-text {
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    z-index: 20;
+}
+
+.screen-inner-text h3 {
+    font-size: 1.9rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: rgb(9, 9, 9);
+    font-family:"Slackey", cursive;
+    /* text-shadow: 1px 1px 0px #ddd,
+    2px 2px 0px #ccc,
+    3px 3px 0px #bbb,
+    4px 4px 6px rgba(0,0,0,0.3); */
+}
+
+.screen-inner-text p {
+    font-size: 0.9rem;
+    opacity: 1;
+    color: rgb(193, 9, 77);
+    font-family:"Pangolin", cursive;
+     /* text-shadow: 1px 1px 0px #ddd,
+    2px 2px 0px #ccc,
+    3px 3px 0px #bbb,
+    4px 4px 6px rgba(0,0,0,0.3); */
+}
+
+/* Details Overlay (Appears after zoom) */
+.details-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(173deg,rgba(255, 255, 255, 1) 0%, rgba(255, 240, 245, 1) 100%);
+    z-index: 50; /* Top most */
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Initially ignore clicks */
+    
+}
+
+.details-overlay[style*="opacity: 1"] {
+    pointer-events: auto; /* Enable clicks when visible */
+}
+
+.overlay-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.overlay-content h2 {
+    font-size: 4rem;
+    font-family: 'Slackey', cursive;
+    margin-bottom: 1.5rem;
+    color: #333;
+    position: relative; /* Ensure z-index works if needed */
+    text-shadow: 1px 1px 0px #ddd,
+    2px 2px 0px #ccc,
+    3px 3px 0px #bbb,
+    4px 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Butterfly Decoration */
+.butterfly-decoration {
+    position: absolute;
+    top: 0px; /* Moved down (more below) */
+    left: -85px; /* Moved further left */
+    width: 130px; /* Made bigger */
+    height: auto;
+    z-index: 10;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+.overlay-content p {
+    font-size: 1.2rem;
+    font-family: 'Pangolin', sans-serif;
+    color: #555;
+    margin-bottom: 3rem;
+}
+
+.grid-placeholder {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.grid-box {
+    width: 150px;
+    height: 150px;
+    background: #eee;
+    border-radius: 12px;
+    overflow: hidden; /* Ensure image corners are clipped */
+    transition: transform 0.3s ease;
+    border: 1px solid black;
+    box-shadow: 0 4px 7px rgb(69, 68, 68);
+}
+
+.grid-box:hover {
+    transform: scale(1.05);
+}
+
+.grid-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.content-spacer {
+    height: 100vh; /* Allow scroll to continue */
+    background: #fff;
+}
+
+@media (max-width: 1440px) {
+    /* Laptop Optimization: Prevent text cutoff */
+    .hero-text-side {
+        font-size: 6rem; /* Smaller font on laptops */
+    }
+    
+    .hero-text-side.left {
+        right: calc(50% + 140px); /* Tighter spacing */
+    }
+    
+    .hero-text-side.right {
+        left: calc(50% + 140px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    /* Hero Text Repositioning: Top and Bottom */
+    .hero-text-side {
+        width: 100%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        transform: translateY(-50%); /* Center Y */
+        font-size: 4rem; /* Smaller font for mobile */
+        z-index: 20; 
+        margin: 0;
+    }
+    .photo-hero{
+        align-items: flex-end;
+    }
+    .hero-text-side.left { 
+        top: 17%; /* Adjusted from 15% to be closer */
+        bottom: auto;
+        right:auto;
+        left: -23%;
+    }
+    
+    .hero-text-side.right { 
+        top: 26%; /* Adjusted from 15% to be closer */
+        bottom: auto;
+        right: -23%;
+        left: auto;
+    }
+    
+    /* iPhone Wrapper */
+    .iphone-wrapper {
+        width: 65%; /* Slightly smaller */
+    }
+
+    /* Screen Inner Text */
+    .screen-inner-text {
+        top: 20%;
+        left: 10%;
+    }
+    .screen-inner-text h3 {
+        font-size: 1.8rem;
+    }
+    .screen-inner-text p {
+        font-size: 1.5rem;
+    }
+
+    /* Details Overlay Responsiveness */
+    .overlay-content {
+        padding: 1rem;
+        width: 90%;
+    }
+
+    .overlay-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .butterfly-decoration {
+        width: 80px;
+        left: -40px;
+        top: -10px;
+    }
+
+    .overlay-content p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Grid in Overlay */
+    .grid-placeholder {
+        gap: 0.5rem;
+    }
+    
+    .grid-box {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* Cute Animated Sticker */
+/* Cute Animated Sticker Wrapper (Shared) */
+/* .cute-sticker-wrapper styles handled inline */
+
+@media (max-width: 768px) {
+    /* Only show the first sticker (sticker-0) on mobile */
+    .sticker-wrapper-1,
+    .sticker-wrapper-2,
+    .sticker-wrapper-3,
+    .sticker-wrapper-4 {
+        display: none !important;
+    }
+
+    /* Adjust the visible sticker if needed */
+    .sticker-wrapper-0 {
+        width: 100px !important;
+        left: 0% !important; /* Move more to the left */
+        top: 22% !important; /* Move down slightly */
+    }
+}

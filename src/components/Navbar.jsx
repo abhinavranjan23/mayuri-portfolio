@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import pandaIcon from '../assets/cute-panda-happy.svg'; // Ensure path is correct relative to this file
+
 import './Navbar.css';
 
 const Navbar = () => {
@@ -12,10 +12,16 @@ const Navbar = () => {
     // If Home (/): Show "About me", "Resume"
     // If About (/about): Show "Content Design", "Resume" (Assuming "Content Design" goes back to Home)
     const isAboutPage = location.pathname === '/about';
-
+    const isPhotoContentPage = location.pathname === '/content-design/photo-content';
     const navItems = isAboutPage 
         ? [
-            { label: "Content Design", link: "/" },
+            { label: "Content Design", link: "/content-design" },
+            { label: "Get Resume", link: "#", isButton: true }
+          ]
+        : isPhotoContentPage 
+        ? [
+            { label: "Content Design", link: "/content-design" },
+            { label: "About me", link: "/about"},
             { label: "Get Resume", link: "#", isButton: true }
           ]
         : [

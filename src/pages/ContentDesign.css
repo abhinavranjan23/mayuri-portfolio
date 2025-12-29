@@ -1,0 +1,245 @@
+/* Content Design Page Container */
+.content-design-container {
+    width: 100vw;
+    min-height: 100vh; /* Allow it to grow */
+    height: auto;
+    background-color: #fff;
+    overflow-x: hidden;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header styles */
+.content-design-top-bar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Background Lottie Container */
+.content-design-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden; 
+    pointer-events: none; /* Let clicks pass through if needed, though usually behind content */
+}
+
+/* 
+   We want the Lottie to behave like object-fit: cover.
+   The player is now configured with preserveAspectRatio='slice',
+   so we just need to ensure the container is full screen.
+*/
+.content-design-lottie-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Flex centering just in case */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-design-lottie-wrapper svg {
+    width: 100%; 
+    height: 100%;
+}
+
+
+/* Scrollable Overlay for Content */
+.content-scroll-overlay {
+    position: relative; /* Changed from absolute to flow with document */
+    width: 100%;
+    height: auto; /* Let content dictate height */
+    z-index: 10;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto;
+}
+
+/* Intro Section */
+.content-intro-section {
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #333; 
+}
+
+.content-quote {
+   font-family: "Caveat Brush", cursive;
+    font-size: 1.8rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #4a4a4a;
+}
+
+.content-description {
+  
+    font-family: 'Pangolin', cursive;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Grid Layout */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 3 columns to allow 2:1 ratios */
+    gap: 2rem;
+    width: 60%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+}
+
+/* 
+   Asymmetrical Layout:
+   Row 1: Wide (2/3) + Narrow (1/3)
+   Row 2: Narrow (1/3) + Wide (2/3)
+*/
+.grid-card:nth-child(1) {
+    grid-column: span 3;
+}
+
+.grid-card:nth-child(2) {
+    grid-column: span 2;
+}
+
+.grid-card:nth-child(3) {
+    grid-column: span 2;
+}
+
+.grid-card:nth-child(4) {
+    grid-column: span 3;
+}
+
+.grid-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    height: 300px; /* Fixed height for all cards */
+    /* aspect-ratio removed to ensure uniform height */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+    cursor: none;
+}
+
+.grid-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.grid-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.grid-card:hover img {
+    transform: scale(1.1);
+    filter: blur(4px);
+}
+
+/* Overlay for Reveal */
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Slight tint */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 24px; /* Match card border radius */
+    pointer-events: none;
+    z-index: 2; /* Below badge but above image */
+}
+
+.grid-card:hover .image-overlay {
+    opacity: 1;
+}
+
+.explore-text {
+    font-family: 'Pangolin', sans-serif;
+    font-size: 2.5rem;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.grid-card:hover .explore-text {
+    transform: translateY(0);
+}
+
+.card-badge {
+    position: absolute;
+    top: 1.5rem; /* Slightly more spacing */
+    right: 1.5rem;
+    background: rgba(30, 40, 60, 0.6); /* Dark translucent blue-ish */
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #fff; /* White text */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Thin border */
+    backdrop-filter: blur(8px); /* Stronger blur */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-design-top-bar {
+        top: 20px;
+        gap: 1rem;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr; /* Stack on mobile */
+        gap: 1.5rem;
+    }
+    
+    /* Reset spans for mobile */
+    .grid-card:nth-child(n) {
+        grid-column: auto;
+    }
+    
+    .content-intro-section {
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .content-quote {
+        font-size: 1.4rem;
+    }
+    
+    .content-scroll-overlay {
+        padding-top: 90px;
+    }
+}

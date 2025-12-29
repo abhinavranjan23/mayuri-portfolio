@@ -26,9 +26,7 @@ const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Debug paths once on mount/change
-    console.log("Cursor Debug - Flower Path:", flowerCursor);
-    console.log("Cursor Debug - Ghost Path:", ghostCursor);
+   
 
     // Preload cursor images
     const img1 = new Image();
@@ -160,7 +158,7 @@ const CustomCursor = () => {
             zIndex: 9999,
            
             // Ensure path is normalized for Vercel
-            backgroundImage: cursorText ? 'none' : (pathname.replace(/\/$/, '') === '/about' ? `url(${ghostCursor})` : `url(${flowerCursor})`), 
+            backgroundImage: cursorText ? 'none' : (pathname.replace(/\/$/, '') === '/about' || pathname.replace(/\/$/, '') === '/content-design' ? `url(${ghostCursor})` : `url(${flowerCursor})`), 
             backgroundSize: 'contain',
          
             backgroundRepeat: 'no-repeat',

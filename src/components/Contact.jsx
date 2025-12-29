@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DotLottiePlayer } from '@dotlottie/react-player';
-import cyclingAnim from '../assets/girl-cycling-in-autumn.json';
+
 import './Contact.css';
 
+const cyclingAnim = "https://res.cloudinary.com/dnt0xlngl/raw/upload/v1767025378/girl-cycling-in-autumn_qol7my.json";
 const Contact = () => {
     // State
     const [selection, setSelection] = useState(null); // 'project' | 'general'
@@ -153,7 +154,7 @@ const Contact = () => {
                                 data-cursor-button="true"
                             >
                                 <div className={`radio-circle ${selection === 'general' ? 'selected' : ''}`}></div>
-                                <span className="option-text">Just Saying Hi</span>
+                                <span className="option-text">Just Say Hi</span>
                             </button>
                             
                              <button 

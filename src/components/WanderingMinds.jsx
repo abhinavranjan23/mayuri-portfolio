@@ -11,7 +11,7 @@ const cardData = [
     id: 1,
     title: "Social Media Creator",
     subtitle: "I Create, Post, Repeat.",
-    oneLiner: "Turning everyday moments into reels, vlogs, and stories that feel real—not rehearsed.",
+    oneLiner: "Turning everyday moments into reels, vlogs, and stories that feel real not rehearsed.",
     color: "#FFD1DC", // Pastel Pink
     emoji: "📱",
     image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/social2_vzaorb.png"
@@ -38,7 +38,7 @@ const cardData = [
     id: 4,
     title: "Skincare & Self-Care",
     subtitle: "Skincare Is My Therapy.",
-    oneLiner: "Testing products, routines, and rituals—because glowing skin is a lifestyle.",
+    oneLiner: "Testing products, routines, and rituals because glowing skin is a lifestyle.",
     color: "#E1BEE7", // Pastel Purple
     emoji: "💅",
     image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/skincare_fxeczg.jpg"
@@ -56,7 +56,7 @@ const cardData = [
     id: 6,
     title: "Foodie",
     subtitle: "Powered by Good Food.",
-    oneLiner: "From street snacks to café hopping—food is always the plan.",
+    oneLiner: "From street snacks to café hopping food is always the plan.",
     color: "#C8E6C9", // Pastel Green
     emoji: "🍔",
     image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/foodie_rxvwtg.jpg"

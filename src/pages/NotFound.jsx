@@ -1,7 +1,9 @@
 import React from 'react';
-import Lottie from 'lottie-react';
-import notFoundAnimation from '../assets/Not-found404.json';
+import { DotLottiePlayer } from '@dotlottie/react-player';
 import { Link } from 'react-router-dom';
+
+
+const notFoundAnimation = "https://res.cloudinary.com/dnt0xlngl/raw/upload/v1767025475/Not-found404_i2k1c3.json";
 
 const NotFound = () => {
   return (
@@ -16,10 +18,11 @@ const NotFound = () => {
       color: 'var(--text-primary, #333)'
     }}>
       <div style={{ maxWidth: '500px', width: '100%' }}>
-        <Lottie 
-          animationData={notFoundAnimation} 
-          loop={true} 
-          autoplay={true} 
+        <DotLottiePlayer
+          src={notFoundAnimation}
+          autoplay
+          loop
+          style={{ width: '100%', height: '100%' }}
         />
       </div>
       <p style={{ marginTop: '10px', fontSize: '1.2rem', textAlign: 'center' , fontFamily: 'var(--font-family, Slackey, cursive)'}}>
