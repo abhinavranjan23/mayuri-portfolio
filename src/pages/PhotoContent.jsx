@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DotLottiePlayer } from '@dotlottie/react-player';
+import { Helmet } from 'react-helmet-async';
 
 import Navbar from '../components/Navbar';
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
@@ -321,12 +322,16 @@ const PhotoContent = () => {
 
     return (
         <div className="photo-content-page" ref={containerRef} >
+            <Helmet>
+                <title>Photo Content Portfolio | Mayuri Saitav - Visual Storyteller</title>
+                <meta name="description" content="Browse the visual portfolio of Mayuri Saitav. High-quality photo content creation for social media, product photography, and lifestyle brands." />
+            </Helmet>
             
             {/* ... Top Bar & Hero Section remain same ... */}
             
             {/* Top Bar */}
              <div className="content-design-top-bar">
-                 <Link to="/">
+                 <Link to="/" aria-label="Home">
                     <div className="avatar-circle" style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', background: '#f0f0f0' }}>
                         <DotLottiePlayer
                             src={avatarAnimation}

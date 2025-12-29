@@ -19,14 +19,19 @@ function App() {
       <CustomCursor />
       <SmoothScroll>
         <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/content-design" element={<ContentDesign />} />
-            <Route path="/content-design/photo-content" element={<PhotoContent />} />
-            {/* <Route path="/work" element={<Work />} /> */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/content-design" element={<ContentDesign />} />
+              <Route path="/content-design/photo-content" element={<PhotoContent />} />
+              <Route path="/content-design/video-content" element={<Work />} />
+              <Route path="/content-design/social-stats" element={<Work />} />
+              <Route path="/content-design/services" element={<Work />} />
+              {/* <Route path="/work" element={<Work />} /> */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
         </Suspense>
       </SmoothScroll>
     </Router>

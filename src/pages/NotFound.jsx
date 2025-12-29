@@ -1,6 +1,7 @@
 import React from 'react';
 import { DotLottiePlayer } from '@dotlottie/react-player';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 
 const notFoundAnimation = "https://res.cloudinary.com/dnt0xlngl/raw/upload/v1767025475/Not-found404_i2k1c3.json";
@@ -17,6 +18,10 @@ const NotFound = () => {
       backgroundColor: 'var(--background-color, #fff)', // Use CSS variable if valid, else white
       color: 'var(--text-primary, #333)'
     }}>
+      <Helmet>
+        <title>404 - Page Not Found | Mayuri Saitav</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <div style={{ maxWidth: '500px', width: '100%' }}>
         <DotLottiePlayer
           src={notFoundAnimation}

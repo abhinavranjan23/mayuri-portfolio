@@ -5,7 +5,4 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.lottie'],
-  server: {
-    allowedHosts: ['bar-thorough-corporation-sampling.trycloudflare.com']
-  }
 })

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { DotLottiePlayer } from '@dotlottie/react-player';
+import { Helmet } from 'react-helmet-async';
 import '@dotlottie/react-player/dist/index.css';
 import './Home.css';
 
@@ -178,6 +179,10 @@ const Home = () => {
 
   return (
     <div className="home-container" ref={containerRef}>
+        <Helmet>
+            <title>Mayuri Saitav | Social Media Strategist & Content Creator</title>
+            <meta name="description" content="Welcome to the portfolio of Mayuri Saitav - expert Social Media Strategist and Content Creator specializing in Instagram, Facebook, and YouTube marketing." />
+        </Helmet>
         
         {/* Audio Element (Only render if not mobile to save resources?) 
             Actually keep it rendered but controlled, OR remove it. 

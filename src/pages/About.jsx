@@ -148,15 +148,16 @@ const About = () => {
             animate="visible"
         >
             <Helmet>
-                <title>About Mayuri | Content Creator Journey</title>
-                <meta name="description" content="Learn about Mayuri's journey from social media enthusiast to professional content creator. Discover the passion behind the work." />
+                <title>About Mayuri Saitav | Content Creator Journey</title>
+                <meta name="description" content="Learn about Mayuri Saitav's journey from social media enthusiast to professional Content Creator and Strategist. Discover the passion behind the work." />
+                <meta name="keywords" content="Mayuri Saitav, About Content Creator, Social Media Story, Influencer Journey, Creative Professional" />
                 <link rel="canonical" href="https://mayuri-portfolio.com/about" />
             </Helmet>
             {!isMobile && <audio ref={audioRef} src="/music/lilies-on-lapse.mp3" loop />}
 
             {/* Top Bar Floating over everything (visually) or top of container */}
              <motion.div className="top-bar" variants={topBarVariants}>
-                <Link to="/">
+                <Link to="/" aria-label="Home">
                     
              
                 <div className="avatar-circle">

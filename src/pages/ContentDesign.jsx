@@ -79,13 +79,13 @@ const ContentDesign = () => {
             animate="visible"
         >
             <Helmet>
-                <title>Content Design | Mayuri</title>
-                <meta name="description" content="Explore Mayuri's Content Design portfolio." />
+                <title>Content Design | Mayuri Saitav - Social Media Strategist</title>
+                <meta name="description" content="Explore Mayuri Saitav's Content Design portfolio. Services include Social Media Marketing, Post Creation, Video Content, and Strategy for Instagram & Facebook." />
             </Helmet>
 
             {/* Top Bar (Avatar + Navbar) - No Music */}
             <motion.div className="content-design-top-bar" variants={topBarVariants}>
-                 <Link to="/">
+                 <Link to="/" aria-label="Home">
                     <div className="avatar-circle" style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', background: '#f0f0f0' }}>
                         <DotLottiePlayer
                             src={avatarAnimation}

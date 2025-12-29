@@ -20,9 +20,9 @@ const Footer = () => {
 
                 {/* Icons Section */}
                 <div className="footer-icons">
-                    <SocialIcon color="#0077b5" icon={<FaLinkedinIn />} href="https://www.linkedin.com/in/mayuri-kumari1/" />
-                    <SocialIcon color="#FF0000" icon={<FaYoutube />} href="https://www.youtube.com/@Mayurisaitav" />
-                    <SocialIcon color="#C13584" icon={<FaInstagram />} href="https://www.instagram.com/saitavmayuri/" />
+                    <SocialIcon label="LinkedIn" color="#0077b5" icon={<FaLinkedinIn />} href="https://www.linkedin.com/in/mayuri-kumari1/" />
+                    <SocialIcon label="YouTube" color="#FF0000" icon={<FaYoutube />} href="https://www.youtube.com/@Mayurisaitav" />
+                    <SocialIcon label="Instagram" color="#C13584" icon={<FaInstagram />} href="https://www.instagram.com/saitavmayuri/" />
                 </div>
             </div>
         </div>
@@ -30,9 +30,10 @@ const Footer = () => {
 };
 
 // Simple helper component for the styled icons
-const SocialIcon = ({ color, icon, href }) => (
+const SocialIcon = ({ color, icon, href, label }) => (
     <a 
         href={href} 
+        aria-label={label}
         target="_blank" 
         rel="noopener noreferrer"
         style={{
