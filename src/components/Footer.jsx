@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPaperPlane, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa';
 import './Footer.css';
+import { FOOTER_SOCIAL_DATA } from '../utils/Constant';
 
 const Footer = () => {
     return (
@@ -20,9 +21,19 @@ const Footer = () => {
 
                 {/* Icons Section */}
                 <div className="footer-icons">
-                    <SocialIcon label="LinkedIn" color="#0077b5" icon={<FaLinkedinIn />} href="https://www.linkedin.com/in/mayuri-kumari1/" />
-                    <SocialIcon label="YouTube" color="#FF0000" icon={<FaYoutube />} href="https://www.youtube.com/@Mayurisaitav" />
-                    <SocialIcon label="Instagram" color="#C13584" icon={<FaInstagram />} href="https://www.instagram.com/saitavmayuri/" />
+                    {FOOTER_SOCIAL_DATA.map((social) => (
+                        <SocialIcon 
+                            key={social.label}
+                            label={social.label}
+                            color={social.color}
+                            icon={
+                                social.iconType === 'linkedin' ? <FaLinkedinIn /> :
+                                social.iconType === 'youtube' ? <FaYoutube /> :
+                                <FaInstagram />
+                            } 
+                            href={social.href} 
+                        />
+                    ))}
                 </div>
             </div>
         </div>

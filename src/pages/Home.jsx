@@ -9,7 +9,7 @@ import './Home.css';
 
 
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
-import pandaIcon from '/cute-panda-happy.svg';
+
 
 // Floating Icons
 
@@ -80,19 +80,7 @@ const FloatingIcon = ({ src, label, initialX, initialY, delay, emoji }) => {
 };
 
 
-const navItems = [
-    { label: "Content design", link: "/content-design", text: "Explore it!" },
-    { label: "About me", link: "/about", text: "Who am I?" },
-    { label: "Resume", link: "/resume", text: "Hire Me!" }
-];
-
-const floatingIcons = [
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473438/foodie_vaqw7f.avif", label: "Foodie By Birth", emoji: "🥟", x: '45%', y: '10%', delay: 0 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473439/palm-tree_ae5zuc.png", label: "Nature Pleaser", emoji: "🌵", x: '20%', y: '25%', delay: 0.5 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766473441/pookie_eqwmqc.svg", label: "Finds peace in solitude !", emoji: "✌️", x: '70%', y: '25%', delay: 1 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473439/instagram-marketing_qxayx0.png", label: "Social Enthusiast", emoji: "📸", x: '18%', y: '50%', delay: 1.5 },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473438/BAG_vyvato.avif", label: "Exploring, One Step at a Time ", emoji: "🏕", x: '70%', y: '50%', delay: 2 },
-];
+import { HOME_NAV_ITEMS, HOME_FLOATING_ICONS, MAYURI_CHAR_IMG, MAYURI_CHAR_MOBILE_IMG, PANDA_ICON_IMG, BACKGROUND_STRIP_IMG, MOUNTAINS_IMGS } from '../utils/Constant';
 
 const Home = () => {
   const containerRef = useRef(null);
@@ -247,7 +235,7 @@ const Home = () => {
             </h1>
 
             <nav className="nav-links hero-anim">
-                {navItems.map((item, index) => (
+                {HOME_NAV_ITEMS.map((item, index) => (
                     <Link 
                         key={index}
                         to={item.link} 
@@ -260,7 +248,7 @@ const Home = () => {
                         {/* Only show Panda hover effect on Desktop */}
                         {!isMobile && hoveredLink === index && (
                              <motion.img 
-                                src={pandaIcon} 
+                                src={PANDA_ICON_IMG} 
                                 alt="Panda"
                                 initial={{ opacity: 0, x: -10, scale: 0 }}
                                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -291,7 +279,7 @@ const Home = () => {
                     ></div>
 
                     {/* Floating Icons around Character */}
-                    {floatingIcons.map((icon, idx) => (
+                    {HOME_FLOATING_ICONS.map((icon, idx) => (
                         <FloatingIcon 
                             key={idx}
                             src={icon.src}
@@ -304,7 +292,7 @@ const Home = () => {
                     ))}
                     
                     <motion.img 
-                        src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457952/mayuriChar_jqehqn.png"} 
+                        src={MAYURI_CHAR_IMG} 
                         alt="Mayuri Character" 
                         className="character-image"
                         fetchpriority="high"
@@ -325,7 +313,7 @@ const Home = () => {
             */}
             {isMobile && (
                  <motion.img 
-                    src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_400,f_auto,q_auto/v1766457952/mayuriChar_jqehqn.png"} 
+                    src={MAYURI_CHAR_MOBILE_IMG} 
                     alt="Mayuri Character" 
                     className="character-image"
                     initial={{ y: 0 }}

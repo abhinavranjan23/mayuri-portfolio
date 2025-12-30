@@ -4,30 +4,20 @@ import { motion } from 'framer-motion';
 
 import './Navbar.css';
 
+import { NAV_CONFIG_ABOUT, NAV_CONFIG_PHOTO, NAV_CONFIG_DEFAULT } from '../utils/Constant';
+
 const Navbar = () => {
     const location = useLocation();
     const [hoveredLink, setHoveredLink] = useState(null);
 
     // Dynamic Navigation Logic
-    // If Home (/): Show "About me", "Resume"
-    // If About (/about): Show "Content Design", "Resume" (Assuming "Content Design" goes back to Home)
     const isAboutPage = location.pathname === '/about';
     const isPhotoContentPage = location.pathname === '/content-design/photo-content';
     const navItems = isAboutPage 
-        ? [
-            { label: "Content Design", link: "/content-design" },
-            { label: "Get Resume", link: "#", isButton: true }
-          ]
+        ? NAV_CONFIG_ABOUT
         : isPhotoContentPage 
-        ? [
-            { label: "Content ", link: "/content-design" },
-            { label: "About", link: "/about"},
-            { label: "Resume", link: "#", isButton: true }
-          ]
-        : [
-            { label: "About me", link: "/about"},
-            { label: "Get Resume", link: "#", isButton: true }
-          ];
+        ? NAV_CONFIG_PHOTO
+        : NAV_CONFIG_DEFAULT;
 
     return (
         <nav className="navbar-container">

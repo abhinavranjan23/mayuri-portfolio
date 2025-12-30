@@ -8,12 +8,7 @@ import './ContentDesign.css';
 // Importing Assets
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
 // Import the background Lottie simply to pass to the player
-const  contentBgAnimation  = "https://res.cloudinary.com/dnt0xlngl/raw/upload/v1767024743/Background_fv3itj.json";
-// Importing Grid Images
-const photoImg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024749/photoContent_wqorhg.jpg";
-const statsImg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024752/socialStats_eia0mm.jpg";
-const videoImg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024743/5956752_uxat9t.jpg";
-const servicesImg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024746/customerSupport_z379ny.jpg";
+import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION } from '../utils/Constant';
 import Footer from '../components/Footer';
 
 const ContentDesign = () => {
@@ -65,12 +60,7 @@ const ContentDesign = () => {
         visible: { opacity: 1, scale: 1 }
     };
 
-    const cards = [
-        { title: "Photo Content", image: photoImg , link: "/content-design/photo-content" },
-        { title: "Video Content", image: videoImg , link: "/content-design/video-content" },
-        { title: "Social Stats", image: statsImg , link: "/content-design/social-stats" },
-        { title: "Services", image: servicesImg , link: "/content-design/services" },
-    ];
+    const cards = CONTENT_DESIGN_CARDS;
     return (
         <motion.div 
             className="content-design-container"
@@ -103,7 +93,7 @@ const ContentDesign = () => {
             <motion.div className="content-design-bg-container" variants={contentVariants}>
                 <div className="content-design-lottie-wrapper">
                     <DotLottiePlayer
-                        src={contentBgAnimation}
+                        src={CONTENT_BG_ANIMATION}
                         autoplay={true}
                         loop
                         rendererSettings={{

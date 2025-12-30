@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
  
 import './CompanyShowcase.css';
 
-const iphoneFrame = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023689/iphone-mockup-newest_aencbp.png";
+import { IPHONE_FRAME_IMG } from '../utils/Constant';
 
 const CompanyShowcase = forwardRef(({ 
     companyName, 
@@ -21,7 +21,7 @@ const CompanyShowcase = forwardRef(({
                 
                 {/* Left: iPhone */}
                 <div className="showcase-iphone-wrapper">
-                    <img src={iphoneFrame} alt="iPhone Frame" className="showcase-iphone-frame" />
+                    <img src={IPHONE_FRAME_IMG} alt="iPhone Frame" className="showcase-iphone-frame" />
                     <div className="showcase-iphone-screen">
                         <img src={iphoneScreenImg} alt={`${companyName} Profile`} className="showcase-screen-img" />
                     </div>

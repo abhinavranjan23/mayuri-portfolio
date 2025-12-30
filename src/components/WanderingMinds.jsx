@@ -6,62 +6,7 @@ import './WanderingMinds.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const cardData = [
-  {
-    id: 1,
-    title: "Social Media Creator",
-    subtitle: "I Create, Post, Repeat.",
-    oneLiner: "Turning everyday moments into reels, vlogs, and stories that feel real not rehearsed.",
-    color: "#FFD1DC", // Pastel Pink
-    emoji: "📱",
-    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/social2_vzaorb.png"
-  },
-  {
-    id: 2,
-    title: "Poems & Quotes",
-    subtitle: "Words When My Mind Gets Loud.",
-    oneLiner: "I write poems and quotes when thoughts need a place to breathe.",
-    color: "#E0F7FA", // Pastel Cyan
-    emoji: "✍️",
-    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458314/writing_ovcuqj.jpg"
-  },
-  {
-    id: 3,
-    title: "Travel & Explore",
-    subtitle: "Always Somewhere Else.",
-    oneLiner: "Exploring new places, new streets, and new versions of myself.",
-    color: "#FFF9C4", // Pastel Yellow
-    emoji: "✈️",
-    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/travel_mgnfgi.jpg"
-  },
-  {
-    id: 4,
-    title: "Skincare & Self-Care",
-    subtitle: "Skincare Is My Therapy.",
-    oneLiner: "Testing products, routines, and rituals because glowing skin is a lifestyle.",
-    color: "#E1BEE7", // Pastel Purple
-    emoji: "💅",
-    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/skincare_fxeczg.jpg"
-  },
-  {
-    id: 5,
-    title: "Friends & Family",
-    subtitle: "My Favorite People, Always.",
-    oneLiner: "Collecting laughs, late nights, and memories with the people who feel like home.",
-    color: "#FFCCBC", // Pastel Orange
-    emoji: "🫶",
-    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458314/friends_yy29hs.jpg"
-  },
-  {
-    id: 6,
-    title: "Foodie",
-    subtitle: "Powered by Good Food.",
-    oneLiner: "From street snacks to café hopping food is always the plan.",
-    color: "#C8E6C9", // Pastel Green
-    emoji: "🍔",
-    image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/foodie_rxvwtg.jpg"
-  }
-];
+import { WANDERING_MINDS_DATA } from '../utils/Constant';
 
 const WanderingMinds = () => {
     const sectionRef = useRef(null);
@@ -145,7 +90,7 @@ const WanderingMinds = () => {
                 {/* Right Side: Card Deck */}
                 <div className="wandering-right">
                     <div className="cards-stack">
-                        {cardData.map((card) => (
+                        {WANDERING_MINDS_DATA.map((card) => (
                             <div key={card.id} className="wander-card" style={{'--card-color': card.color}}>
                                 <div className="card-header">
                                    <span className="card-emoji">{card.emoji}</span>

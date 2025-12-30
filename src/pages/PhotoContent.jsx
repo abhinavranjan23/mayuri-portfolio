@@ -10,42 +10,11 @@ import Navbar from '../components/Navbar';
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
 import CompanyShowcase from '../components/CompanyShowcase';
 
-const iphoneMockup = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023689/iphone-mockup-newest_aencbp.png";
-const wallpaperImg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023660/iphonge-bg_dffgqh.png"; 
-const butterflyImg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023764/butterfly_dbzb2t.png";
-
-const sticker1 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023503/sticker1-removebg-preview_jsmgiz.png";
-const sticker2 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023504/sticker2-removebg-preview_aeola2.png";
-const sticker3 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023504/sticker3-removebg-preview_orhtod.png";
-const sticker4 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023505/sticker4-removebg-preview_mwgacr.png";
-const sticker5 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023512/sticker5-removebg-preview_omjj2j.png";
-
-
-const instaPage1 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023606/InstaPage1_isuiy7.jpg";
-const instaPage2 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023544/InstaPage2_vb147e.jpg";
-const instaPage3 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023545/InstaPage3_epv8mb.jpg";
-
-
-const firstPost = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023661/second_s9oxup.jpg";
-const secondPost = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023406/image4_q2fpn1.jpg";
-const thirdPost = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023370/image4_gccchz.jpg";
-
-
-
-const dfImg1 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023444/image1_iylx9m.jpg"
-const dfImg2 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023444/image2_bgkpkm.jpg"
-const dfImg3 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023445/image3_lfhexq.jpg"
-const dfImg4 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023446/image4_q7nohe.jpg"
-
-const chaloImg1 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023405/image1_pl1a52.jpg"
-const chaloImg2 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023405/image2_hxnbef.jpg"
-const chaloImg3 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023406/image3_shc2lv.jpg"
-const chaloImg4 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023406/image4_q2fpn1.jpg"
-
-const phdcciImg1 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023370/image1_akwitg.jpg"
-const phdcciImg2 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023370/image2_u0jsta.jpg"
-const phdcciImg3 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023370/image3_co3bny.jpg"
-const phdcciImg4 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023370/image4_gccchz.jpg"
+import { 
+    IPHONE_FRAME_IMG, IPHONE_WALLPAPER_IMG, BUTTERFLY_IMG, 
+    PHOTO_CONTENT_STICKERS, COMPANIES_DATA, 
+    ANIMATION_STICKERS_DATA, PHOTO_CONTENT_POSTS
+} from '../utils/Constant';
 
 
 
@@ -62,26 +31,7 @@ const PhotoContent = () => {
     const showcaseRefs = useRef([]); // Array to hold references to each showcase panel
     
     // Data for Company Showcases
-    const companies = [
-        {
-            name: "@phdcci",
-            iphoneImg: instaPage1,
-            gridImages: [phdcciImg1, phdcciImg2, phdcciImg3, phdcciImg4], // Reusing for demo
-            bgColor: "#fff0f5" // Lavender Blush
-        },
-        {
-            name: "@chalotravellers",
-            iphoneImg: instaPage2,
-            gridImages: [chaloImg1, chaloImg2, chaloImg3, chaloImg4],
-            bgColor: "#f0f8ff" // Alice Blue
-        },
-        {
-            name: "@dfimmigrationto",
-            iphoneImg: instaPage3,
-            gridImages: [dfImg1, dfImg2, dfImg3, dfImg4],
-            bgColor: "#f5f5dc" // Beige
-        }
-    ];
+    const companies = COMPANIES_DATA;
     
     useLayoutEffect(() => {
         let mm = gsap.matchMedia();
@@ -246,14 +196,7 @@ const PhotoContent = () => {
             // CUTE STICKER ANIMATION
             // ----------------------------------------------------
             
-            const stickers = [
-                 // ALL STICKERS: Start IN -> Move OUT (Disperse)
-                 { id: 0, xMove: 50, yMove: 900, rot: 360 },   // Top Left -> Out Left/Down//cat
-                 { id: 1, xMove: 200, yMove: 1000, rot: -180 },   // Top Right -> Out Right/Down//flower
-                 { id: 2, xMove: -400, yMove: 300, rot: 90 },    // Mid Right -> Out Right/Up cat goggles
-                 { id: 3, xMove: 300, yMove: -800, rot: -45 },   // Mid Left -> Out Left/Down flower plant
-                 { id: 4, xMove: -200, yMove: 300, rot: 200 }     // Center -> Out Up //pea
-            ];
+            const stickers = ANIMATION_STICKERS_DATA;
 
             stickers.forEach((s, i) => {
                 const wrapperSelector = `.sticker-wrapper-${i}`;
@@ -345,14 +288,7 @@ const PhotoContent = () => {
             </div>
 
             {/* Cute Animated Stickers */}
-            {[
-                // ALL Start Visible -> Move Out
-                { src: sticker1, top: '15%', left: '5%' },   // Top Left
-                { src: sticker2, top: '15%', left: '75%' },  // Top Right
-                { src: sticker3, top: '58%', left: '10%' },  // Mid Left
-                { src: sticker4, top: '60%', left: '80%' },  // Mid Right
-                { src: sticker5, top: '75%', left: '60%' }   // Bottom Center
-            ].map((s, i) => (
+            {PHOTO_CONTENT_STICKERS.map((s, i) => (
                 <div
                     key={i}
                     className={`cute-sticker-wrapper sticker-wrapper-${i}`}
@@ -387,11 +323,11 @@ const PhotoContent = () => {
                 
                 <div className="iphone-wrapper" ref={iphoneRef}>
                     {/* Frame */}
-                    <img src={iphoneMockup} alt="iPhone Frame" className="iphone-frame" />
+                    <img src={IPHONE_FRAME_IMG} alt="iPhone Frame" className="iphone-frame" />
                     
                     {/* Screen content (absolute inside frame) */}
                     <div className="iphone-screen">
-                        <img src={wallpaperImg} alt="Wallpaper" className="screen-bg" />
+                        <img src={IPHONE_WALLPAPER_IMG} alt="Wallpaper" className="screen-bg" />
                        <div className="screen-inner-text">
                             <h3>Stories<br/></h3>
                              <p >That Every  Post Speaks.</p>
@@ -405,7 +341,7 @@ const PhotoContent = () => {
                 <div className="details-overlay">
                     <div className="overlay-content">
                         <div className="header-wrapper" style={{position: 'relative', display: 'inline-block'}}>
-                             <img src={butterflyImg} alt="Butterfly" className="butterfly-decoration" />
+                             <img src={BUTTERFLY_IMG} alt="Butterfly" className="butterfly-decoration" />
                              <h2>Explore the Gallery</h2>
                         </div>
                         <p>
@@ -413,9 +349,9 @@ const PhotoContent = () => {
                         </p>
                         {/* Placeholder for further components */}
                         <div className="grid-placeholder">
-                             <div className="grid-box"><img src={firstPost} alt="Content Created 1" /></div>
-                             <div className="grid-box"><img src={secondPost} alt="Content Created 2" /></div>
-                             <div className="grid-box"><img src={thirdPost} alt="Content Created 3" /></div>
+                             <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.first} alt="Content Created 1" /></div>
+                             <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.second} alt="Content Created 2" /></div>
+                             <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.third} alt="Content Created 3" /></div>
                         </div>
                     </div>
                 </div>

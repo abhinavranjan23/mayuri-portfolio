@@ -1,11 +1,7 @@
 import { motion, animate, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
-const statsData = [
-  { value: 4, suffix: "+", label: "years of experience" },
-  { value: 40, suffix: "+", label: "Content Created" },
-  { value: 11, suffix: "+", label: "Happy Clients" }
-];
+import { STATS_DATA } from '../utils/Constant';
 
 const Counter = ({ from, to, duration }) => {
     const nodeRef = useRef();
@@ -44,7 +40,7 @@ const Stats = () => {
       margin: '0 auto',
       width: '100%'
     }}>
-      {statsData.map((stat, index) => (
+      {STATS_DATA.map((stat, index) => (
         <motion.div 
           key={index}
           initial={{ opacity: 0, y: 20 }}

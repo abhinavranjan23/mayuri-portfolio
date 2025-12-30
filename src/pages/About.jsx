@@ -16,7 +16,7 @@ import Footer from '../components/Footer';
 const WhatIBring = lazy(() => import('../components/WhatIBring'));
 const BooksSection = lazy(() => import('../components/BooksSection'));
 const WanderingMinds = lazy(() => import('../components/WanderingMinds'));
-const aboutBg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767025022/bgNew_wehssm.jpg";  
+import { ABOUT_BG_IMG, ABOUT_TYPEWRITER_TEXT } from '../utils/Constant';
 const About = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);
@@ -195,7 +195,7 @@ const About = () => {
                 {/* Background Image Container */}
                 <motion.div 
                     className="about-bg-image"
-                    style={{ backgroundImage: `url(${aboutBg})` }}
+                    style={{ backgroundImage: `url(${ABOUT_BG_IMG})` }}
                     variants={imageVariants}
                 >
                     {/* Text Overlay */}
@@ -204,16 +204,13 @@ const About = () => {
                             Content<br /> Creator.
                         </motion.div>
                         <div className="about-description">
-                             {/* Only start typing after image is largely in place. 
-                                 We can use a simple delay or separate animation control. 
-                                 For simplicity with variants, we can wrap this in a motion div with delay.
-                              */}
+                            
                              <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 1.5 }} // Wait for image and heading
                              >
-                                <TypewriterText text="I started social media as work but now it's an adventure where the rides are fun and exciting. I am exploring at every step of creation because I believe creativity comes out in it's own way and is never ending......" />
+                                <TypewriterText text={ABOUT_TYPEWRITER_TEXT} />
                              </motion.div>
                         </div>
                     </div>
