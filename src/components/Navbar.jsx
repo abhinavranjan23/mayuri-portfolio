@@ -20,9 +20,9 @@ const Navbar = () => {
           ]
         : isPhotoContentPage 
         ? [
-            { label: "Content Design", link: "/content-design" },
-            { label: "About me", link: "/about"},
-            { label: "Get Resume", link: "#", isButton: true }
+            { label: "Content ", link: "/content-design" },
+            { label: "About", link: "/about"},
+            { label: "Resume", link: "#", isButton: true }
           ]
         : [
             { label: "About me", link: "/about"},
