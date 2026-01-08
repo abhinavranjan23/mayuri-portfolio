@@ -1,13 +1,11 @@
 import React, { useLayoutEffect, useRef } from 'react';
+
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { DotLottiePlayer } from '@dotlottie/react-player';
 import { Helmet } from 'react-helmet-async';
 
-import Navbar from '../components/Navbar';
-import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
+import BackButton from '../components/BackButton';
 import CompanyShowcase from '../components/CompanyShowcase';
 
 import { 
@@ -36,6 +34,8 @@ const PhotoContent = () => {
     useLayoutEffect(() => {
         let mm = gsap.matchMedia();
         const scope = containerRef; // Scope for selector text
+        
+            gsap.set([".content-design-top-bar", ".hero-text-side span", ".iphone-frame", ".iphone-screen"], { autoAlpha: 0 }); // Target INNERS
 
         mm.add({
             isDesktop: "(min-width: 769px)",
@@ -45,28 +45,43 @@ const PhotoContent = () => {
 
             // Initial Entrance Animation
             const introTl = gsap.timeline();
+
             
             // Navbar always animates same
             introTl.fromTo(".content-design-top-bar", 
-                { y: -100, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+                { y: -100, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out" }
             );
 
             // Intro Text & iPhone - Responsive
+            // STRATEGY: 
+            // - Animate Wrapper Position (x/y/scale)
+            // - Animate Inner Opacity (autoAlpha) 0->1
+            
             if (isDesktop) {
                  introTl
-                    .fromTo(".hero-text-side.left", { x: -200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: "power3.out" }, "0")
-                    .fromTo(".hero-text-side.right", { x: 200, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: "power3.out" }, "0")
-                    .fromTo(iphoneRef.current, { y: 200, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: "back.out(1.2)" }, "0");
+                    // Wrappers: Move into place
+                    .fromTo(".hero-text-side.left", { x: -200 }, { x: 0, duration: 1, ease: "power3.out" }, "0")
+                    .fromTo(".hero-text-side.right", { x: 200 }, { x: 0, duration: 1, ease: "power3.out" }, "0")
+                    .fromTo(iphoneRef.current, { y: 200 }, { y: 0, duration: 1.2, ease: "back.out(1.2)" }, "0")
+                    
+                    // Inners: Fade In
+                    .to([".hero-text-side span", ".iphone-frame", ".iphone-screen"], { autoAlpha: 1, duration: 1 }, "0");
             } else {
-                // Mobile Intro: Fade in or slide vertically
+                // Mobile Intro
                  introTl
-                    .fromTo(".hero-text-side.left", { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "0")
-                    .fromTo(".hero-text-side.right", { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "0")
-                    .fromTo(iphoneRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2, ease: "back.out(1.2)" }, "0");
+                    .fromTo(".hero-text-side.left", { y: -50 }, { y: 0, duration: 1, ease: "power3.out" }, "0")
+                    .fromTo(".hero-text-side.right", { y: -50 }, { y: 0, duration: 1, ease: "power3.out" }, "0")
+                    .fromTo(iphoneRef.current, { scale: 0.8 }, { scale: 1, duration: 1.2, ease: "back.out(1.2)" }, "0")
+                    
+                    // Inners: Fade In
+                    .to([".hero-text-side span", ".iphone-frame", ".iphone-screen"], { autoAlpha: 1, duration: 1 }, "0");
             }
 
             // Scroll Animation (Hero Section)
+            // STRATEGY:
+            // - Animate Wrapper Position & Opacity (1->0) 
+
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroRef.current,
@@ -81,18 +96,19 @@ const PhotoContent = () => {
             if (isDesktop) {
                 // Horizontal Exit
                 tl.fromTo(".hero-text-side.left", 
-                    { x: 0, opacity: 1 }, 
+                    { x: 0, opacity: 1 },
                     { x: -400, opacity: 0, duration: 1, immediateRender: false }, 0)
                   .fromTo(".hero-text-side.right", 
-                    { x: 0, opacity: 1 }, 
+                    { x: 0, opacity: 1 },
                     { x: 400, opacity: 0, duration: 1, immediateRender: false }, 0);
             } else {
                 // Vertical Exit (Top goes Up, Bottom goes Down)
+                // Note: Wrappers handle position
                 tl.fromTo(".hero-text-side.left", 
-                    { y: 0, opacity: 1 }, 
+                    { y: 0, opacity: 1 },
                     { y: -150, opacity: 0, duration: 1, immediateRender: false }, 0)
                   .fromTo(".hero-text-side.right", 
-                    { y: 0, opacity: 1 }, 
+                    { y: 0, opacity: 1 },
                     { y: -150, opacity: 0, duration: 1, immediateRender: false }, 0);
             }
 
@@ -272,20 +288,7 @@ const PhotoContent = () => {
             
             {/* ... Top Bar & Hero Section remain same ... */}
             
-            {/* Top Bar */}
-             <div className="content-design-top-bar">
-                 <Link to="/" aria-label="Home">
-                    <div className="avatar-circle" style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', background: '#f0f0f0' }}>
-                        <DotLottiePlayer
-                            src={avatarAnimation}
-                            autoplay={true}
-                            loop
-                            style={{ width: '100%', height: '100%' }}
-                        />
-                    </div>
-                 </Link>
-                 <Navbar />
-            </div>
+            <BackButton />
 
             {/* Cute Animated Stickers */}
             {PHOTO_CONTENT_STICKERS.map((s, i) => (
@@ -319,14 +322,16 @@ const PhotoContent = () => {
             {/* Hero Pinned Section */}
              <div className="photo-hero" ref={heroRef}>
                 
-                <h1 className="hero-text-side left">Visual</h1>
+                <h1 className="hero-text-side left" style={{ opacity: 1, visibility: 'visible' }}>
+                    <span style={{ opacity: 0, visibility: 'hidden' }}>Visual</span>
+                </h1>
                 
-                <div className="iphone-wrapper" ref={iphoneRef}>
+                <div className="iphone-wrapper" ref={iphoneRef} style={{ opacity: 1, visibility: 'visible' }}>
                     {/* Frame */}
-                    <img src={IPHONE_FRAME_IMG} alt="iPhone Frame" className="iphone-frame" />
+                    <img src={IPHONE_FRAME_IMG} alt="iPhone Frame" className="iphone-frame" style={{ opacity: 0, visibility: 'hidden' }} />
                     
                     {/* Screen content (absolute inside frame) */}
-                    <div className="iphone-screen">
+                    <div className="iphone-screen" style={{ opacity: 0, visibility: 'hidden' }}>
                         <img src={IPHONE_WALLPAPER_IMG} alt="Wallpaper" className="screen-bg" />
                        <div className="screen-inner-text">
                             <h3>Stories<br/></h3>
@@ -335,7 +340,9 @@ const PhotoContent = () => {
                     </div>
                 </div>
 
-                <h1 className="hero-text-side right">Stories</h1>
+                <h1 className="hero-text-side right" style={{ opacity: 1, visibility: 'visible' }}>
+                    <span style={{ opacity: 0, visibility: 'hidden' }}>Stories</span>
+                </h1>
                 
                 {/* Overlay Content that appears when zoomed in */}
                 <div className="details-overlay">

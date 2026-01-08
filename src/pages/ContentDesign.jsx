@@ -28,11 +28,12 @@ const ContentDesign = () => {
     };
 
     const topBarVariants = {
-        hidden: { y: -20, opacity: 0, x: "-50%" },
+        hidden: { y: -20, opacity: 0, x: "-50%", visibility: "hidden" },
         visible: {
             y: 0,
             opacity: 1,
             x: "-50%",
+            visibility: "visible",
             transition: { type: "spring", stiffness: 50, damping: 20, delay: 0.5 } 
         }
     };

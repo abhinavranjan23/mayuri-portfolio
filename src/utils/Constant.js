@@ -195,6 +195,37 @@ export const CONTENT_DESIGN_CARDS = [
     { title: "Services", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024746/customerSupport_z379ny.jpg" , link: "/content-design/services" },
 ];
 
+export const VIDEO_CONTENT_DATA = [
+    {
+        id: 1,
+        title: "dfimmigrationto",
+        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873596/There_s_an_increase_in_the_Canada_processing_time_and_this_time_it_is_huge._In-Canada_class_e25j57.mp4", // Placeholder - User to replace
+        description: "Vedio Crafted for Dfimmigrationto",
+        profileUrl: "https://www.instagram.com/dfimmigrationto" // Link to open on Follow click
+    },
+    {
+        id: 2,
+        title: "@dfimmigrationto",
+        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873597/If_you_are_thinking_of_working_in_Canada_while_studying_here_s_your_opportunity-_You_might_xcwffm.mp4", // Placeholder
+        description: "Vedio Crafted for Dfimmigrationto",
+        profileUrl: "https://www.instagram.com/dfimmigrationto"
+    },
+    {
+        id: 3,
+        title: "My Short Vedio",
+        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767874571/_didikishadi_ashortsaday_trending_minivlog_mehendi_sangeet_720P_xrcuda.mp4", // Placeholder
+        description: "Short, snappy content designed for maximum reach and engagement.",
+        profileUrl: "https://www.youtube.com"
+    },
+    {
+        id: 4,
+        title: "@chalotravellers",
+        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873597/7_Best_Places_to_Visit_in_India_from_June_to_December_Planning_your_next_trip_Here_s_your_ezvdpl.mp4", // Placeholder
+        description: "#travel Vedio",
+        profileUrl: "https://www.instagram.com/chalotravellers"
+    }
+];
+
 export const QUOTE_TEXT = "Posting meaningful is important rather than posting daily";
 export const DESCRIPTION_TEXT = "I consider content is a way to vocalize one's social account. I absolutely love when being part of strategizing content and bringing volume to those ideas through graphic. I've strategized and shaped those ideas across D2C, B2C companies.";
 

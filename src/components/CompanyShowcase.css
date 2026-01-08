@@ -96,7 +96,7 @@
     opacity: 0; /* Animated in */
     transform: translateY(20px);
     transition: transform 0.3s ease;
-    border: 2px solid rgba(85, 83, 83, 0.5);
+    /* border: 2px solid rgba(85, 83, 83, 0.5); */
 }
 
 .showcase-grid-item:hover {

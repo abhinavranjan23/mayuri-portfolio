@@ -32,6 +32,7 @@
     align-items: center;
     gap: 2rem;
     opacity: 0; /* Hidden initially for animation */
+    visibility: hidden; /* Prevent FOUC */
 }
 
 /* Side Text */
@@ -49,6 +50,7 @@
     line-height: 1; /* Tighten up line height for better centering */
     margin: 0;      /* Remove default margins */
     opacity: 0; /* Hidden initially for animation */
+    visibility: hidden; /* Added to prevent FOUC */
     /* 3D Text Shadow */
     text-shadow: 
         1px 1px 0px #ddd,
@@ -74,8 +76,8 @@
     height: auto;
     z-index: 5;
     transform-origin: center center;
-    transform-origin: center center;
     opacity: 0; /* Hidden initially for animation */
+    visibility: hidden; /* Prevent FOUC */
 }
 
 .iphone-frame {
@@ -269,14 +271,14 @@
         align-items: flex-end;
     }
     .hero-text-side.left { 
-        top: 17%; /* Adjusted from 15% to be closer */
+        top: 15%; /* Adjusted from 15% to be closer */
         bottom: auto;
         right:auto;
         left: -23%;
     }
     
     .hero-text-side.right { 
-        top: 26%; /* Adjusted from 15% to be closer */
+        top: 24%; /* Adjusted from 15% to be closer */
         bottom: auto;
         right: -23%;
         left: auto;
