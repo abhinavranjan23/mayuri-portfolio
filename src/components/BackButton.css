@@ -24,6 +24,18 @@
     border-color: rgba(255, 255, 255, 0.4);
 }
 
+/* Light Mode Variant (for Light Backgrounds) */
+.custom-back-button.light-mode {
+    color: #1a1a1a;
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.custom-back-button.light-mode:hover {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
 .custom-back-button svg {
     width: 20px;
     height: 20px;

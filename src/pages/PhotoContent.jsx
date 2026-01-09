@@ -158,6 +158,7 @@ const PhotoContent = () => {
             // AND ensure its children are visible (since CSS hides them)
             if (showcaseRefs.current[0]) {
                 gsap.set(showcaseRefs.current[0], { opacity: 1, zIndex: 1 });
+                showcaseTl.fromTo(showcaseContainerRef.current, {backgroundColor: '#ffffff'}, { backgroundColor: companies[0].bgColor , duration: 0.7 });
                 gsap.set(showcaseRefs.current[0].querySelector('.showcase-title'), { opacity: 1, y: 0 });
                 gsap.set(showcaseRefs.current[0].querySelector('.showcase-iphone-wrapper'), { opacity: 1, y: 0 });
                 gsap.set(showcaseRefs.current[0].querySelectorAll('.showcase-grid-item'), { opacity: 1, y: 0 });
@@ -288,7 +289,7 @@ const PhotoContent = () => {
             
             {/* ... Top Bar & Hero Section remain same ... */}
             
-            <BackButton />
+            <BackButton lightMode={true} />
 
             {/* Cute Animated Stickers */}
             {PHOTO_CONTENT_STICKERS.map((s, i) => (
@@ -352,8 +353,7 @@ const PhotoContent = () => {
                              <h2>Explore the Gallery</h2>
                         </div>
                         <p>
-                          A selection of high-impact visuals created for company social media channels, highlighting brand consistency, audience engagement, and platform-ready creativity.
-                        </p>
+                          This showcases <span className="highlight-text highlight-yellow">my photo content creations</span>, my approach to <span className="highlight-text highlight-pink">visual storytelling</span> through thoughtfully designed photo content paired with <span className="highlight-text highlight-blue">purpose-driven</span> captions. From <span className="highlight-text highlight-green">immigration consultancies</span>, <span className="highlight-text highlight-orange">cultural</span> or <span className="highlight-text highlight-yellow">travel brands</span>, each piece is created to not just look good but to <span className="highlight-text highlight-pink">communicate clearly, build trust, and drive action</span>. <br/> I focus on designing content that aligns with a <span className="highlight-text highlight-blue">brand’s voice, audience mindset, and business goals</span>. Whether it’s simplifying complex immigration information or capturing the aspirational feel of travel, my content is crafted to be <span className="highlight-text highlight-green">scroll-stopping, informative, and conversion-friendly</span>.<br /> Every visual here is backed by strategic captioning because good content doesn’t just attract attention, it guides the audience toward <span className="highlight-text highlight-orange">meaningful engagement</span>                     </p>
                         {/* Placeholder for further components */}
                         <div className="grid-placeholder">
                              <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.first} alt="Content Created 1" /></div>

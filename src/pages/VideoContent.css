@@ -1,165 +1,358 @@
 .reels-page-container {
-    width: 100vw;
-    height: 100vh;
-    background-color: #000;
-    overflow: hidden;
-    position: relative;
-    color: #fff;
-}
-
-.reels-scroll-container {
     width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scrollbar-width: none; /* Firefox */
+    min-height: 100vh;
+    background-color:#FAF8F1;
+    color: #111; /* Dark text */
+    overflow-x: hidden;
 }
 
-.reels-scroll-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-}
-
-.reel-section {
+.header-section {
     width: 100%;
-    height: 100vh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    padding: 40px 20px 80px; /* Increased bottom padding */
+    text-align: center;
     position: relative;
+    z-index: 10;
+}
+
+.header-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #111;
+}
+
+.header-section p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* The element that gets pinned */
+/* The element that gets pinned via GSAP */
+.deck-wrapper {
+    width: 100%;
+    height: 600px; /* Exact height of the cards */
     display: flex;
     justify-content: center;
+    align-items: center; 
+    position: relative; /* Normal flow, GSAP will handle pinning */
+    margin-top: 50px; /* Space from header */
+    margin-bottom: 50px;
+    z-index: 5;
+    perspective: 1200px; /* Enable 3D transitions */
+}
+
+/* Container creating the scrollable height - NOT NEEDED for GSAP pin:true, 
+   GSAP adds pin-spacer. We can remove special styling for it if any. 
+*/
+.scroll-spacer {
+    /* We will remove this wrapper in JSX, but keep class just in case of cache */
+    width: 100%;
+}
+.header-title {
+    font-size: 3rem;
+    font-family: 'Slackey', cursive;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #111;
+}
+.header-desc {
+    font-size: 1.1rem;
+    color: #444; /* Slightly darker for better contrast */
+    font-size: 1.2rem;
+    font-family: 'Pangolin', sans-serif;
+    max-width: 700px; /* Slightly wider */
+    margin: 0 auto;
+    line-height: 1.8; /* More breathing room */
+}
+
+/* Marker Highlight Effect */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    margin: 0 2px;
+}
+
+.highlight-text::before {
+    content: "";
+    position: absolute;
+    top: 55%;
+    left: -4px;
+    right: -4px;
+    height: 45%;
+    background-color: #FFD54F; /* Default Yellow */
+    opacity: 0.6;
+    z-index: -1;
+    transform: translateY(-50%) rotate(-2deg);
+    border-radius: 8px 4px 10px 2px; /* Irregular shape */
+}
+
+.highlight-yellow::before { background-color: #ffd54f; }
+.highlight-green::before { background-color: #aed581; transform: translateY(-50%) rotate(1deg); }
+.highlight-pink::before { background-color: #f8bbd0; transform: translateY(-50%) rotate(-1deg); }
+.highlight-blue::before { background-color: #81d4fa; transform: translateY(-50%) rotate(2deg); }
+.highlight-orange::before { background-color: #ffab91; }
+
+
+
+/* Individual Card */
+.video-card {
+    position: absolute;
+    width: 350px;
+    height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2); /* Softer shadow for white bg */
     background: #000;
+    transform-origin: center top; 
+    will-change: transform, opacity;
 }
 
-.reel-container {
-    width: 100%;
-    max-width: 450px; /* Mobile width constraint for desktop view */
-    height: 100%;
-    position: relative;
-    background: #111;
-}
-
-.reel-video-wrapper {
+.video-container {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.reel-video {
+.video-player {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Or cover, depending on preference. Contain ensures full video visible. Cover fills screen. Reels usually Cover. */
-    object-fit: cover; 
-    display: block;
+    object-fit: cover;
 }
 
-/* Gradient Overlay */
-.reel-overlay {
+/* Overlay Content on the card */
+.card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
     padding: 20px;
-    padding-right: 15px; 
-    padding-bottom: 20px; /* Reduced from 80px to push content down */
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); /* Darker bottom for contrast */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2;
+    color: white;
+}
+
+.card-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    box-sizing: border-box;
-    pointer-events: none; /* Let clicks pass through overlay area mostly */
-}
-
-/* Re-enable pointer events for interactive children */
-.reel-content,
-.reel-actions {
-    pointer-events: auto;
-}
-
-.reel-content {
-    flex: 1;
-    padding-right: 20px;
-}
-
-.reel-header {
-    display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 8px;
 }
 
-.reel-header h3 {
+.card-header h3 {
+    margin: 0;
     font-size: 1.1rem;
     font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    margin: 0;
 }
 
 .follow-btn {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.8);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 4px;
+    background: white;
+    color: black;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 20px;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s;
-    backdrop-filter: blur(4px);
+    width: fit-content;
 }
 
-.follow-btn:hover {
-    background: rgba(255,255,255,0.2);
-    transform: scale(1.05);
+.card-desc {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #eee;
+    margin: 0;
+    /* Limit lines? */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.reel-content p {
-    font-size: 0.9rem;
-    line-height: 1.3;
-    opacity: 0.9;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+/* Sticker Responsiveness */
+@media (max-width: 768px) {
+    /* Only show the first sticker (sticker-0) on mobile if needed, or adjust positions */
+    .sticker-wrapper-1,
+    .sticker-wrapper-2 {
+        display: none !important;
+    }
+    
+    .sticker-wrapper-0 {
+        width: 90px !important;
+        left: -10px !important;
+        top: 15% !important;
+    }
+    .header-section{
+        padding: 40px 0px 40px;
+
+    }
 }
 
-.reel-actions {
+.card-actions {
+    position: absolute;
+    right: 15px;
+    bottom: 100px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    z-index: 3;
+    color: white;
 }
 
-.action-btn {
+.action-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
     cursor: pointer;
-    font-size: 0.8rem;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-.action-btn:focus,
-.action-btn:active,
-.action-btn:focus-visible,
-.action-btn svg:focus {
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Bigger touch target */
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15); /* Glass effect */
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.5rem; /* Bigger icon size */
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.action-btn svg {
-    outline: none !important;
-    display: block; /* Removes descender space */
+.icon-container:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
 }
 
-.action-btn span:first-child {
-    font-size: 1.8rem;
+.action-item span {
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
-/* Back button override for visibility */
-.custom-back-button {
-    background: rgba(0,0,0,0.3) !important;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-section h1 {
+        font-size: 2rem;
+    }
+
+    .header-desc {
+        font-size: 1rem;
+        padding: 0 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .video-card {
+        width: 90vw;
+        height: 85vh;
+    }
+}
+
+/* Marquee Section */
+.marquee-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    padding: 40px 0;
+    overflow: hidden;
+    background-color: #FAF8F1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    /* Fade effect at edges */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-row {
+    display: flex;
+    gap: 20px;
+    white-space: nowrap;
+    width: max-content;
+}
+
+.marquee-row.left-to-right {
+    animation: scrollLeftToRight 20s linear infinite;
+}
+
+.marquee-row.right-to-left {
+    animation: scrollRightToLeft 20s linear infinite;
+}
+
+.marquee-item {
+    position: relative;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #111;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    box-shadow: none;
+    background: transparent; /* Remove default bg */
+    z-index: 1;
+}
+
+/* The marker stroke background */
+.marquee-item::before {
+    content: "";
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; /* Organic shape */
+    transform: rotate(-1deg);
+    transition: transform 0.3s ease;
+}
+
+.marquee-item:hover::before {
+    transform: scale(1.05) rotate(0deg);
+}
+
+/* Vary the shapes slightly for natural feel */
+.marquee-item:nth-child(odd)::before {
+    transform: rotate(1deg);
+    border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+}
+
+.marquee-item:nth-child(3n)::before {
+    transform: rotate(-2deg);
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+/* Pill Colors applied to the pseudo-element */
+.pill-yellow, .pill-pink, .pill-blue, .pill-green, .pill-orange {
+    background-color: transparent; /* Ensure main element is transparent */
+}
+
+.pill-yellow::before { background-color: #FFD54F; }
+.pill-pink::before { background-color: #f8bbd0; }
+.pill-blue::before { background-color: #81d4fa; }
+.pill-green::before { background-color: #aed581; }
+.pill-orange::before { background-color: #ffab91; }
+
+@keyframes scrollLeftToRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes scrollRightToLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }

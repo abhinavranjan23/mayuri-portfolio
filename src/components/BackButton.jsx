@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './BackButton.css';
 
-const BackButton = () => {
+const BackButton = ({ lightMode = false }) => {
     const navigate = useNavigate();
 
     return (
         <motion.button 
-            className="custom-back-button"
+            className={`custom-back-button ${lightMode ? 'light-mode' : ''}`}
             onClick={() => navigate(-1)}
             whileHover={{ scale: 1.1, x: -5 }}
             whileTap={{ scale: 0.95 }}

@@ -1,5 +1,5 @@
 // Image Assets - Common
-export const IPHONE_FRAME_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023689/iphone-mockup-newest_aencbp.png";
+export const IPHONE_FRAME_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767891728/i-phonebg_gezwhm.png";
 export const IPHONE_WALLPAPER_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023660/iphonge-bg_dffgqh.png";
 export const BUTTERFLY_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023764/butterfly_dbzb2t.png";
 
@@ -81,8 +81,8 @@ export const SERVICES_DATA = [
 // Footer Socials
 export const FOOTER_SOCIAL_DATA = [
     { label: "LinkedIn", color: "#0077b5", href: "https://www.linkedin.com/in/mayuri-kumari1/", iconType: "linkedin" },
-    { label: "YouTube", color: "#FF0000", href: "https://www.youtube.com/@Mayurisaitav", iconType: "youtube" },
-    { label: "Instagram", color: "#C13584", href: "https://www.instagram.com/saitavmayuri/", iconType: "instagram" }
+    { label: "YouTube", color: "#ff0000", href: "https://www.youtube.com/@Mayurisaitav", iconType: "youtube" },
+    { label: "Instagram", color: "#e1306c", href: "https://www.instagram.com/saitavmayuri/", iconType: "instagram" }
 ];
 
 // Home Page Data
@@ -118,8 +118,11 @@ export const PHOTO_CONTENT_STICKERS = [
     { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023504/sticker2-removebg-preview_aeola2.png", top: '15%', left: '75%' },
     { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023504/sticker3-removebg-preview_orhtod.png", top: '58%', left: '10%' },
     { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023505/sticker4-removebg-preview_mwgacr.png", top: '60%', left: '80%' },
-    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023512/sticker5-removebg-preview_omjj2j.png", top: '75%', left: '60%' }
+    // { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023512/sticker5-removebg-preview_omjj2j.png", top: '75%', left: '60%' }
 ];
+
+
+
 
 export const PHOTO_CONTENT_POSTS = {
     first: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023661/second_s9oxup.jpg",
@@ -181,7 +184,7 @@ export const ANIMATION_STICKERS_DATA = [
       { id: 1, xMove: 200, yMove: 1000, rot: -180 },   
       { id: 2, xMove: -400, yMove: 300, rot: 90 },    
       { id: 3, xMove: 300, yMove: -800, rot: -45 },  
-      { id: 4, xMove: -200, yMove: 300, rot: 200 }     
+      // { id: 4, xMove: -200, yMove: 300, rot: 200 }     
 ];
 
 
@@ -195,39 +198,64 @@ export const CONTENT_DESIGN_CARDS = [
     { title: "Services", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024746/customerSupport_z379ny.jpg" , link: "/content-design/services" },
 ];
 
+
 export const VIDEO_CONTENT_DATA = [
-    {
+   {
         id: 1,
-        title: "dfimmigrationto",
+        title: "@chalotravellers",
+        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873597/7_Best_Places_to_Visit_in_India_from_June_to_December_Planning_your_next_trip_Here_s_your_ezvdpl.mp4", // Placeholder
+        description: "",
+        profileUrl: "https://www.instagram.com/chalotravellers"
+    },
+ 
+   
+      {
+        id: 2,
+        title: "@MayuriSaitav",
+        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767874571/_didikishadi_ashortsaday_trending_minivlog_mehendi_sangeet_720P_xrcuda.mp4", // Placeholder
+        description: "Short, snappy content designed for maximum reach and engagement.",
+        profileUrl: "https://www.youtube.com/@Mayurisaitav"
+    },
+     {
+        id: 3,
+        title: "@dfimmigrationto",
         videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873596/There_s_an_increase_in_the_Canada_processing_time_and_this_time_it_is_huge._In-Canada_class_e25j57.mp4", // Placeholder - User to replace
-        description: "Vedio Crafted for Dfimmigrationto",
+        description: "",
         profileUrl: "https://www.instagram.com/dfimmigrationto" // Link to open on Follow click
     },
-    {
-        id: 2,
+   
+     {
+        id: 4,
         title: "@dfimmigrationto",
         videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873597/If_you_are_thinking_of_working_in_Canada_while_studying_here_s_your_opportunity-_You_might_xcwffm.mp4", // Placeholder
-        description: "Vedio Crafted for Dfimmigrationto",
+        description: "",
         profileUrl: "https://www.instagram.com/dfimmigrationto"
     },
     {
-        id: 3,
-        title: "My Short Vedio",
-        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767874571/_didikishadi_ashortsaday_trending_minivlog_mehendi_sangeet_720P_xrcuda.mp4", // Placeholder
-        description: "Short, snappy content designed for maximum reach and engagement.",
-        profileUrl: "https://www.youtube.com"
+      id: 5,
+      title: "@chalotravellers",
+      videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873593/chalotravellers_travelmemes_travelmeme_memes_travel_travelgram_meme_instatravel_travelqu_jrcap0.mp4",
+      description: "",
+      profileUrl: "https://www.instagram.com/chalotravellers"
     },
     {
-        id: 4,
-        title: "@chalotravellers",
-        videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873597/7_Best_Places_to_Visit_in_India_from_June_to_December_Planning_your_next_trip_Here_s_your_ezvdpl.mp4", // Placeholder
-        description: "#travel Vedio",
-        profileUrl: "https://www.instagram.com/chalotravellers"
+      id: 6,
+      title: "@phdcci",
+      videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873598/get_o6kpkv.mp4",
+      description: "",
+      profileUrl: ""
+    },
+    {
+      id: 7,
+      title: "@MayuriSaitav",
+      videoUrl: "https://res.cloudinary.com/dnt0xlngl/video/upload/v1767873598/Cousins_at_a_wedding_ashortsaday_trending_minivlog_wedding_cousins_720P_vjjttm.mp4",
+      description: "",
+      profileUrl: "https://www.youtube.com/@Mayurisaitav"
     }
 ];
 
 export const QUOTE_TEXT = "Posting meaningful is important rather than posting daily";
-export const DESCRIPTION_TEXT = "I consider content is a way to vocalize one's social account. I absolutely love when being part of strategizing content and bringing volume to those ideas through graphic. I've strategized and shaped those ideas across D2C, B2C companies.";
+export const DESCRIPTION_TEXT = "I believe content is a way to vocalize one's social account. I absolutely love  strategizing content and bringing volume to those ideas through graphic. I've strategized and shaped those ideas across D2C, B2C companies.";
 
 // About Page
 export const ABOUT_BG_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767025022/bgNew_wehssm.jpg";
