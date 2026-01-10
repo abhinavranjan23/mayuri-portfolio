@@ -233,7 +233,7 @@ const VideoContent = () => {
                             y: window.innerHeight * 1.5,
                             scale: 0.5, 
                             rotation: 10, 
-                            autoAlpha: 1, 
+                            autoAlpha: 0, 
                             duration: 1.5,
                             ease: "power2.inOut"
                         }, stepLabel);
