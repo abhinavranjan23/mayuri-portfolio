@@ -145,8 +145,7 @@ const VideoContent = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isMuted, setIsMuted] = useState(false);
     
-
-   
+    const lastSnapped = useRef(0);
     
     const toggleMute = () => setIsMuted(!isMuted);
 
@@ -176,7 +175,7 @@ const VideoContent = () => {
                 let { isDesktop } = context.conditions;
 
                 // Master Timeline
-                const endValue = isDesktop ? `+=${cards.length * 1500}px` : `+=${cards.length * 1000}px`;
+                const endValue = isDesktop ? `+=${cards.length * 1400}px` : `+=${cards.length * 900}px`;
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: deckRef.current,
@@ -184,23 +183,31 @@ const VideoContent = () => {
                         end: endValue,
                         pin: true,
                         scrub: 1, // Smooth scrubbing effect
+                        onRefresh: (self) => { 
+                            // Sync our tracker with actual progress on load/resize
+                            lastSnapped.current = self.progress; 
+                        },
                         snap: {
                             snapTo: (value) => {
-                                // Logic to snap only to the immediate next/prev card
                                 const step = 1 / (cards.length - 1);
-                                const currentProgress = tl.scrollTrigger.progress;
-                                
-                                const naturalSnap = Math.round(value / step) * step;
-                                const currentSnap = Math.round(currentProgress / step) * step;
-                                
-                                const diff = Math.abs((naturalSnap - currentSnap) / step);
-                                
-                                // If the jump is roughly 1 step or less, let it happen naturally
-                                if (diff < 1.1) return naturalSnap;
+                                const prev = lastSnapped.current;
+                                const threshold = step * 0.05; // Sensitive enough to catch intent, but ignore tiny jitters
 
-                                // If jump is big (> 1 step), force it to neighbor
-                                const direction = value > currentProgress ? 1 : -1;
-                                return currentSnap + (direction * step);
+                                let nextIndex = Math.round(prev / step);
+
+                                if (value > prev + threshold) {
+                                    nextIndex += 1; // Force exact next card
+                                } else if (value < prev - threshold) {
+                                    nextIndex -= 1; // Force exact prev card
+                                } 
+                                // Else stay (didn't scroll enough to justify swap)
+
+                                // Clamp
+                                nextIndex = Math.min(Math.max(nextIndex, 0), cards.length - 1);
+                                
+                                const nextProgress = nextIndex * step;
+                                lastSnapped.current = nextProgress; 
+                                return nextProgress;
                             },
                             duration: { min: 0.2, max: 0.5 },
                             delay: 0,
@@ -230,7 +237,7 @@ const VideoContent = () => {
                     } else {
                         // Mobile Animation
                         tl.to(cards[i], {
-                            y: window.innerHeight * 1.5,
+                            x: window.innerWidth * 1.5,
                             scale: 0.5, 
                             rotation: 10, 
                             autoAlpha: 0, 
