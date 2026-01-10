@@ -16,6 +16,8 @@ import {
 
 
 
+import { IoArrowDown } from "react-icons/io5";
+
 import './PhotoContent.css';
 import Footer from '../components/Footer';
 
@@ -66,7 +68,7 @@ const PhotoContent = () => {
                     .fromTo(iphoneRef.current, { y: 200 }, { y: 0, duration: 1.2, ease: "back.out(1.2)" }, "0")
                     
                     // Inners: Fade In
-                    .to([".hero-text-side span", ".iphone-frame", ".iphone-screen"], { autoAlpha: 1, duration: 1 }, "0");
+                    .to([".hero-text-side span", ".iphone-frame", ".iphone-screen", ".scroll-indicator-wrapper"], { autoAlpha: 1, duration: 1 }, "0");
             } else {
                 // Mobile Intro
                  introTl
@@ -75,7 +77,7 @@ const PhotoContent = () => {
                     .fromTo(iphoneRef.current, { scale: 0.8 }, { scale: 1, duration: 1.2, ease: "back.out(1.2)" }, "0")
                     
                     // Inners: Fade In
-                    .to([".hero-text-side span", ".iphone-frame", ".iphone-screen"], { autoAlpha: 1, duration: 1 }, "0");
+                    .to([".hero-text-side span", ".iphone-frame", ".iphone-screen", ".scroll-indicator-wrapper"], { autoAlpha: 1, duration: 1 }, "0");
             }
 
             // Scroll Animation (Hero Section)
@@ -137,6 +139,13 @@ const PhotoContent = () => {
               0.5) 
               
               .to({}, { duration: 0.5 });
+              
+            // Fade out scroll indicator on scroll - Sync with start (0)
+            tl.to(".scroll-indicator-wrapper", {
+                y: 200, // Move down 100px
+                // autoAlpha: 0,
+                duration: 1 // Fast exit
+            }, 0);
 
 
 
@@ -357,14 +366,24 @@ const PhotoContent = () => {
                         {/* Placeholder for further components */}
                         <div className="grid-placeholder">
                              <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.first} alt="Content Created 1" /></div>
-                             <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.second} alt="Content Created 2" /></div>
+                            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' , fontFamily:'Pangolin', fontSize:'1rem' , color:'#393939ff'}}> <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.second} alt="Content Created 2" /></div><span style={{animation: 'bounce 1s infinite'}}>Scroll Down</span></div> 
                              <div className="grid-box"><img src={PHOTO_CONTENT_POSTS.third} alt="Content Created 3" /></div>
                         </div>
                     </div>
                 </div>
 
+            <div className="scroll-indicator-wrapper">
+                <motion.div 
+                    initial={{ y: 0 }}
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                    <p>Scroll Down</p>
+                    <span className="arrow"><IoArrowDown /></span>
+                </motion.div>
             </div>
-            
+        </div>
+
             {/* ------------------------------------------------------------------
                 PINNED COMPANY SHOWCASE CONTAINER
                 - Height: 100vh (pinned)

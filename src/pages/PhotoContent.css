@@ -17,6 +17,35 @@
     background-color: #FAF8F1;
 }
 
+.scroll-indicator-wrapper {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    z-index: 10;
+    text-align: center;
+    font-family: 'Pangolin', cursive;
+    color: #3e3c3c;
+    opacity: 0; /* Hidden initially */
+    visibility: hidden;
+    cursor: none;
+}
+
+.scroll-indicator-wrapper p {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.scroll-indicator-wrapper .arrow {
+    font-size: 1.5rem;
+    margin-top: 5px;
+    display: block;
+}
+
 
 
 /* Navbar (Reused style) */
@@ -443,7 +472,7 @@
 .details-overlay {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; /* Smooth scroll */
-    padding: 80px 0 50px 0; /* Fixed top spacing + bottom breathing room */
+    padding: 40px 0 50px 0; /* Fixed top spacing + bottom breathing room */
     
     /* Flexbox Safe Centering Logic */
     display: flex !important;
@@ -456,4 +485,13 @@
     margin: 0 auto; /* Horizontal center only */
     width: 90%;
     max-width: 800px;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }

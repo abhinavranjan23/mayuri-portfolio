@@ -185,9 +185,9 @@ const VideoContent = () => {
 
                 tl.to(cards[i], {
                     y: window.innerHeight * 1.5, // Move down further
-                    scale: 4.5, // Get much bigger
-                    rotationX: 90, // Lie down backward
-                    // autoAlpha: 0, // VISIBILITY FIX: Hide it once it's down so it doesn't show below footer
+                    scale: 4, // Get much bigger
+                    rotationX: 95, // Lie down backward
+                    autoAlpha: 0, // VISIBILITY FIX: Hide it once it's down so it doesn't show below footer
                     display: "none", // LAYOUT FIX: Remove from DOM layout to prevent extra scroll space
                     duration: 1,
                     ease: "power2.inOut"
@@ -288,6 +288,7 @@ const VideoContent = () => {
         <div className="reels-page-container" ref={mainContainerRef}>
             <Helmet>
                 <title>Reels | Video Content</title>
+                <meta name="description" content="video content" />
             </Helmet>
             
             <BackButton  lightMode={true}/>
