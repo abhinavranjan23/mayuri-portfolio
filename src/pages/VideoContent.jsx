@@ -144,15 +144,19 @@ const VideoContent = () => {
     const mainContainerRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [isMuted, setIsMuted] = useState(false);
+    
 
+   
+    
     const toggleMute = () => setIsMuted(!isMuted);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
             const cards = gsap.utils.toArray('.video-card');
             const spacer = 30;
+              
 
-            // Initial setup using GSAP to set z-index and positions
+            // Initial setup (common)
             cards.forEach((card, i) => {
                 gsap.set(card, {
                     zIndex: cards.length - i,
@@ -164,118 +168,161 @@ const VideoContent = () => {
                 });
             });
 
-            // Master Timeline
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: deckRef.current,
-                    start: "center center",
-                    end: `+=${cards.length * 1500}px`,
-                    pin: true,
-                    scrub: 1,
-                    onUpdate: (self) => {
-                        const idx = Math.round(self.progress * (cards.length - 1));
-                        setActiveIndex(Math.min(Math.max(idx, 0), cards.length - 1));
+            let mm = gsap.matchMedia();
+            mm.add({
+                isDesktop: "(min-width: 769px)",
+                isMobile: "(max-width: 768px)",
+            }, (context) => {
+                let { isDesktop } = context.conditions;
+
+                // Master Timeline
+                const endValue = isDesktop ? `+=${cards.length * 1000}px` : `+=${cards.length * 700}px`;
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: deckRef.current,
+                        start: "center center",
+                        end: endValue,
+                        pin: true,
+                        scrub: 1, // Smooth scrubbing effect
+                        snap: {
+                            snapTo: (value) => {
+                                // Logic to snap only to the immediate next/prev card
+                                const step = 1 / (cards.length - 1);
+                                const currentProgress = tl.scrollTrigger.progress;
+                                
+                                const naturalSnap = Math.round(value / step) * step;
+                                const currentSnap = Math.round(currentProgress / step) * step;
+                                
+                                const diff = Math.abs((naturalSnap - currentSnap) / step);
+                                
+                                // If the jump is roughly 1 step or less, let it happen naturally
+                                if (diff < 1.1) return naturalSnap;
+
+                                // If jump is big (> 1 step), force it to neighbor
+                                const direction = value > currentProgress ? 1 : -1;
+                                return currentSnap + (direction * step);
+                            },
+                            duration: { min: 0.2, max: 0.5 },
+                            delay: 0,
+                            ease: "power1.inOut"
+                        },
+                        onUpdate: (self) => {
+                            const idx = Math.round(self.progress * (cards.length - 1));
+                            setActiveIndex(Math.min(Math.max(idx, 0), cards.length - 1));
+                        }
+                    }
+                });
+
+                for (let i = 0; i < cards.length - 1; i++) {
+                    const stepLabel = `step-${i}`;
+                    tl.addLabel(stepLabel);
+
+                    if (isDesktop) {
+                        tl.to(cards[i], {
+                            y: window.innerHeight * 1.5, // Move down further
+                            scale: 4, // Get much bigger
+                            rotationX: 95, // Lie down backward
+                            autoAlpha: 0, // VISIBILITY FIX: Hide it once it's down so it doesn't show below footer
+                            display: "none", // LAYOUT FIX: Remove from DOM layout to prevent extra scroll space
+                            duration: 1.5,
+                            ease: "power2.inOut"
+                        }, stepLabel);
+                    } else {
+                        // Mobile Animation
+                        tl.to(cards[i], {
+                            y: window.innerHeight * 1.5,
+                            scale: 0.5, 
+                            rotation: 10, 
+                            autoAlpha: 1, 
+                            duration: 1.5,
+                            ease: "power2.inOut"
+                        }, stepLabel);
+                    }
+
+                    if (cards[i+1]) {
+                        tl.to(cards[i+1], {
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px) brightness(1)",
+                            opacity: 1,
+                            duration: 1,
+                            ease: "power2.inOut"
+                        }, stepLabel);
+                    }
+
+                    if (cards[i+2]) {
+                        tl.to(cards[i+2], {
+                            y: -spacer,
+                            scale: 0.95,
+                            filter: "blur(0px) brightness(1)",
+                            opacity: 1,
+                            duration: 1,
+                            ease: "power2.inOut"
+                        }, stepLabel);
+                    }
+
+                    if (cards[i+3]) {
+                        tl.to(cards[i+3], {
+                            y: -(2 * spacer),
+                            scale: 0.90,
+                            opacity: 1,
+                            duration: 1,
+                            ease: "power2.inOut"
+                        }, stepLabel);
                     }
                 }
-            });
 
-            for (let i = 0; i < cards.length - 1; i++) {
-                const stepLabel = `step-${i}`;
-                tl.addLabel(stepLabel);
+                // --- Sticker Animation ---
+                const stickers = ANIMATION_STICKERS_DATA.slice(0, 3);
+                stickers.forEach((s, i) => {
+                    const wrapperSelector = `.sticker-wrapper-${i}`;
+                    const innerSelector = `.sticker-inner-${i}`;
 
-                tl.to(cards[i], {
-                    y: window.innerHeight * 1.5, // Move down further
-                    scale: 4, // Get much bigger
-                    rotationX: 95, // Lie down backward
-                    autoAlpha: 0, // VISIBILITY FIX: Hide it once it's down so it doesn't show below footer
-                    display: "none", // LAYOUT FIX: Remove from DOM layout to prevent extra scroll space
-                    duration: 1,
-                    ease: "power2.inOut"
-                }, stepLabel);
+                    // 1. Initial State
+                    gsap.set(wrapperSelector, {
+                        scale: 0,
+                        autoAlpha: 0,
+                        x: 0,
+                        y: 0
+                    });
 
-                if (cards[i+1]) {
-                    tl.to(cards[i+1], {
-                        y: 0,
+                    gsap.set(innerSelector, {
+                        rotation: -45,
+                        y: 0
+                    });
+
+                    // 2. Entrance
+                    gsap.to(wrapperSelector, {
                         scale: 1,
-                        filter: "blur(0px) brightness(1)",
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power2.inOut"
-                    }, stepLabel);
-                }
+                        autoAlpha: 1,
+                        duration: 1.5,
+                        ease: "elastic.out(1, 0.5)",
+                        delay: 0.5 + (i * 0.2)
+                    });
 
-                if (cards[i+2]) {
-                    tl.to(cards[i+2], {
-                        y: -spacer,
-                        scale: 0.95,
-                        filter: "blur(0px) brightness(1)",
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power2.inOut"
-                    }, stepLabel);
-                }
+                    // 3. Idle Float
+                    gsap.to(innerSelector, {
+                        y: -20,
+                        rotation: 10,
+                        duration: 2 + (i * 0.2),
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut",
+                        delay: i * 0.5
+                    });
 
-                if (cards[i+3]) {
-                    tl.to(cards[i+3], {
-                        y: -(2 * spacer),
-                        scale: 0.90,
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power2.inOut"
-                    }, stepLabel);
-                }
-            }
-
-            // --- Sticker Animation ---
-            const stickers = ANIMATION_STICKERS_DATA.slice(0, 3);
-            stickers.forEach((s, i) => {
-                const wrapperSelector = `.sticker-wrapper-${i}`;
-                const innerSelector = `.sticker-inner-${i}`;
-
-                // 1. Initial State
-                gsap.set(wrapperSelector, {
-                    scale: 0,
-                    autoAlpha: 0,
-                    x: 0,
-                    y: 0
-                });
-
-                gsap.set(innerSelector, {
-                    rotation: -45,
-                    y: 0
-                });
-
-                // 2. Entrance
-                gsap.to(wrapperSelector, {
-                    scale: 1,
-                    autoAlpha: 1,
-                    duration: 1.5,
-                    ease: "elastic.out(1, 0.5)",
-                    delay: 0.5 + (i * 0.2)
-                });
-
-                // 3. Idle Float
-                gsap.to(innerSelector, {
-                    y: -20,
-                    rotation: 10,
-                    duration: 2 + (i * 0.2),
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut",
-                    delay: i * 0.5
-                });
-
-                // 4. Scroll Wandering (Triggered by main container scroll)
-                gsap.to(wrapperSelector, {
-                    scrollTrigger: {
-                        trigger: mainContainerRef.current,
-                        start: "top top",
-                        end: "bottom bottom",
-                        scrub: 1.5,
-                    },
-                    x: () => s.xMove, 
-                    y: () => s.yMove,
-                    ease: "none"
+                    // 4. Scroll Wandering (Triggered by main container scroll)
+                    gsap.to(wrapperSelector, {
+                        scrollTrigger: {
+                            trigger: mainContainerRef.current,
+                            start: "top top",
+                            end: "bottom bottom",
+                            scrub: 1.5,
+                        },
+                        x: () => s.xMove, 
+                        y: () => s.yMove,
+                        ease: "none"
+                    });
                 });
             });
 
