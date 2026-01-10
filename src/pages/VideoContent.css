@@ -268,6 +268,12 @@
     .deck-wrapper {
         height: 85vh; /* Match card height to prevent overflow/overlap */
         margin-top: 80px; /* Adjust spacing if needed */
+        margin-bottom: 0px; 
+    }
+
+    .marquee-section {
+        margin-bottom: 0px;
+        padding: 20px 0;
     }
 }
 
@@ -275,7 +281,7 @@
 .marquee-section {
     width: 90%;
     max-width: 1200px;
-    margin: 0 auto 50px auto;
+    margin: 0 auto 0px auto;
     padding: 40px 0;
     overflow: hidden;
     background-color: #FAF8F1;

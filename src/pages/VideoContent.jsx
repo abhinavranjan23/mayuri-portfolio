@@ -176,7 +176,7 @@ const VideoContent = () => {
                 let { isDesktop } = context.conditions;
 
                 // Master Timeline
-                const endValue = isDesktop ? `+=${cards.length * 1000}px` : `+=${cards.length * 700}px`;
+                const endValue = isDesktop ? `+=${cards.length * 1500}px` : `+=${cards.length * 1000}px`;
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: deckRef.current,
@@ -234,6 +234,7 @@ const VideoContent = () => {
                             scale: 0.5, 
                             rotation: 10, 
                             autoAlpha: 0, 
+                            display: "none",
                             duration: 1.5,
                             ease: "power2.inOut"
                         }, stepLabel);
