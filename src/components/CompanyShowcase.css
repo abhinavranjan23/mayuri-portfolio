@@ -163,9 +163,15 @@
     }
 
     .showcase-iphone-wrapper {
-        width: 200px; /* Smaller iPhone on mobile */
+        width: 140px; /* Smaller iPhone on mobile */
         order: 2; /* Ensure it's second */
     }
+    .showcase-iphone-screen {
+
+    border-radius: 5px;
+
+    margin: 1px;
+}
 
     /* Stack images below iPhone */
     .showcase-side-group {
