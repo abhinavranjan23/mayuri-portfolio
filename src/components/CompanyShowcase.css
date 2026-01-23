@@ -5,16 +5,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute; /* Stacked on top of each other */
+    position: absolute; 
     top: 0;
     left: 0;
-    padding: 2rem; /* Reduced padding to prevent overflow */
-    box-sizing: border-box; /* Re-added to prevent sizing issues */
+    padding: 2rem;
+    box-sizing: border-box;
     overflow: visible;
-    opacity: 0; /* Hidden by default, controlled by GSAP */
+    opacity: 0; 
     background:linear-gradient(to bottom, #fff , #FAF8F1); /* Off-white warm paper */
-    border: 1px solid rgba(0, 0, 0, 0.08); /* More subtle edge to appear thinner */
-    transform-origin: center 150%; 
+    box-shadow: none !important; 
+    border: none !important;
+    border-radius: 0 !important; 
 }
 
 

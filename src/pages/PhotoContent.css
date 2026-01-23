@@ -611,28 +611,7 @@
 }
 
 /* Ensure Pages (CompanyShowcase) act as 3D planes */
-.company-showcase-panel {
-    /* Override absolute from .company-showcase-panel if needed, 
-       but inline style in JSX handles pos: absolute, top:0.. */
-    
-    background-color: #fdfbf7; /* Warm Paper */
-    border-radius: 4px 12px 12px 4px; /* Realistic Page Shape */
-    
-    /* Combine Spine Gradient (Inset) + Stacked Depth (Drop) */
-    box-shadow: 
-        inset 10px 0 15px rgba(0,0,0,0.05), /* Spine Shadow */
-        1px 1px 0px #e8e8e8,
-        2px 2px 0px #dadada,
-        3px 3px 0px #cfcfcf,
-        4px 4px 0px #c4c4c4,
-        5px 5px 6px rgba(0,0,0,0.1);
-    
-    backface-visibility: hidden; /* Hide back when flipped */
-    
-    /* Ensure content is visible */
-    display: flex;
-    position: absolute !important;
-}
+/* .company-showcase-panel styles removed to avoid conflict */
 
 /* Responsive Book */
 @media (max-width: 768px) {
