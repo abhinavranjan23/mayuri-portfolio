@@ -184,7 +184,7 @@ const VideoContent = () => {
                         pin: true,
                         scrub: 1, // Smooth scrubbing effect
                         onRefresh: (self) => { 
-                            // Sync our tracker with actual progress on load/resize
+                            // Sync our tracker with actual progress on load/resiz/3e
                             lastSnapped.current = self.progress; 
                         },
                         snap: {

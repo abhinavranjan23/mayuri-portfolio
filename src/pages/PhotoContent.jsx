@@ -1,23 +1,16 @@
-import React, { useLayoutEffect, useRef } from 'react';
-
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Helmet } from 'react-helmet-async';
-
 import BackButton from '../components/BackButton';
 import CompanyShowcase from '../components/CompanyShowcase';
-
 import { 
     IPHONE_FRAME_IMG, IPHONE_WALLPAPER_IMG, BUTTERFLY_IMG, 
     PHOTO_CONTENT_STICKERS, COMPANIES_DATA, 
     ANIMATION_STICKERS_DATA, PHOTO_CONTENT_POSTS
 } from '../utils/Constant';
-
-
-
 import { IoArrowDown } from "react-icons/io5";
-
 import './PhotoContent.css';
 import Footer from '../components/Footer';
 
@@ -27,62 +20,53 @@ const PhotoContent = () => {
     const containerRef = useRef(null);
     const heroRef = useRef(null);
     const iphoneRef = useRef(null);
-    const showcaseContainerRef = useRef(null);
-    const showcaseRefs = useRef([]); // Array to hold references to each showcase panel
-    
-    // Data for Company Showcases
+    const showcaseContainerRef = useRef(null); 
+    const showcaseRefs = useRef([]); 
+    const coverRef = useRef(null);
     const companies = COMPANIES_DATA;
+    const [selectedImage, setSelectedImage] = useState(null);
+
     
     useLayoutEffect(() => {
         let mm = gsap.matchMedia();
-        const scope = containerRef; // Scope for selector text
+        const scope = containerRef; 
         
             gsap.set([".content-design-top-bar", ".hero-text-side span", ".iphone-frame", ".iphone-screen"], { autoAlpha: 0 }); // Target INNERS
 
         mm.add({
             isDesktop: "(min-width: 769px)",
             isMobile: "(max-width: 768px)",
-        }, (context) => { // Context provides conditions
+        }, (context) => { 
             let { isDesktop, isMobile } = context.conditions;
 
-            // Initial Entrance Animation
             const introTl = gsap.timeline();
 
-            
-            // Navbar always animates same
             introTl.fromTo(".content-design-top-bar", 
                 { y: -100, autoAlpha: 0 },
                 { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out" }
             );
 
-            // Intro Text & iPhone - Responsive
-            // STRATEGY: 
-            // - Animate Wrapper Position (x/y/scale)
-            // - Animate Inner Opacity (autoAlpha) 0->1
+
             
             if (isDesktop) {
                  introTl
-                    // Wrappers: Move into place
+                
                     .fromTo(".hero-text-side.left", { x: -200 }, { x: 0, duration: 1, ease: "power3.out" }, "0")
                     .fromTo(".hero-text-side.right", { x: 200 }, { x: 0, duration: 1, ease: "power3.out" }, "0")
                     .fromTo(iphoneRef.current, { y: 200 }, { y: 0, duration: 1.2, ease: "back.out(1.2)" }, "0")
-                    
-                    // Inners: Fade In
+                 
                     .to([".hero-text-side span", ".iphone-frame", ".iphone-screen", ".scroll-indicator-wrapper"], { autoAlpha: 1, duration: 1 }, "0");
             } else {
-                // Mobile Intro
+              
                  introTl
                     .fromTo(".hero-text-side.left", { y: -50 }, { y: 0, duration: 1, ease: "power3.out" }, "0")
                     .fromTo(".hero-text-side.right", { y: -50 }, { y: 0, duration: 1, ease: "power3.out" }, "0")
                     .fromTo(iphoneRef.current, { scale: 0.8 }, { scale: 1, duration: 1.2, ease: "back.out(1.2)" }, "0")
-                    
-                    // Inners: Fade In
+                  
                     .to([".hero-text-side span", ".iphone-frame", ".iphone-screen", ".scroll-indicator-wrapper"], { autoAlpha: 1, duration: 1 }, "0");
             }
 
-            // Scroll Animation (Hero Section)
-            // STRATEGY:
-            // - Animate Wrapper Position & Opacity (1->0) 
+
 
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -94,9 +78,8 @@ const PhotoContent = () => {
                 }
             });
 
-            // Scroll Text Animations
             if (isDesktop) {
-                // Horizontal Exit
+                
                 tl.fromTo(".hero-text-side.left", 
                     { x: 0, opacity: 1 },
                     { x: -400, opacity: 0, duration: 1, immediateRender: false }, 0)
@@ -127,7 +110,7 @@ const PhotoContent = () => {
                   { rotation: 0, scale: 1 },
                   { 
                       rotation: 90, 
-                      scale: isMobile ? 8 : 14, // Smaller scale on mobile
+                      scale: isMobile ? 8 : 14, 
                       duration: 2,
                       ease: "power2.inOut",
                       immediateRender: false
@@ -149,74 +132,57 @@ const PhotoContent = () => {
 
 
 
-            // ----------------------------------------------------
-            // PINNED COMPANY SHOWCASE SECTION
-            // ----------------------------------------------------
-            const showcaseTl = gsap.timeline({
+            
+            const albumTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: showcaseContainerRef.current,
                     start: "top top",
-                    end: "+=300%", // 300vh scroll distance for 3 slides
+                    end: "+=300%", // Adjust scroll length
                     pin: true,
-                    scrub: 1, // Smooth scrubbing
-                    snap: 1 / 2, // Snap to each of the 3 slides (0, 0.5, 1)
+                    scrub: 1,
+                    snap: 1 / (companies.length - 1), // Snap to each card
                 }
             });
 
-            // Make sure first slide is visible initially
-            // AND ensure its children are visible (since CSS hides them)
-            if (showcaseRefs.current[0]) {
-                gsap.set(showcaseRefs.current[0], { opacity: 1, zIndex: 1 });
-                showcaseTl.fromTo(showcaseContainerRef.current, {backgroundColor: '#ffffff'}, { backgroundColor: companies[0].bgColor , duration: 0.7 });
-                gsap.set(showcaseRefs.current[0].querySelector('.showcase-title'), { opacity: 1, y: 0 });
-                gsap.set(showcaseRefs.current[0].querySelector('.showcase-iphone-wrapper'), { opacity: 1, y: 0 });
-                gsap.set(showcaseRefs.current[0].querySelectorAll('.showcase-grid-item'), { opacity: 1, y: 0 });
-            }
+            // Initial State: All panels hidden/positioned down except the first one?
+            // Actually, let's stack them. 
+            // First one is visible by default (CSS opacity: 0 needs override).
             
-            if (showcaseRefs.current[1]) gsap.set(showcaseRefs.current[1], { opacity: 0, zIndex: 2 });
-            if (showcaseRefs.current[2]) gsap.set(showcaseRefs.current[2], { opacity: 0, zIndex: 3 });
+            showcaseRefs.current.forEach((el, i) => {
+                if (el) {
+                    gsap.set(el, { 
+                        zIndex: i + 1,
+                        opacity: i === 0 ? 1 : 0, // First visible, others start hidden
+                        yPercent: i === 0 ? 0 : 100, // Others start offscreen down
+                        scale: i === 0 ? 1 : 0.9,
+                        visibility: 'visible'
+                    });
+                }
+            });
 
-            // Slide 1 to Slide 2
-            if (showcaseRefs.current[1]) {
-                showcaseTl
-                .to(showcaseContainerRef.current, { backgroundColor: companies[1].bgColor, duration: 1 })
-                .fromTo(showcaseRefs.current[1], 
-                    { opacity: 0, y: 100 }, 
-                    { opacity: 1, y: 0, duration: 1 }, 
-                "<")
-                .to(showcaseRefs.current[0], { opacity: 0, scale: 0.95, duration: 1 }, "<") // Fade out prev
-                
-                // Animate elements inside Slide 2
-                .fromTo(showcaseRefs.current[1].querySelector('.showcase-title'), { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, "-=0.5")
-                .fromTo(showcaseRefs.current[1].querySelector('.showcase-iphone-wrapper'), { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, "<")
-                .fromTo(showcaseRefs.current[1].querySelectorAll('.showcase-grid-item'), 
-                    { y: 50, opacity: 0 }, 
-                    { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 }, 
-                "<");
-            }
+            // Animation: Slide up next card
+            showcaseRefs.current.forEach((el, i) => {
+                if (i > 0) {
+                    const prevEl = showcaseRefs.current[i - 1];
+                    
+                    // Animate Current Card In
+                    albumTl.to(el, {
+                        yPercent: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1,
+                        ease: "power2.out"
+                    });
 
+                    // Update Previous Card (Scale down slightly for depth)
+                    albumTl.to(prevEl, {
+                        scale: 0.9,
+                        filter: "blur(5px)", // Add blur for focus effect
+                        duration: 1
+                    }, "<"); // Run at same time
+                }
+            });
 
-            // Slide 2 to Slide 3
-            if (showcaseRefs.current[2]) {
-                showcaseTl
-                .addLabel("slide3")
-                .to(showcaseContainerRef.current, { backgroundColor: companies[2].bgColor, duration: 1 })
-                .fromTo(showcaseRefs.current[2], 
-                    { opacity: 0, y: 100 }, 
-                    { opacity: 1, y: 0, duration: 1 }, 
-                "<")
-                .to(showcaseRefs.current[1], { opacity: 0, scale: 0.95, duration: 1 }, "<") // Fade out prev
-
-                // Animate elements inside Slide 3
-                .fromTo(showcaseRefs.current[2].querySelector('.showcase-title'), { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, "-=0.5")
-                .fromTo(showcaseRefs.current[2].querySelector('.showcase-iphone-wrapper'), { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, "<")
-                .fromTo(showcaseRefs.current[2].querySelectorAll('.showcase-grid-item'), 
-                    { y: 50, opacity: 0 }, 
-                    { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 }, 
-                "<");
-            }
-            
-            // Clean up ScrollTrigger related to this is automatic via ctx.revert()
             
             // ----------------------------------------------------
             // CUTE STICKER ANIMATION
@@ -394,14 +360,18 @@ const PhotoContent = () => {
                 ref={showcaseContainerRef} 
                 className="showcase-pinned-wrapper"
                 style={{ 
+                    // Main Scene Styling
                     width: '100%', 
                     height: '100vh', 
                     position: 'relative', 
-                    backgroundColor: companies[0].bgColor, // Start with first color
+                    background: "#FAF8F1",
                     overflow: 'hidden',
-                // marginTop: '50vh' // Removed to allow natural scroll-in
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}
             >
+                {/* Pages */}
                 {companies.map((company, index) => (
                     <CompanyShowcase 
                         key={index}
@@ -409,9 +379,30 @@ const PhotoContent = () => {
                         companyName={company.name}
                         iphoneScreenImg={company.iphoneImg}
                         gridImages={company.gridImages}
+                        onImageClick={setSelectedImage}
+                        style={{ 
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                        }}
                     />
                 ))}
             </div>
+
+            {/* Lightbox Overlay */}
+            {selectedImage && (
+                <div 
+                    className="lightbox-overlay" 
+                    onClick={() => setSelectedImage(null)}
+                    data-cursor-text="Close" // Tells custom cursor to show "Close" text
+                >
+                    <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                        <img src={selectedImage} alt="Full Screen" className="lightbox-img" />
+                    </div>
+                </div>
+            )}
 
             <Footer />
 

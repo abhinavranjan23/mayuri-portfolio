@@ -255,11 +255,12 @@ export const VIDEO_CONTENT_DATA = [
 ];
 
 export const QUOTE_TEXT = "Posting meaningful is important rather than posting daily";
-export const DESCRIPTION_TEXT = "I believe content is a way to vocalize one's social account. I absolutely love  strategizing content and bringing volume to those ideas through graphic. I've strategized and shaped those ideas across D2C, B2C companies.";
+export const DESCRIPTION_TEXT = "I believe content is a way to vocalize one’s social account. I absolutely love strategizing content and bringing volume to ideas through graphics. I've strategized and shaped those ideas across D2C, B2C companies.";
 
 // About Page
 export const ABOUT_BG_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767025022/bgNew_wehssm.jpg";
 export const ABOUT_TYPEWRITER_TEXT = "I started social media as work but now it's an adventure where the rides are fun and exciting. I am exploring at every step of creation because I believe creativity comes out in it's own way and is never ending......";
+
 
 // Navbar Configurations
 export const NAV_CONFIG_ABOUT = [

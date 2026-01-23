@@ -1,6 +1,6 @@
 /* Panel Wrapper */
 .company-showcase-panel {
-    width: 100%;
+    width: 80%;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -8,28 +8,35 @@
     position: absolute; /* Stacked on top of each other */
     top: 0;
     left: 0;
-    padding: 4rem 2rem;
-    box-sizing: border-box;
-    overflow: hidden;
+    padding: 2rem; /* Reduced padding to prevent overflow */
+    box-sizing: border-box; /* Re-added to prevent sizing issues */
+    overflow: visible;
     opacity: 0; /* Hidden by default, controlled by GSAP */
-    
+    background:linear-gradient(to bottom, #fff , #FAF8F1); /* Off-white warm paper */
+    border: 1px solid rgba(0, 0, 0, 0.08); /* More subtle edge to appear thinner */
+    transform-origin: center 150%; 
 }
 
+
+
 .showcase-container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* Left, iPhone, Right */
+    grid-template-rows: auto 1fr; /* Title, Content */
     align-items: center;
-    justify-content: center;
-    gap: 2rem;
+    justify-items: center;
+    gap: 0rem;
     max-width: 1200px;
     width: 100%;
     z-index: 2;
+    padding-top: 0; /* Removed top padding */
+    margin-top: -13vh; /* Shift content up slightly */
 }
 
 /* Left: iPhone Mockup */
 .showcase-iphone-wrapper {
     position: relative;
-    width: 350px;
+    width: 260px; /* Reduced width */
     height: auto;
     flex-shrink: 0;
     will-change: transform, opacity;
@@ -48,7 +55,7 @@
     position: absolute;
     top: 2%;
     left: 5%;
-    width: 88%;
+    width: 90%;
     height: 95%;
     background: #000;
     z-index: 5;
@@ -64,40 +71,56 @@
 }
 
 /* Right: Content & Grid */
-.showcase-content-side {
+/* Side Groups (Images) */
+.showcase-side-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    max-width: 600px;
+    gap: 1rem;
+    width: 100%;
+    max-width: 280px; /* Limit width of image columns */
+}
+
+/* Specific alignments if needed */
+.left-group {
+    align-items: flex-end; /* Push towards center */
+}
+
+.right-group {
+    align-items: flex-start; /* Push towards center */
 }
 
 .showcase-title {
+    grid-column: 1 / -1;
+    grid-row: 1;
     font-family: 'Pangolin', cursive;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    text-align: center;
     color: #333;
-    margin: 0;
-    opacity: 0; /* Animated in */
-    transform: translateY(20px);
+    position: relative; /* Allow visual movement without layout shift */
+    top: 2rem; /* Move title down as requested */
 }
 
-.showcase-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
+/* Remove old grid styles */
+/* .showcase-grid { ... } */
 
 .showcase-grid-item {
     width: 100%;
-    aspect-ratio: 1; /* Square */
+    height: 100%;
+    aspect-ratio: 0.9; /* rectangle */
     border-radius: 12px;
     overflow: hidden;
     background: rgba(65, 65, 65, 0.5);
     box-shadow: 0 10px 19px rgba(0,0,0,0.1);
-    opacity: 0; /* Animated in */
+    /* opacity: 0; Removed to prevent visibility issues. GSAP .from() handles this. */
     transform: translateY(20px);
     transition: transform 0.3s ease;
+    z-index: 5; /* Ensure above decorations if needed */
+    
     /* border: 2px solid rgba(85, 83, 83, 0.5); */
 }
+
 
 .showcase-grid-item:hover {
     transform: scale(1.03) !important; /* Override GSAP set transform on hover */
@@ -112,80 +135,53 @@
 }
 
 /* Responsive */
+/* Responsive */
 @media (max-width: 768px) {
     .company-showcase-panel {
-        height: 100vh; /* Restore 100vh for pinned scroll logic */
-        padding: 1rem 1rem 1rem 1rem; /* Adjust padding */
-        align-items: center; /* Center vertically */
+        height: 100vh;
+        padding: 1rem;
+        align-items: center;
+        width: 100%;
+        left: 0;
+        top: 0;
     }
 
     .showcase-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto auto; /* Title, Row1, Row2, Row3 */
-        gap: 0.8rem;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
+        overflow-y: hidden; /* Allow scrolling content if needed */
+        justify-content: flex-start;
+        padding-top: 4rem; /* Space for top bar */
     }
 
-    /* Flatten the structure to grid items */
-    .showcase-content-side,
-    .showcase-grid {
-        display: contents;
-    }
-
-    /* 1. Title: Top, Span 2 */
     .showcase-title {
-        grid-column: 1 / -1;
-        grid-row: 1;
-        text-align: center;
         font-size: 2rem;
         margin-bottom: 0.5rem;
-        width: 100%;
     }
 
-    /* 2. iPhone: Left, Span 2 Rows */
     .showcase-iphone-wrapper {
-        grid-column: 1;
-        grid-row: 2 / 4; /* Spans Row 2 and 3 */
-        width: 100%;
-        height: auto;
-        max-width: 160px; /* Constrain size */
-        margin: 0 auto;
-        align-self: center; /* Center in its grid area */
-    }
-    .showcase-iphone-screen{
-        border-radius: 4px;
+        width: 200px; /* Smaller iPhone on mobile */
+        order: 2; /* Ensure it's second */
     }
 
-    /* 3. Grid Items Placement */
+    /* Stack images below iPhone */
+    .showcase-side-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2x2 Grid for interactions */
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        order: 3;
+    }
+    
+    /* Merge left and right groups visually */
+    .left-group { order: 3; }
+    .right-group { order: 4; }
+
     .showcase-grid-item {
-        width: 100%;
-        aspect-ratio: 1;
-    }
-
-    /* First Grid Image -> Right Top */
-    .showcase-grid-item:nth-child(1) {
-        grid-column: 2;
-        grid-row: 2;
-    }
-
-    /* Second Grid Image -> Right Bottom */
-    .showcase-grid-item:nth-child(2) {
-        grid-column: 2;
-        grid-row: 3;
-    }
-
-    /* Third Grid Image -> Bottom Left */
-    .showcase-grid-item:nth-child(3) {
-        grid-column: 1;
-        grid-row: 4;
-    }
-
-    /* Fourth Grid Image -> Bottom Right */
-    .showcase-grid-item:nth-child(4) {
-        grid-column: 2;
-        grid-row: 4;
+        aspect-ratio: 1; /* Square on mobile */
+        transform: none !important;
     }
 }

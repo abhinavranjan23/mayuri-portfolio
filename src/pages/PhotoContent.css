@@ -218,6 +218,7 @@
     justify-content: center;
     align-items: center;
     pointer-events: none; /* Initially ignore clicks */
+    overflow-y: hidden;
     
 }
 
@@ -493,5 +494,154 @@
     }
     50% {
         transform: translateY(-8px);
+    }
+}
+
+/* Lightbox Styles */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Dark background */
+    backdrop-filter: blur(5px);
+    z-index: 99999; /* Highest priority */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    transform: scale(0.9);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
+}
+
+/* ------------------------------------------------------------------
+   3D ALBUM STYLES
+   ------------------------------------------------------------------ */
+
+.album-book-container {
+    width: 85%; /* Standard Page Width */
+    height: 85%; /* Standard Page Height */
+    position: relative;
+    transform-style: preserve-3d; /* Essential for children to be 3D */
+    perspective: 2500px;
+}
+
+/* Common Page Styles (Cover + Panels) */
+.album-cover, 
+.company-showcase-panel {
+    /* ... existing props ... */
+    
+    transform-origin: left center; /* Rotate around left edge */
+}
+
+/* The Cover Page Specifics */
+.album-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2c3e50; /* Dark premium cover */
+    color: #fff;
+    border-radius: 12px 20px 20px 12px; /* Left spine square, right rounded */
+    box-shadow: 
+        inset 10px 0 20px rgba(0,0,0,0.5), /* Spine shadow */
+        5px 5px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+    transform-origin: left center; /* Pivot from spine */
+    backface-visibility: hidden; /* Hide when flipped */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid #34495e;
+}
+
+.cover-design {
+    padding: 2rem;
+    border: 2px solid rgba(255,255,255,0.1);
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cover-title {
+    font-size: 5rem;
+    font-family: 'Slackey', cursive;
+    margin: 0;
+    line-height: 1.1;
+    color: #f1c40f; /* Gold title */
+    text-shadow: 2px 2px 0px #000;
+}
+
+.cover-subtitle {
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 1rem;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+/* Ensure Pages (CompanyShowcase) act as 3D planes */
+.company-showcase-panel {
+    /* Override absolute from .company-showcase-panel if needed, 
+       but inline style in JSX handles pos: absolute, top:0.. */
+    
+    background-color: #fdfbf7; /* Warm Paper */
+    border-radius: 4px 12px 12px 4px; /* Realistic Page Shape */
+    
+    /* Combine Spine Gradient (Inset) + Stacked Depth (Drop) */
+    box-shadow: 
+        inset 10px 0 15px rgba(0,0,0,0.05), /* Spine Shadow */
+        1px 1px 0px #e8e8e8,
+        2px 2px 0px #dadada,
+        3px 3px 0px #cfcfcf,
+        4px 4px 0px #c4c4c4,
+        5px 5px 6px rgba(0,0,0,0.1);
+    
+    backface-visibility: hidden; /* Hide back when flipped */
+    
+    /* Ensure content is visible */
+    display: flex;
+    position: absolute !important;
+}
+
+/* Responsive Book */
+@media (max-width: 768px) {
+    .album-book-container {
+        width: 95%;
+        height: 80%; /* Smaller on mobile */
+    }
+    
+    .cover-title {
+        font-size: 3rem;
     }
 }
