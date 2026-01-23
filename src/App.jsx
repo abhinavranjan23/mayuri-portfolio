@@ -13,6 +13,7 @@ const Work = lazy(() => import('./components/Work'));
 const ContentDesign = lazy(() => import('./pages/ContentDesign'));
 const PhotoContent = lazy(() => import('./pages/PhotoContent'));
 const VideoContent = lazy(() => import('./pages/VideoContent'));
+const SocialStats = lazy(() => import('./pages/SocialStats'));
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
               <Route path="/content-design" element={<ContentDesign />} />
               <Route path="/content-design/photo-content" element={<PhotoContent />} />
               <Route path="/content-design/video-content" element={<VideoContent />} />
-              <Route path="/content-design/social-stats" element={<Work />} />
+              <Route path="/content-design/social-stats" element={<SocialStats />} />
               <Route path="/content-design/services" element={<Work />} />
               {/* <Route path="/work" element={<Work />} /> */}
               <Route path="*" element={<NotFound />} />
