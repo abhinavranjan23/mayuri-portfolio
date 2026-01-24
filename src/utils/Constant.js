@@ -106,12 +106,12 @@ export const MAYURI_CHAR_MOBILE_IMG = "https://res.cloudinary.com/dnt0xlngl/imag
 export const PANDA_ICON_IMG = "/cute-panda-happy.svg";
 export const BACKGROUND_STRIP_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769284738/background_m9bzpx_mmv1ju.webp";
 
-export const MOUNTAINS_IMGS = {
-    m4: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1769284737/mountain4_qfqwbh_asqaw5.webp",
-    m3: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1769284737/mountain3_lzfbki_ritw1f.webp",
-    m2: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1769284737/mountain2_l6sk50_tjum8g.webp",
-    m1: "https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1769284737/mountain1_xse8h4_y3u2hj.webp"
-};
+export const MOUNTAINS_IMGS = [
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1769284737/mountain4_qfqwbh_asqaw5.webp", className: "mountain-4" },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1769284737/mountain3_lzfbki_ritw1f.webp", className: "mountain-3" },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1769284737/mountain2_l6sk50_tjum8g.webp", className: "mountain-2" },
+    { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1769284737/mountain1_xse8h4_y3u2hj.webp", className: "mountain-1" }
+];
 
 // Photo Content Page Data
 export const PHOTO_CONTENT_STICKERS = [

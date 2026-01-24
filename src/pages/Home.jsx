@@ -336,7 +336,7 @@ const Home = () => {
                     key={idx}
                     src={img.src}
                     alt={`Mountain ${idx + 1}`}
-                    className={`mountain-img mountain-${idx + 1}`}
+                    className={`mountain-img ${img.className}`}
                     loading="lazy"
                 />
             ))}
