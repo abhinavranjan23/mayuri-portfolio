@@ -342,8 +342,8 @@ const VideoContent = () => {
     return (
         <div className="reels-page-container" ref={mainContainerRef}>
             <Helmet>
-                <title>Reels | Video Content</title>
-                <meta name="description" content="video content" />
+                <title>Video Editing & Reels | Shorts, Vlogs & Viral Content</title>
+                <meta name="description" content="Expert video editing portfolio. Check out my engaging Reels, YouTube Shorts, and promotional videos designed to capture attention and drive views." />
             </Helmet>
             
             <BackButton  lightMode={true}/>

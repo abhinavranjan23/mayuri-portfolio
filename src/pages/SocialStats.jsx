@@ -68,8 +68,8 @@ const SocialStats = () => {
     return (
         <div className="social-stats-page" ref={pageRef}>
             <Helmet>
-                <title>Social Stats & Case Studies | Mayuri Saitav</title>
-                <meta name="description" content="Detailed case studies and social media performance statistics." />
+                <title>Growth & Case Studies | Social Media Performance</title>
+                <meta name="description" content="Real results and case studies. See how Mayuri Saitav has grown social media accounts, increased engagement, and driven viral success." />
             </Helmet>
 
             <BackButton  lightMode={true}/>

@@ -70,8 +70,8 @@ const ContentDesign = () => {
             animate="visible"
         >
             <Helmet>
-                <title>Content Design | Mayuri Saitav - Social Media Strategist</title>
-                <meta name="description" content="Explore Mayuri Saitav's Content Design portfolio. Services include Social Media Marketing, Post Creation, Video Content, and Strategy for Instagram & Facebook." />
+                <title>Content Design Portfolio | Visuals & Creative Work</title>
+                <meta name="description" content="Browse the creative content design portfolio of Mayuri Saitav. High-quality visuals, graphics, and layouts tailored for social media success." />
             </Helmet>
 
             {/* Top Bar (Avatar + Navbar) - No Music */}

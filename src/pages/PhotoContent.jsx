@@ -22,7 +22,6 @@ const PhotoContent = () => {
     const iphoneRef = useRef(null);
     const showcaseContainerRef = useRef(null); 
     const showcaseRefs = useRef([]); 
-    const coverRef = useRef(null);
     const companies = COMPANIES_DATA;
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -258,8 +257,8 @@ const PhotoContent = () => {
     return (
         <div className="photo-content-page" ref={containerRef} >
             <Helmet>
-                <title>Photo Content Portfolio | Mayuri Saitav - Visual Storyteller</title>
-                <meta name="description" content="Browse the visual portfolio of Mayuri Saitav. High-quality photo content creation for social media, product photography, and lifestyle brands." />
+                <title>Photography & Visual Content | Mayuri Saitav Portfolio</title>
+                <meta name="description" content="Showcasing stunning photography and visual content strategies. See how I use imagery to tell compelling branch stories." />
             </Helmet>
             
             {/* ... Top Bar & Hero Section remain same ... */}

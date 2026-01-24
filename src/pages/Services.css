@@ -354,6 +354,11 @@
     will-change: transform; /* Optimize for animation */
 }
 
+/* Optimization Hints */
+.service-card, .why-track, .process-step {
+    will-change: transform, opacity;
+}
+
 .shape-1 {
     top: 10%;
     left: -100px;

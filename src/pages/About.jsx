@@ -148,8 +148,8 @@ const About = () => {
             animate="visible"
         >
             <Helmet>
-                <title>About Mayuri Saitav | Content Creator Journey</title>
-                <meta name="description" content="Learn about Mayuri Saitav's journey from social media enthusiast to professional Content Creator and Strategist. Discover the passion behind the work." />
+                <title>About Me | Mayuri Saitav - Digital Creator & Strategist</title>
+                <meta name="description" content="Learn more about Mayuri Saitav, a passionate social media manager and content creator with over 3 years of experience in helping brands grow online." />
                 <meta name="keywords" content="Mayuri Saitav, About Content Creator, Social Media Story, Influencer Journey, Creative Professional" />
                 <link rel="canonical" href="https://mayuri-portfolio.com/about" />
             </Helmet>

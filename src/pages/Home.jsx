@@ -168,8 +168,8 @@ const Home = () => {
   return (
     <div className="home-container" ref={containerRef}>
         <Helmet>
-            <title>Mayuri Saitav | Social Media Strategist & Content Creator</title>
-            <meta name="description" content="Welcome to the portfolio of Mayuri Saitav - expert Social Media Strategist and Content Creator specializing in Instagram, Facebook, and YouTube marketing." />
+            <title>Mayuri Saitav | Social Media Manager & Content Creator Portfolio</title>
+            <meta name="description" content="Welcome to the official portfolio of Mayuri Saitav. I specialize in social media management, content strategy, video editing, and digital growth. Let's elevate your brand." />
         </Helmet>
         
         {/* Audio Element (Only render if not mobile to save resources?) 
@@ -330,10 +330,10 @@ const Home = () => {
 
         {/* --- MOUNTAINS --- */}
         <div className="mountains-container">
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1766457948/mountain4_qfqwbh.png"} className="mountain-img mountain-4" alt="Mountain" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1766457948/mountain3_lzfbki.avif"} className="mountain-img mountain-3" alt="Mountain" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457949/mountain2_l6sk50.avif"} className="mountain-img mountain-2" alt="Mountain" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/mountain1_xse8h4.avif"} className="mountain-img mountain-1" alt="Mountain" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1766457948/mountain4_qfqwbh.png"} className="mountain-img mountain-4" alt="Mountain" loading="lazy" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1766457948/mountain3_lzfbki.avif"} className="mountain-img mountain-3" alt="Mountain" loading="lazy" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457949/mountain2_l6sk50.avif"} className="mountain-img mountain-2" alt="Mountain" loading="lazy" />
+            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/mountain1_xse8h4.avif"} className="mountain-img mountain-1" alt="Mountain" loading="lazy" />
         </div>
 
     </div>

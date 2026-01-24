@@ -248,8 +248,8 @@ const Services = () => {
     return (
         <div className="services-page" ref={pageRef}>
             <Helmet>
-                <title>Services | Mayuri Saitav</title>
-                <meta name="description" content="Social Media Management, Content Creation, Ads, and more." />
+                <title>Social Media Services | Management, Content, & Ads</title>
+                <meta name="description" content="Explore professional services by Mayuri Saitav: Social Media Management, Content Creation, Facebook Ads, Google My Business, and Account Setup." />
             </Helmet>
 
             <BackButton lightMode={true}/>
