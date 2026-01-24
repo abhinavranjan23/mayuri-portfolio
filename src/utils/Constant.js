@@ -266,18 +266,18 @@ export const ABOUT_TYPEWRITER_TEXT = "I started social media as work but now it'
 // Navbar Configurations
 export const NAV_CONFIG_ABOUT = [
     { label: "Content Design", link: "/content-design" },
-    { label: "Get Resume", link: "#", isButton: true }
+    { label: "Get Resume", link: "https://drive.google.com/file/d/1TdrMzhP6YNLOImuCk2D-LxDT2ICW5Ztz/view", isButton: true }
 ];
 
 export const NAV_CONFIG_PHOTO = [
     { label: "Content ", link: "/content-design" },
     { label: "About", link: "/about"},
-    { label: "Resume", link: "#", isButton: true }
+    { label: "Resume", link: "https://drive.google.com/file/d/1TdrMzhP6YNLOImuCk2D-LxDT2ICW5Ztz/view", isButton: true }
 ];
 
 export const NAV_CONFIG_DEFAULT = [
     { label: "About me", link: "/about"},
-    { label: "Get Resume", link: "#", isButton: true }
+    { label: "Get Resume", link: "https://drive.google.com/file/d/1TdrMzhP6YNLOImuCk2D-LxDT2ICW5Ztz/view", isButton: true }
 ];
 
 export const WANDERING_MINDS_DATA = [
