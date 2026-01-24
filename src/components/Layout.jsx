@@ -4,12 +4,13 @@ import CustomCursor from './CustomCursor';
 import Loading from './Loading';
 import SmoothScroll from './SmoothScroll';
 import ScrollToTop from './ScrollToTop';
-
+import { Analytics } from "@vercel/analytics/next"
 const Layout = () => {
   return (
     <>
       <ScrollToTop />
       <CustomCursor />
+      <Analytics />
       <SmoothScroll>
         <Suspense fallback={<Loading />}>
           <main>
