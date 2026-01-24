@@ -55,6 +55,7 @@
     position: relative;
     border-radius: 0;
     margin: 0 auto;
+    will-change: transform, opacity;
 }
 
 /* Overlay Content inside the image area */
@@ -80,6 +81,7 @@
     text-align: left;
     flex: 1;
     letter-spacing: -1px;
+    will-change: transform, opacity;
 }
 
 .about-description {

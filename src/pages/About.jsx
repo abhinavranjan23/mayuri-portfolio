@@ -164,7 +164,7 @@ const About = () => {
                     <div style={{ width: '60px', height: '60px' }}>
                         <DotLottiePlayer
                             src={avatarAnimation}
-                            autoplay={true}
+                            autoplay={!isMobile}
                             loop
                             style={{ width: '100%', height: '100%' }}
                         />

@@ -117,7 +117,7 @@ const Services = () => {
                         y: window.innerHeight + 100, // Start further down
                         z: 0,
                         scale: 0.8,
-                        rotationX: 20, // Tilted back initially
+                        rotationX: 5, // Reduced tilt for smoother feel
                         transformOrigin: "center bottom", 
                         autoAlpha: 1,
                         zIndex: (i) => i + 1,

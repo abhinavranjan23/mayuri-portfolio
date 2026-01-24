@@ -109,6 +109,7 @@
     background: #000;
     transform-origin: center top; 
     will-change: transform, opacity;
+    backface-visibility: hidden; /* Prevent flickering */
 }
 
 .video-container {

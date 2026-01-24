@@ -175,13 +175,14 @@ const VideoContent = () => {
                 let { isDesktop } = context.conditions;
 
                 // Master Timeline
-                const endValue = isDesktop ? `+=${cards.length * 2500}px` : `+=${cards.length * 1500}px`;
+                const endValue = isDesktop ? `+=${cards.length * 2000}px` : `+=${cards.length * 1500}px`;
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: deckRef.current,
                         start: "center center",
                         end: endValue,
                         pin: true,
+                        anticipatePin: 1, // Smooth out pinning
                         scrub: 1, // Smooth scrubbing effect
                         onRefresh: (self) => { 
                             // Sync our tracker with actual progress on load/resiz/3e
@@ -242,7 +243,7 @@ const VideoContent = () => {
                         tl.to(cards[i], {
                             x: window.innerWidth * 1.5,
                             scale: 0.5, 
-                            rotation: 10, 
+                            rotation: 2, // Reduced rotation for smoother feel
                             autoAlpha: 0, 
                             display: "none",
                             duration: 1.5,
