@@ -1,17 +1,27 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { DotLottiePlayer } from '@dotlottie/react-player';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import './ContentDesign.css';
-// Importing Assets
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
-// Import the background Lottie simply to pass to the player
 import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION } from '../utils/Constant';
 import Footer from '../components/Footer';
 
 const ContentDesign = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        
+        checkMobile(); 
+        window.addEventListener('resize', checkMobile);
+        
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     
     // Animation Variants
@@ -73,15 +83,14 @@ const ContentDesign = () => {
                 <title>Content Design Portfolio | Visuals & Creative Work</title>
                 <meta name="description" content="Browse the creative content design portfolio of Mayuri Saitav. High-quality visuals, graphics, and layouts tailored for social media success." />
             </Helmet>
-
-            {/* Top Bar (Avatar + Navbar) - No Music */}
             <motion.div className="content-design-top-bar" variants={topBarVariants}>
                  <Link to="/" aria-label="Home">
                     <div className="avatar-circle" style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', background: '#f0f0f0' }}>
                         <DotLottiePlayer
+                            key={isMobile ? 'mobile-avatar' : 'desktop-avatar'}
                             src={avatarAnimation}
-                            autoplay={true}
-                            loop
+                            autoplay={!isMobile}
+                            loop={!isMobile}
                             style={{ width: '100%', height: '100%' }}
                         />
                     </div>
@@ -94,9 +103,10 @@ const ContentDesign = () => {
             <motion.div className="content-design-bg-container" variants={contentVariants}>
                 <div className="content-design-lottie-wrapper">
                     <DotLottiePlayer
+                        key={isMobile ? 'mobile-bg' : 'desktop-bg'}
                         src={CONTENT_BG_ANIMATION}
-                        autoplay={true}
-                        loop
+                        autoplay={!isMobile}
+                        loop={!isMobile}
                         rendererSettings={{
                             preserveAspectRatio: 'xMidYMid slice'
                         }}

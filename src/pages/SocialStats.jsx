@@ -233,32 +233,22 @@ and managing monthly calendar.
                     <h2 className="section-title">What People Say</h2>
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
-                            <p className="testimonial-text">"Mayuri's content strategy completely transformed our social presence. The visual storytelling is unmatched!"</p>
+                            <p className="testimonial-text">"I’ve really enjoyed working with Mayuri as our Social Media and Content Creator. She’s creative, reliable, and has a great ability to turn complex ideas into clear, engaging content that fits our brand perfectly. She’s proactive, easy to work with, and always open to feedback. Mayuri consistently delivers high-quality work and brings a thoughtful approach to everything she does. I’d highly recommend her to any team looking for a strong content and social media professional."</p>
                             <div className="client-info">
                                 <div className="client-avatar"></div>
                                 <div>
-                                    <div className="client-name">Sarah Jenkins</div>
-                                    <div className="client-role">Marketing Director</div>
+                                    <div className="client-name">Bonnie Tyler</div>
+                                    <div className="client-role">General Manager at Doherty Fultz Immigration</div>
                                 </div>
                             </div>
                         </div>
                         <div className="testimonial-card">
-                            <p className="testimonial-text">"The captions and visuals were spot on. She understood our brand voice immediately. Highly recommended."</p>
+                            <p className="testimonial-text">"I’ve had the pleasure of working with Mayuri, and I can confidently say she's an excellent social media content creator. She a sharp understanding of how to translate brand voice into engaging, platform-appropriate content that actually resonates. Mayuri combines creativity with strategy. Every piece of content is intentional, data-informed, and aligned with broader business goals. She's very responsive to feedback, and consistently bring fresh ideas to the table. Beyond her technical skills, Mayuri is reliable, collaborative, and easy to work with. I would not hesitate to recommend her."</p>
                             <div className="client-info">
                                 <div className="client-avatar"></div>
                                 <div>
-                                    <div className="client-name">David Chen</div>
-                                    <div className="client-role">Founder, TravelEasy</div>
-                                </div>
-                            </div>
-                        </div>
-                         <div className="testimonial-card">
-                            <p className="testimonial-text">"Professional, creative, and data-driven. The growth we saw in just 3 months was incredible."</p>
-                            <div className="client-info">
-                                <div className="client-avatar"></div>
-                                <div>
-                                    <div className="client-name">Priya Sharma</div>
-                                    <div className="client-role">Content Lead</div>
+                                    <div className="client-name">Cassandra Fultz, RCIC-IRB</div>
+                                    <div className="client-role">Founder - Doherty Fultz Immigration Inc.</div>
                                 </div>
                             </div>
                         </div>
