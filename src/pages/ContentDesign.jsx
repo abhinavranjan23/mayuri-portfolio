@@ -14,7 +14,8 @@ const ContentDesign = () => {
 
     useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 768);
+            const isNowMobile = window.innerWidth <= 768;
+            setIsMobile(prev => prev !== isNowMobile ? isNowMobile : prev);
         };
         
         checkMobile(); 
@@ -36,7 +37,7 @@ const ContentDesign = () => {
                 }
             });
         }, {
-            threshold: 0.6 // Trigger when 60% of card is visible
+            threshold: 0.5 // Trigger when 50% of card is visible - slightly earlier/smoother
         });
 
         const cards = document.querySelectorAll('.grid-card');
