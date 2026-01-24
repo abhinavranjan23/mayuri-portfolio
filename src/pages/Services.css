@@ -1,0 +1,384 @@
+
+.services-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #FAF8F1;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    padding-top: 80px;
+}
+
+/* Header Section */
+.services-header {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-title {
+    font-family: 'Slackey', cursive;
+    font-size: 3.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+.services-subtitle {
+    font-family: 'Pangolin', monospace;
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Marquee Styles (Copied & Adapted from VideoContent) */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 4rem 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    /* Animation handled by GSAP or CSS */
+}
+
+/* CSS Fallback Animation */
+.animate-left {
+    animation: scrollLeft 30s linear infinite;
+}
+
+.animate-right {
+    animation: scrollRight 30s linear infinite;
+}
+
+@keyframes scrollLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+
+.marquee-item {
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Slackey', cursive;
+    white-space: nowrap;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    border: 2px solid #333;
+    transition: transform 0.3s;
+}
+
+.marquee-item:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* Theme Pills */
+.pill-yellow { background-color: #FFD54F; color: #333; }
+.pill-pink { background-color: #F48FB1; color: #fff; }
+.pill-blue { background-color: #4FC3F7; color: #fff; }
+.pill-green { background-color: #AED581; color: #333; }
+.pill-orange { background-color: #FFAB91; color: #fff; }
+.pill-purple { background-color: #CE93D8; color: #fff; }
+
+/* Detailed Services Grid */
+.services-grid-container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.service-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+    overflow: hidden;
+    cursor: default;
+}
+
+.service-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    border-color: rgba(0,0,0,0.1);
+}
+
+/* Decorative top bar for cards */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: #FFD54F; /* Default */
+    transition: height 0.3s ease;
+}
+
+.service-card:hover::before {
+    height: 12px;
+}
+
+.card-yellow::before { background: #FFD54F; }
+.card-pink::before { background: #F48FB1; }
+.card-blue::before { background: #4FC3F7; }
+.card-green::before { background: #AED581; }
+.card-orange::before { background: #FFAB91; }
+.card-purple::before { background: #CE93D8; }
+
+.service-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.service-title {
+    font-family: 'Slackey', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.service-desc {
+    font-family: 'Poppins', sans-serif;
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Floating Elements (Background) */
+.floating-shape {
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .services-title {
+        font-size: 2.5rem;
+    }
+    
+    .marquee-item {
+        font-size: 1.2rem;
+        padding: 0.6rem 1.5rem;
+    }
+
+    }
+
+
+/* Why Choose Us - Horizontal Scroll Section */
+.why-choose-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    overflow: hidden; /* Hide horizontal overflow */
+    padding: 0;
+    position: relative;
+    background: #FFECB3; /* Very light yellow background */
+}
+
+.why-header {
+    margin-bottom: 2rem;
+    padding-left: 5vw;
+}
+
+.why-track-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* This track will be moved horizontally by GSAP */
+}
+
+.why-track {
+    display: flex;
+    gap: 40px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    width: max-content; /* Ensure it takes full width for GSAP calculation */
+}
+
+.why-card {
+    min-width: 350px;
+    height: 400px;
+    background: #fff;
+    border-radius: 30px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+    border: 3px solid #333;
+    transition: transform 0.3s;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.why-card:hover {
+    transform: translateY(-10px) rotate(-2deg);
+}
+
+.why-card h3 {
+    font-family: 'Slackey', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.why-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    font-family: 'Pangolin', monospace;
+}
+
+/* How We Work - Vertical Process */
+.process-section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.process-step {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    opacity: 0; /* Animated in */
+    align-items: flex-start;
+}
+
+.process-number {
+    font-size: 5rem;
+    font-family: 'Slackey', cursive;
+    color: #FFD54F; /* Yellow */
+    line-height: 1;
+    text-shadow: 3px 3px 0px #333;
+    flex-shrink: 0;
+    width: 80px;
+    text-align: center;
+}
+
+.process-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    border: 2px solid rgba(0,0,0,0.05);
+    flex-grow: 1;
+}
+
+.process-content h3 {
+    font-family: 'Slackey', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.process-content p {
+    font-family: 'Poppins', sans-serif;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Colors for specific steps for variety */
+.step-1 .process-number { color: #FFD54F; }
+.step-2 .process-number { color: #F48FB1; }
+.step-3 .process-number { color: #4FC3F7; }
+.step-4 .process-number { color: #AED581; }
+.step-5 .process-number { color: #FFAB91; }
+.step-6 .process-number { color: #CE93D8; }
+
+@media (max-width: 768px) {
+    .why-card {
+        min-width: 260px;
+        height: auto; /* Allow content to dictate height */
+        min-height: 350px; /* Preserve size consistency */
+        padding-left: 1rem; /* Reduce padding slightly */
+        padding-right: 1rem;
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+    }
+    
+    .process-step {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .process-number {
+        font-size: 4rem;
+    }
+}
+
+/* Background Floating Shapes */
+.shape-1, .shape-2, .shape-3 {
+    position: fixed; /* Changed to fixed so they stay with viewport */
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6; 
+    filter: blur(40px);
+    will-change: transform; /* Optimize for animation */
+}
+
+.shape-1 {
+    top: 10%;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: #FFD54F;
+}
+
+.shape-2 {
+    top: 40%;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: #4FC3F7;
+}
+
+.shape-3 {
+    top: 70%;
+    left: 20%;
+    width: 250px;
+    height: 250px;
+    background: #F48FB1;
+}
+
+.services-page {
+    position: relative; /* Context to contain absolute shapes */
+    overflow-x: hidden; /* Hide overflow from shapes */
+}
