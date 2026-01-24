@@ -16,68 +16,8 @@ import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
 import pauseIcon from '../assets/pause.svg';
 import playIcon from '../assets/play.svg';
 
-const FloatingIcon = ({ src, label, initialX, initialY, delay, emoji }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  return (
-    <motion.div
-        style={{ 
-            position: 'absolute', 
-            top: initialY, 
-            left: initialX, 
-            zIndex: 10,
-            cursor: 'none'
-        }}
-        animate={{ y: isHovered ? 0 : [0, -15, 0] }}
-        transition={{ 
-            duration: 4, 
-            repeat: Infinity, 
-            ease: "easeInOut",
-            delay: delay 
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-    >
-        <div style={{position: 'relative', width: '6vw' , height: '6vw'}}>
-             <motion.img 
-                src={src} 
-                alt={label} 
-                style={{width: '100%', height: '100%', objectFit:'contain', filter: 'drop-shadow(0px 10px 8px rgba(0,0,0,0.3))'}} 
-                animate={{ rotate: isHovered ? [0, -10, 10, -5, 5, 0] : 0 }}
-                transition={{ duration: 0.5 }}
-             />
-             {isHovered && (
-                 <motion.div 
-                    initial={{opacity:0, y: 10, scale: 0.8}}
-                    animate={{opacity:1, y: 0, scale: 1}}
-                    style={{
-                        position: 'absolute',
-                        bottom: '80%', // Position above the icon
-                        left: '-15%',
-                        transform: 'translateX(-30%)',
-                        background: 'white',
-                        padding: '8px 12px',
-                        borderRadius: '20px',
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#333',
-                        whiteSpace: 'nowrap',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px',
-                        marginBottom: '10px', // Add space between icon and tooltip
-                        pointerEvents: 'none', // Prevent flickering if mouse touches tooltip
-                        zIndex: 20
-                    }}
-                 >
-                    <span style={{fontSize: '1.2em'}}>{emoji}</span> {label}
-                 </motion.div>
-             )}
-        </div>
-    </motion.div>
-  );
-};
+import FloatingIcon from '../components/FloatingIcon';
+import useIsMobile from '../hooks/useIsMobile';
 
 
 import { HOME_NAV_ITEMS, HOME_FLOATING_ICONS, MAYURI_CHAR_IMG, MAYURI_CHAR_MOBILE_IMG, PANDA_ICON_IMG, BACKGROUND_STRIP_IMG, MOUNTAINS_IMGS } from '../utils/Constant';
@@ -88,14 +28,8 @@ const Home = () => {
   const audioRef = useRef(null);
   const [hoveredLink, setHoveredLink] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const isMobile = useIsMobile();
 
-  useEffect(() => {
-      const handleResize = () => setIsMobile(window.innerWidth < 768);
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  console.log();
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
@@ -190,19 +124,7 @@ const Home = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                style={{ 
-                    cursor: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '60px',
-                    height: '60px',
-                    background: 'rgba(255, 255, 255, 0.25)', // Glassy look
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: '50%',
-                    border: '1px solid rgba(255, 255, 255, 0.5)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
-                }}
+
             >
                 <img 
                     src={isPlaying ? pauseIcon : playIcon} 
@@ -218,7 +140,7 @@ const Home = () => {
                 className="avatar-container hero-anim avatar"
                 onMouseEnter={() => lottieRef.current?.play()}
                 onMouseLeave={() => lottieRef.current?.pause()}
-                style={{ width: '80px', height: '80px', marginBottom: '1rem', cursor: 'none' }}
+
             >
                 <DotLottiePlayer
                     ref={lottieRef}
@@ -244,7 +166,7 @@ const Home = () => {
                         data-cursor-text={item.text} 
                         onMouseEnter={() => setHoveredLink(index)}
                         onMouseLeave={() => setHoveredLink(null)}
-                        style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+        
                     >
                         {/* Only show Panda hover effect on Desktop */}
                         {!isMobile && hoveredLink === index && (
@@ -255,12 +177,7 @@ const Home = () => {
                                 animate={{ opacity: 1, x: 0, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                style={{ 
-                                    width: '40px', 
-                                    height: '40px', 
-                                    marginRight: '10px',
-                                    pointerEvents: 'none' 
-                                }}
+                                className="panda-icon"
                              />
                         )}
                         {item.label}

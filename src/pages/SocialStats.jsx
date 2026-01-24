@@ -1,11 +1,10 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import  { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Helmet } from 'react-helmet-async';
 import BackButton from '../components/BackButton';
 import Footer from '../components/Footer';
 import './SocialStats.css';
-import { IPHONE_FRAME_IMG } from '../utils/Constant';
 
 gsap.registerPlugin(ScrollTrigger);
 

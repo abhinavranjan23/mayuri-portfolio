@@ -10,32 +10,22 @@ import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION } from '../utils/Constant';
 import Footer from '../components/Footer';
 import ShimmerLoader from '../components/ShimmerLoader';
 
+import useIsMobile from '../hooks/useIsMobile';
+
 const ContentDesign = () => {
-    const [isMobile, setIsMobile] = useState(false);
+    const isMobile = useIsMobile();
     const [isLoading, setIsLoading] = useState(true);
 
     // Safety timeout in case Lottie takes too long or fails
     useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 200); // 3s max wait
+        const timer = setTimeout(() => setIsLoading(false), 500); // 3s max wait
         return () => clearTimeout(timer);
     }, []);
 
     const handleLottieLoad = () => {
         // Add a small delay for smoothness
-        setTimeout(() => setIsLoading(false), 500);
+        setTimeout(() => setIsLoading(false), 400);
     };
-
-    useEffect(() => {
-        const checkMobile = () => {
-            const isNowMobile = window.innerWidth <= 768;
-            setIsMobile(prev => prev !== isNowMobile ? isNowMobile : prev);
-        };
-        
-        checkMobile(); 
-        window.addEventListener('resize', checkMobile);
-        
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     // Mobile Scroll Trigger for Hover Effect
     useEffect(() => {
@@ -165,12 +155,12 @@ const ContentDesign = () => {
                 {/* Intro Section */}
                 <motion.div className="content-intro-section" variants={gridVariants}>
                     <h2 className="content-quote">
-                        "Posting meaningful is important rather than posting daily"
+                        &quot;Posting meaningful is important rather than posting daily&quot;
                     </h2>
                     <p className="content-description">
-                        I consider content is a way to vocalize one's social account. 
+                        I consider content is a way to vocalize one&apos;s social account. 
                         I absolutely love when being part of strategizing content and bringing volume to those ideas through graphic. 
-                        I've strategized and shaped those ideas across D2C, B2C companies.
+                        I&apos;ve strategized and shaped those ideas across D2C, B2C companies.
                     </p>
                 </motion.div>
 

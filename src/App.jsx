@@ -9,7 +9,6 @@ import ScrollToTop from './components/ScrollToTop';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-const Work = lazy(() => import('./components/Work'));
 const ContentDesign = lazy(() => import('./pages/ContentDesign'));
 const PhotoContent = lazy(() => import('./pages/PhotoContent'));
 const VideoContent = lazy(() => import('./pages/VideoContent'));

@@ -19,17 +19,16 @@ const WanderingMinds = lazy(() => import('../components/WanderingMinds'));
 import { ABOUT_BG_IMG, ABOUT_TYPEWRITER_TEXT } from '../utils/Constant';
 import ShimmerLoader from '../components/ShimmerLoader';
 
+import useIsMobile from '../hooks/useIsMobile';
+
 const About = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const isMobile = useIsMobile();
 
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        window.addEventListener('resize', handleResize);
-        
         // Preload Background Image
         const img = new Image();
         img.src = ABOUT_BG_IMG;
@@ -38,8 +37,6 @@ const About = () => {
              setTimeout(() => setIsLoading(false), 100);
         };
         img.onerror = () => setIsLoading(false); // Fallback
-
-        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     useEffect(() => {

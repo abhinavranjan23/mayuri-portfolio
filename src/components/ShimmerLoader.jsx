@@ -1,4 +1,3 @@
-import React from 'react';
 import './ShimmerLoader.css';
 
 const ShimmerLoader = () => {
@@ -17,6 +16,7 @@ const ShimmerLoader = () => {
 
             {/* Grid for Content Design feel */}
             <div className="shimmer-grid">
+                <div className="shimmer-card shimmer-animate"></div>
                 <div className="shimmer-card shimmer-animate"></div>
                 <div className="shimmer-card shimmer-animate"></div>
                 <div className="shimmer-card shimmer-animate"></div>

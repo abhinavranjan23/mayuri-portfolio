@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
+import CollisionEffect from '../components/CollisionEffect';
+import useIsMobile from '../hooks/useIsMobile';
+
 // Use static paths from public/ directory to avoid inlining issues
 const flowerCursor = '/cursors/flower.svg';
 const ghostCursor = '/cursors/cute-ghost.svg';
@@ -23,7 +26,7 @@ const CustomCursor = () => {
   const [isColliding, setIsColliding] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [cursorText, setCursorText] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
    
@@ -34,12 +37,6 @@ const CustomCursor = () => {
     const img2 = new Image();
     img2.src = ghostCursor;
 
-    const checkMobile = () => {
-        setIsMobile(window.matchMedia("(max-width: 768px)").matches || 'ontouchstart' in window);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
   }, [pathname]);
 
   useEffect(() => {
@@ -194,79 +191,6 @@ const CustomCursor = () => {
   );
 };
 
-const CollisionEffect = ({ x, y }) => {
-    return (
-        <div style={{
-            position: 'fixed',
-            left: x,
-            top: y,
-            pointerEvents: 'none',
-            zIndex: 9998,
-        }}>
-            {/* Shockwave Ripple */}
-            <motion.div
-                initial={{ scale: 0, opacity: 0.8 }}
-                animate={{ scale: 2.5, opacity: 0 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                style={{
-                    position: 'absolute',
-                    top: -20,
-                    left: -20,
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    border: '2px solid rgba(255, 255, 255, 0.8)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                }}
-            />
 
-            {/* Glass Crack SVG */}
-            <motion.svg
-                width="60"
-                height="60"
-                viewBox="0 0 60 60"
-                initial={{ opacity: 1, scale: 0.5 }}
-                animate={{ opacity: 0, scale: 1.1 }}
-                transition={{ duration: 0.5 }}
-                style={{
-                    position: 'absolute',
-                    top: -30,
-                    left: -30,
-                    filter: "drop-shadow(0px 0px 2px rgba(0,0,0,0.5))"
-                }}
-            >
-                {/* Crack Pattern */}
-                <path d="M30 30 L45 15" stroke="grey" strokeWidth="2" strokeLinecap="round" />
-                <path d="M30 30 L15 15" stroke="grey" strokeWidth="2" strokeLinecap="round" />
-                <path d="M30 30 L30 10" stroke="grey" strokeWidth="2" strokeLinecap="round" />
-                <path d="M30 30 L50 35" stroke="grey" strokeWidth="2" strokeLinecap="round" />
-                <path d="M30 30 L10 35" stroke="grey" strokeWidth="2" strokeLinecap="round" />
-                <path d="M30 30 L30 50" stroke="grey" strokeWidth="1" strokeLinecap="round" strokeDasharray="4 2" />
-            </motion.svg>
-
-            {/* Debris Particles */}
-            {[0, 1, 2, 3].map((i) => (
-                <motion.div
-                    key={i}
-                    initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                    animate={{ 
-                        x: (i % 2 === 0 ? 1 : -1) * (Math.random() * 40 + 20),
-                        y: (i < 2 ? -1 : 1) * (Math.random() * 40 + 20),
-                        opacity: 0,
-                        rotate: Math.random() * 360
-                    }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    style={{
-                        position: 'absolute',
-                        width: '4px',
-                        height: '4px',
-                        backgroundColor: 'white',
-                        borderRadius: '2px', // Shard shape
-                    }}
-                />
-            ))}
-        </div>
-    );
-};
 
 export default CustomCursor;

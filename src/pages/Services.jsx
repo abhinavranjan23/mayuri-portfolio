@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import  { useLayoutEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaPaperPlane, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa';
 import './Footer.css';
 import { FOOTER_SOCIAL_DATA } from '../utils/Constant';

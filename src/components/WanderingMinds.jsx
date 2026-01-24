@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './WanderingMinds.css';
@@ -8,14 +8,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 import { WANDERING_MINDS_DATA } from '../utils/Constant';
 
+import useIsMobile from '../hooks/useIsMobile';
+
 const WanderingMinds = () => {
     const sectionRef = useRef(null);
     const containerRef = useRef(null);
+    const isMobile = useIsMobile();
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             const cards = gsap.utils.toArray(".wander-card");
-            const stackHeight = window.innerHeight ; // Height of the stacking area roughly
             
             // Initial setup: All cards positioned down off-screen except maybe the first one?
             // User wants stacking effect. Let's have them all start essentially "stacked" visually but off screeen 
@@ -50,7 +52,7 @@ const WanderingMinds = () => {
             });
 
             // Animate Title: Only on desktop
-            if (window.matchMedia("(min-width: 768px)").matches) {
+            if (!isMobile) {
                 // Starts from top and moves to position
                 tl.from(".wandering-title", {
                     y: -window.innerHeight * 0.3, // Start above
@@ -60,7 +62,6 @@ const WanderingMinds = () => {
             }
 
             cards.forEach((card, index) => {
-                const isMobile = window.innerWidth < 768;
                 const offset = isMobile ? 3 : 10;
 
                 tl.to(card, {
@@ -75,7 +76,7 @@ const WanderingMinds = () => {
         }, sectionRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [isMobile]);
 
     return (
         <section className="wandering-minds-section" ref={sectionRef}>
