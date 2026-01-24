@@ -109,7 +109,7 @@ const PhotoContent = () => {
                 scrollTrigger: {
                     trigger: showcaseContainerRef.current,
                     start: "top top",
-                    end: "+=800%", // Adjust scroll length
+                    end: "+=1000%", // Increased scroll length for longer holds
                     pin: true,
                     scrub: 1,
                     snap: 1 / (companies.length - 1), // Snap to each card
@@ -117,7 +117,7 @@ const PhotoContent = () => {
             });
 
             // Add initial pause (hold first card)
-            albumTl.to({}, { duration: 0.5 });
+            albumTl.to({}, { duration: 1.5 });
 
             // Initial State: All panels hidden/positioned down except the first one?
             // Actually, let's stack them. 
@@ -155,6 +155,9 @@ const PhotoContent = () => {
                         filter: "blur(5px)", // Add blur for focus effect
                         duration: 1
                     }, "<"); // Run at same time
+
+                    // HOLD the card for a while before the next one comes
+                    albumTl.to({}, { duration: 0.5 });
                 }
             });
 

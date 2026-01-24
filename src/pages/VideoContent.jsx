@@ -175,7 +175,7 @@ const VideoContent = () => {
                 let { isDesktop } = context.conditions;
 
                 // Master Timeline
-                const endValue = isDesktop ? `+=${cards.length * 1400}px` : `+=${cards.length * 900}px`;
+                const endValue = isDesktop ? `+=${cards.length * 1600}px` : `+=${cards.length * 1000}px`;
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: deckRef.current,
@@ -185,7 +185,7 @@ const VideoContent = () => {
                         scrub: 1, // Smooth scrubbing effect
                         onRefresh: (self) => { 
                             // Sync our tracker with actual progress on load/resiz/3e
-                            lastSnapped.current = self.progress; 
+                             lastSnapped.current = self.progress; 
                         },
                         snap: {
                             snapTo: (value) => {
@@ -219,6 +219,9 @@ const VideoContent = () => {
                         }
                     }
                 });
+
+                // Initial Pause
+                tl.to({}, { duration: 2.5 });
 
                 for (let i = 0; i < cards.length - 1; i++) {
                     const stepLabel = `step-${i}`;
@@ -278,6 +281,7 @@ const VideoContent = () => {
                             ease: "power2.inOut"
                         }, stepLabel);
                     }
+                    tl.to({}, { duration: 2.5 });
                 }
 
                 // --- Sticker Animation ---
