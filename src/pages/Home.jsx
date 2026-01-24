@@ -95,6 +95,7 @@ const Home = () => {
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
   }, []);
+  console.log();
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
@@ -275,7 +276,7 @@ const Home = () => {
                 <>
                     <div 
                         className="orange-strip" 
-                        style={{ backgroundImage: `url(https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/background_m9bzpx.jpg)` }}
+                        style={{ backgroundImage: `url(${BACKGROUND_STRIP_IMG})` }}
                     ></div>
 
                     {/* Floating Icons around Character */}
@@ -330,10 +331,15 @@ const Home = () => {
 
         {/* --- MOUNTAINS --- */}
         <div className="mountains-container">
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1766457948/mountain4_qfqwbh.png"} className="mountain-img mountain-4" alt="Mountain" loading="lazy" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1766457948/mountain3_lzfbki.avif"} className="mountain-img mountain-3" alt="Mountain" loading="lazy" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457949/mountain2_l6sk50.avif"} className="mountain-img mountain-2" alt="Mountain" loading="lazy" />
-            <img src={"https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/mountain1_xse8h4.avif"} className="mountain-img mountain-1" alt="Mountain" loading="lazy" />
+            {MOUNTAINS_IMGS.map((img, idx) => (
+                <img 
+                    key={idx}
+                    src={img.src}
+                    alt={`Mountain ${idx + 1}`}
+                    className={`mountain-img mountain-${idx + 1}`}
+                    loading="lazy"
+                />
+            ))}
         </div>
 
     </div>
