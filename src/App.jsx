@@ -1,10 +1,7 @@
-import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CustomCursor from './components/CustomCursor';
+import { lazy } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './components/Layout';
 
-import Loading from './components/Loading';
-import SmoothScroll from './components/SmoothScroll';
-import ScrollToTop from './components/ScrollToTop';
 // Code splitting
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -15,32 +12,55 @@ const VideoContent = lazy(() => import('./pages/VideoContent'));
 const SocialStats = lazy(() => import('./pages/SocialStats'));
 const Services = lazy(() => import('./pages/Services'));
 
-
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <NotFound />, // Handle errors at the root level
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "content-design",
+        children: [
+          {
+            index: true,
+            element: <ContentDesign />,
+          },
+          {
+            path: "photo-content",
+            element: <PhotoContent />,
+          },
+          {
+            path: "video-content",
+            element: <VideoContent />,
+          },
+          {
+            path: "social-stats",
+            element: <SocialStats />,
+          },
+          {
+            path: "services",
+            element: <Services />,
+          },
+        ],
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <Router>
-      <ScrollToTop />
-      <CustomCursor />
-      <SmoothScroll>
-        <Suspense fallback={<Loading />}>
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/content-design" element={<ContentDesign />} />
-              <Route path="/content-design/photo-content" element={<PhotoContent />} />
-              <Route path="/content-design/video-content" element={<VideoContent />} />
-              <Route path="/content-design/social-stats" element={<SocialStats />} />
-              <Route path="/content-design/services" element={<Services />} />
-              {/* <Route path="/work" element={<Work />} /> */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </Suspense>
-      </SmoothScroll>
-    </Router>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
