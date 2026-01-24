@@ -17,19 +17,33 @@ const WhatIBring = lazy(() => import('../components/WhatIBring'));
 const BooksSection = lazy(() => import('../components/BooksSection'));
 const WanderingMinds = lazy(() => import('../components/WanderingMinds'));
 import { ABOUT_BG_IMG, ABOUT_TYPEWRITER_TEXT } from '../utils/Constant';
+import ShimmerLoader from '../components/ShimmerLoader';
+
 const About = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener('resize', handleResize);
+        
+        // Preload Background Image
+        const img = new Image();
+        img.src = ABOUT_BG_IMG;
+        img.onload = () => {
+             // Add a small delay for smoother transition
+             setTimeout(() => setIsLoading(false), 100);
+        };
+        img.onerror = () => setIsLoading(false); // Fallback
+
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     useEffect(() => {
-        if (isMobile) return;
+        if (isMobile || isLoading) return; // Don't play if loading
 
         const playAudio = async () => {
             try {
@@ -139,6 +153,8 @@ const About = () => {
             </motion.p>
         );
     };
+
+    if (isLoading) return <ShimmerLoader />;
 
     return (
         <motion.div 

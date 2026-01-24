@@ -244,7 +244,15 @@
         font-size: 2rem;
     }
     .youtube-section {
-        padding: 2rem;
+        padding: 2rem 1rem; /* Reduced padding */
+    }
+    
+    .youtube-stats-wrapper {
+        gap: 2rem; /* Reduced gap */
+    }
+    
+    .analytics-card {
+        max-width: 100%; /* Full width on mobile */
     }
 }
 
@@ -254,7 +262,8 @@
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Subtle shadow like UI */
-    width: 300px; /* Fixed width like a widget */
+    width: 100%; /* Responsive width */
+    max-width: 300px; /* Max width constraint */
     text-align: left;
     font-family: 'Roboto', sans-serif; /* Standard analytics font */
     border: 1px solid #e0e0e0;

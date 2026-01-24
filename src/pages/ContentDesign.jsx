@@ -8,9 +8,22 @@ import './ContentDesign.css';
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
 import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION } from '../utils/Constant';
 import Footer from '../components/Footer';
+import ShimmerLoader from '../components/ShimmerLoader';
 
 const ContentDesign = () => {
     const [isMobile, setIsMobile] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    // Safety timeout in case Lottie takes too long or fails
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 200); // 3s max wait
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleLottieLoad = () => {
+        // Add a small delay for smoothness
+        setTimeout(() => setIsLoading(false), 500);
+    };
 
     useEffect(() => {
         const checkMobile = () => {
@@ -95,6 +108,9 @@ const ContentDesign = () => {
     };
 
     const cards = CONTENT_DESIGN_CARDS;
+
+    if (isLoading) return <ShimmerLoader />;
+
     return (
         <motion.div 
             className="content-design-container"
@@ -134,6 +150,11 @@ const ContentDesign = () => {
                             preserveAspectRatio: 'xMidYMid slice'
                         }}
                         style={{ width: '100%', height: '100%' }}
+                        onEvent={(event) => {
+                            if (event === 'ready' || event === 'load') {
+                                handleLottieLoad();
+                            }
+                        }}
                     />
                 </div>
             </motion.div>
