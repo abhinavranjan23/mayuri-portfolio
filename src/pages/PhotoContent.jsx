@@ -109,7 +109,7 @@ const PhotoContent = () => {
                 scrollTrigger: {
                     trigger: showcaseContainerRef.current,
                     start: "top top",
-                    end: "+=1000%", // Increased scroll length for longer holds
+                    end: "+=700%", // Increased scroll length for longer holds
                     pin: true,
                     scrub: 1,
                     snap: 1 / (companies.length - 1), // Snap to each card
