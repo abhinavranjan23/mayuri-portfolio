@@ -43,11 +43,12 @@ const WanderingMinds = () => {
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top top",
-                    end: "+=700%",
+                    end: "+=800%",
                     pin: true,
                     scrub: 1,
                     anticipatePin: 1,
                     // markers: true
+                    snap: 1 / (cards.length - 1),
                 }
             });
 
