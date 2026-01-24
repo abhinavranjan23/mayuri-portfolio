@@ -92,7 +92,7 @@
 /* Marker Highlight Effect - Consistent with VideoContent */
 .highlight-text {
     position: relative;
-    display: inline-block;
+    display: inline;
     z-index: 1;
     margin: 0 2px;
 }

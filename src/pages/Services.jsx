@@ -275,7 +275,7 @@ const Services = () => {
                 {/* Row 1: Left to Right */}
                 <div className="marquee-track animate-left">
                     {MARQUEE_LIST.map((item, i) => (
-                        <div key={`l-${i}`} className={`marquee-item ${item.color}`}>
+                        <div key={`l-${i}`} className={`service-marquee-item ${item.color}`}>
                             {item.title} {item.icon}
                         </div>
                     ))}
@@ -284,7 +284,7 @@ const Services = () => {
                 {/* Row 2: Right to Left */}
                 <div className="marquee-track animate-right">
                     {MARQUEE_LIST.map((item, i) => (
-                        <div key={`r-${i}`} className={`marquee-item ${item.color}`}>
+                        <div key={`r-${i}`} className={`service-marquee-item ${item.color}`}>
                             {item.title} {item.icon}
                         </div>
                     ))}

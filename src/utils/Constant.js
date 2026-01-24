@@ -90,7 +90,7 @@ export const FOOTER_SOCIAL_DATA = [
 export const HOME_NAV_ITEMS = [
     { label: "Content design", link: "/content-design", text: "Explore it!" },
     { label: "About me", link: "/about", text: "Who am I?" },
-    { label: "Resume", link: "/resume", text: "Hire Me!" }
+    { label: "Resume", link: "https://drive.google.com/file/d/1TdrMzhP6YNLOImuCk2D-LxDT2ICW5Ztz/view", text: "Hire Me!" }
 ];
 
 export const HOME_FLOATING_ICONS = [

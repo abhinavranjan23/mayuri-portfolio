@@ -72,7 +72,7 @@
 }
 
 
-.marquee-item {
+.service-marquee-item {
     padding: 0.8rem 2rem;
     border-radius: 50px;
     font-size: 1.5rem;
@@ -84,7 +84,7 @@
     transition: transform 0.3s;
 }
 
-.marquee-item:hover {
+.service-marquee-item:hover {
     transform: translateY(-5px) scale(1.05);
 }
 
