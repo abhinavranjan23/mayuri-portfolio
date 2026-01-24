@@ -1,7 +1,7 @@
 // Image Assets - Common
-export const IPHONE_FRAME_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767891728/i-phonebg_gezwhm.png";
-export const IPHONE_WALLPAPER_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023660/iphonge-bg_dffgqh.png";
-export const BUTTERFLY_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767023764/butterfly_dbzb2t.png";
+export const IPHONE_FRAME_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769286111/i-phonebg_gezwhm_z6cf11.webp";
+export const IPHONE_WALLPAPER_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769286110/iphonge-bg_dffgqh_1_ulfd6y.webp";
+export const BUTTERFLY_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769286253/butterfly_dbzb2t_ntb9dh.webp";
 
 // Books Data
 export const BOOKS_DATA = [
@@ -101,16 +101,16 @@ export const HOME_FLOATING_ICONS = [
     { src: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_150,f_auto,q_auto/v1766473438/BAG_vyvato.avif", label: "Exploring, One Step at a Time ", emoji: "🏕", x: '70%', y: '50%', delay: 2 },
 ];
 
-export const MAYURI_CHAR_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457952/mayuriChar_jqehqn.png";
-export const MAYURI_CHAR_MOBILE_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/w_400,f_auto,q_auto/v1766457952/mayuriChar_jqehqn.png";
+export const MAYURI_CHAR_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1769284737/mayuriChar_jqehqn_1_ggyvsr.webp";
+export const MAYURI_CHAR_MOBILE_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/w_400,f_auto,q_auto/v1769284737/mayuriChar_jqehqn_1_ggyvsr.webp";
 export const PANDA_ICON_IMG = "/cute-panda-happy.svg";
-export const BACKGROUND_STRIP_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/background_m9bzpx.jpg";
+export const BACKGROUND_STRIP_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769284738/background_m9bzpx_mmv1ju.webp";
 
 export const MOUNTAINS_IMGS = {
-    m4: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1766457948/mountain4_qfqwbh.png",
-    m3: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1766457948/mountain3_lzfbki.avif",
-    m2: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1766457949/mountain2_l6sk50.avif",
-    m1: "https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1766457948/mountain1_xse8h4.avif"
+    m4: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_550,f_auto,q_auto/v1769284737/mountain4_qfqwbh_asqaw5.webp",
+    m3: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_500,f_auto,q_auto/v1769284737/mountain3_lzfbki_ritw1f.webp",
+    m2: "https://res.cloudinary.com/dnt0xlngl/image/upload/w_600,f_auto,q_auto/v1769284737/mountain2_l6sk50_tjum8g.webp",
+    m1: "https://res.cloudinary.com/dnt0xlngl/image/upload/f_auto,q_auto/v1769284737/mountain1_xse8h4_y3u2hj.webp"
 };
 
 // Photo Content Page Data
@@ -193,10 +193,10 @@ export const ANIMATION_STICKERS_DATA = [
 export const CONTENT_BG_ANIMATION = "https://res.cloudinary.com/dnt0xlngl/raw/upload/v1767024743/Background_fv3itj.json";
 
 export const CONTENT_DESIGN_CARDS = [
-    { title: "Photo Content", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024749/photoContent_wqorhg.jpg" , link: "/content-design/photo-content" },
-    { title: "Video Content", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024743/5956752_uxat9t.jpg" , link: "/content-design/video-content" },
-    { title: "Social Stats", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024752/socialStats_eia0mm.jpg" , link: "/content-design/social-stats" },
-    { title: "Services", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767024746/customerSupport_z379ny.jpg" , link: "/content-design/services" },
+    { title: "Photo Content", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769284109/photoContent_wqorhg_i770wy.webp" , link: "/content-design/photo-content" },
+    { title: "Video Content", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769284108/5956752_uxat9t_zh67g0.webp" , link: "/content-design/video-content" },
+    { title: "Social Stats", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769284108/socialStats_eia0mm_ctpbtv.webp" , link: "/content-design/social-stats" },
+    { title: "Services", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769284108/customerSupport_z379ny_la53mk.webp" , link: "/content-design/services" },
 ];
 
 
@@ -259,7 +259,7 @@ export const QUOTE_TEXT = "Posting meaningful is important rather than posting d
 export const DESCRIPTION_TEXT = "I believe content is a way to vocalize one’s social account. I absolutely love strategizing content and bringing volume to ideas through graphics. I've strategized and shaped those ideas across D2C, B2C companies.";
 
 // About Page
-export const ABOUT_BG_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1767025022/bgNew_wehssm.jpg";
+export const ABOUT_BG_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769285707/bgNew_wehssm_fqlfgv.webp";
 export const ABOUT_TYPEWRITER_TEXT = "I started social media as work but now it's an adventure where the rides are fun and exciting. I am exploring at every step of creation because I believe creativity comes out in it's own way and is never ending......";
 
 

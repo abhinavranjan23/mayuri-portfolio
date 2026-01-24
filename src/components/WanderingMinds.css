@@ -38,7 +38,7 @@
     padding-left: 30px; /* Space between line and text */
 }
 
-.highlight-text {
+.wandering-minds-section .highlight-text {
     color: #FF6B6B; /* Accent color */
     display: block;
     margin-top: 0.5rem;
@@ -181,7 +181,7 @@
         margin-bottom: 1rem;
         padding-top: 0;
     }
-    .highlight-text {
+    .wandering-minds-section .highlight-text {
         font-size: 2.5rem;
     }
 

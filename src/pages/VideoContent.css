@@ -74,6 +74,7 @@
     display: inline;
     z-index: 1;
     margin: 0 2px;
+    font-size: inherit; /* Prevent inheritance from other global styles */
 }
 
 .highlight-text::before {
