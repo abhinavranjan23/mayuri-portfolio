@@ -144,7 +144,8 @@
     cursor: none;
 }
 
-.grid-card:hover {
+.grid-card:hover,
+.grid-card.mobile-active {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
@@ -156,7 +157,8 @@
     transition: transform 0.5s ease;
 }
 
-.grid-card:hover img {
+.grid-card:hover img,
+.grid-card.mobile-active img {
     transform: scale(1.1);
     filter: blur(4px);
 }
@@ -179,7 +181,8 @@
     z-index: 2; /* Below badge but above image */
 }
 
-.grid-card:hover .image-overlay {
+.grid-card:hover .image-overlay,
+.grid-card.mobile-active .image-overlay {
     opacity: 1;
 }
 
@@ -194,7 +197,8 @@
     transition: transform 0.3s ease;
 }
 
-.grid-card:hover .explore-text {
+.grid-card:hover .explore-text,
+.grid-card.mobile-active .explore-text {
     transform: translateY(0);
 }
 

@@ -23,6 +23,28 @@ const ContentDesign = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    // Mobile Scroll Trigger for Hover Effect
+    useEffect(() => {
+        if (!isMobile) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('mobile-active');
+                } else {
+                    entry.target.classList.remove('mobile-active');
+                }
+            });
+        }, {
+            threshold: 0.6 // Trigger when 60% of card is visible
+        });
+
+        const cards = document.querySelectorAll('.grid-card');
+        cards.forEach(card => observer.observe(card));
+
+        return () => observer.disconnect();
+    }, [isMobile]);
+
     
     // Animation Variants
     const containerVariants = {
