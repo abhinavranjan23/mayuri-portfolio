@@ -1,0 +1,21 @@
+{
+  "short_name": "Mayuri",
+  "name": "Mayuri Saitav Portfolio",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#FAF8F1",
+  "background_color": "#FAF8F1",
+  "description": "Mayuri Saitav - expert Social Media Strategist & Content Creator.",
+  "categories": ["portfolio", "business", "social"],
+  "icons": [
+    {
+      "src": "/cute-panda-happy.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
