@@ -4,7 +4,7 @@ import CustomCursor from './CustomCursor';
 import Loading from './Loading';
 import SmoothScroll from './SmoothScroll';
 import ScrollToTop from './ScrollToTop';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 const Layout = () => {
   return (
     <>
