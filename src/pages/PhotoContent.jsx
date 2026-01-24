@@ -109,12 +109,15 @@ const PhotoContent = () => {
                 scrollTrigger: {
                     trigger: showcaseContainerRef.current,
                     start: "top top",
-                    end: "+=1500%", // Adjust scroll length
+                    end: "+=800%", // Adjust scroll length
                     pin: true,
                     scrub: 1,
                     snap: 1 / (companies.length - 1), // Snap to each card
                 }
             });
+
+            // Add initial pause (hold first card)
+            albumTl.to({}, { duration: 0.5 });
 
             // Initial State: All panels hidden/positioned down except the first one?
             // Actually, let's stack them. 
