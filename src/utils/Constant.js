@@ -12,26 +12,27 @@ export const BOOKS_DATA = [
     cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458371/She-Swiped-Right-Into-My-Heart-Sudeep-Nagarkar-Buy-Online-Bookbins-_nbv44x.png",
     color: "#f9f3f3ff" 
   },
+
   {
     id: 2,
-    title: "Our Impossible Love",
-    author: "Durjoy Datta",
-    cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458370/our-impossible-love_qrqoy5.jpg",
-    color: "#d1210de6"
-  },
-  {
-    id: 3,
     title: "The Palace of Illusions",
     author: "Chitra Banerjee Divakaruni",
     cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458373/the-palace-of-illusions_f1nkut.jpg",
     color: "#469047ff"
   },
   {
-    id: 4,
+    id: 3,
     title: "The Kite Runner",
     author: "Khaled Hosseini",
     cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458372/theKiteRunner_qkgtwf.jpg",
     color: "#89c4ebff"
+  },
+  {
+    id: 4,
+    title: "Murakami",
+    author: "Norwegian Wood",
+    cover: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769268373/9780099448822-3_ipiymd.jpg",
+    color: "#b03131ff"
   }
 ];
 

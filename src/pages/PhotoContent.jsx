@@ -48,86 +48,59 @@ const PhotoContent = () => {
 
             
             if (isDesktop) {
+                 // --- DESKTOP INTRO ---
                  introTl
-                
                     .fromTo(".hero-text-side.left", { x: -200 }, { x: 0, duration: 1, ease: "power3.out" }, "0")
                     .fromTo(".hero-text-side.right", { x: 200 }, { x: 0, duration: 1, ease: "power3.out" }, "0")
                     .fromTo(iphoneRef.current, { y: 200 }, { y: 0, duration: 1.2, ease: "back.out(1.2)" }, "0")
-                 
                     .to([".hero-text-side span", ".iphone-frame", ".iphone-screen", ".scroll-indicator-wrapper"], { autoAlpha: 1, duration: 1 }, "0");
-            } else {
-              
-                 introTl
-                    .fromTo(".hero-text-side.left", { y: -50 }, { y: 0, duration: 1, ease: "power3.out" }, "0")
-                    .fromTo(".hero-text-side.right", { y: -50 }, { y: 0, duration: 1, ease: "power3.out" }, "0")
-                    .fromTo(iphoneRef.current, { scale: 0.8 }, { scale: 1, duration: 1.2, ease: "back.out(1.2)" }, "0")
-                  
-                    .to([".hero-text-side span", ".iphone-frame", ".iphone-screen", ".scroll-indicator-wrapper"], { autoAlpha: 1, duration: 1 }, "0");
-            }
 
+                 // --- DESKTOP SCROLL SEQUENCE ---
+                 const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: heroRef.current,
+                        start: "top top", 
+                        end: "+=150%", 
+                        pin: true,
+                        scrub: 0.5, 
+                    }
+                });
 
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: heroRef.current,
-                    start: "top top", 
-                    end: "+=150%", 
-                    pin: true,
-                    scrub: 0.5, 
-                }
-            });
-
-            if (isDesktop) {
-                
                 tl.fromTo(".hero-text-side.left", 
                     { x: 0, opacity: 1 },
                     { x: -400, opacity: 0, duration: 1, immediateRender: false }, 0)
                   .fromTo(".hero-text-side.right", 
                     { x: 0, opacity: 1 },
-                    { x: 400, opacity: 0, duration: 1, immediateRender: false }, 0);
-            } else {
-                // Vertical Exit (Top goes Up, Bottom goes Down)
-                // Note: Wrappers handle position
-                tl.fromTo(".hero-text-side.left", 
+                    { x: 400, opacity: 0, duration: 1, immediateRender: false }, 0)
+                  .fromTo(".screen-inner-text h3", 
                     { y: 0, opacity: 1 },
-                    { y: -150, opacity: 0, duration: 1, immediateRender: false }, 0)
-                  .fromTo(".hero-text-side.right", 
+                    { y: -200, opacity: 0, duration: 2, immediateRender: false }, 0)
+                  .fromTo(".screen-inner-text p", 
                     { y: 0, opacity: 1 },
-                    { y: -150, opacity: 0, duration: 1, immediateRender: false }, 0);
-            }
+                    { y: -200, opacity: 0, duration: 2, immediateRender: false }, 0)
+                  .fromTo(iphoneRef.current, 
+                      { rotation: 0, scale: 1 },
+                      { rotation: 90, scale: 14, duration: 2, ease: "power2.inOut", immediateRender: false }, 0)
+                  .fromTo(".details-overlay", 
+                      { rotation: -100, scale: 0, opacity: 0 },
+                      { rotation: 0, scale: 1, opacity: 1, duration: 2, ease: "power2.out" }, 0.5) 
+                  .to({}, { duration: 0.5 })
+                  .to(".scroll-indicator-wrapper", { y: 200, duration: 1 }, 0);
 
-            // Shared Scroll Animations
-            tl.fromTo(".screen-inner-text h3", 
-                { y: 0, opacity: 1 },
-                { y: -200, opacity: 0, duration: 2, immediateRender: false }, 0
-              )
-              .fromTo(".screen-inner-text p", 
-                { y: 0, opacity: 1 },
-                { y: -200, opacity: 0, duration: 2, immediateRender: false }, 0
-              )
-              .fromTo(iphoneRef.current, 
-                  { rotation: 0, scale: 1 },
-                  { 
-                      rotation: 90, 
-                      scale: isMobile ? 8 : 14, 
-                      duration: 2,
-                      ease: "power2.inOut",
-                      immediateRender: false
-                  }, 0)
-              
-              .fromTo(".details-overlay", 
-                  { rotation: -100, scale: 0, opacity: 0 },
-                  { rotation: 0, scale: 1, opacity: 1, duration: 2, ease: "power2.out" }, 
-              0.5) 
-              
-              .to({}, { duration: 0.5 });
-              
-            // Fade out scroll indicator on scroll - Sync with start (0)
-            tl.to(".scroll-indicator-wrapper", {
-                y: 200, // Move down 100px
-                // autoAlpha: 0,
-                duration: 1 // Fast exit
-            }, 0);
+            } else {
+                 // --- MOBILE: SKIP ANIMATION ---
+                 // Hide iPhone and Hero Text
+                 gsap.set([".hero-text-side", ".iphone-wrapper", ".scroll-indicator-wrapper"], { display: "none" });
+                 
+                 // Show Overlay Immediately (with a nice fade in)
+                 gsap.set(".details-overlay", { rotation: 0, scale: 1, opacity: 0 }); // Start invisible for fade
+                 
+                 introTl.to(".details-overlay", { 
+                     opacity: 1, 
+                     duration: 1, 
+                     ease: "power2.out" 
+                 });
+            }
 
 
 
