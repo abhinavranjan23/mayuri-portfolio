@@ -12,8 +12,8 @@
 /* Header Section */
 .services-header {
     text-align: center;
-    padding: 2rem;
-    margin-bottom: 3rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -23,7 +23,7 @@
     font-family: 'Slackey', cursive;
     font-size: 3.5rem;
     color: #2c3e50;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .services-subtitle {
@@ -37,7 +37,7 @@
 .marquee-container {
     width: 100%;
     overflow: hidden;
-    padding: 4rem 0;
+    padding: 1rem 0;
     background: transparent;
     display: flex;
     flex-direction: column;
@@ -47,7 +47,7 @@
 
 .marquee-track {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     width: max-content;
     /* Animation handled by GSAP or CSS */
 }
@@ -112,7 +112,7 @@
 .service-card {
     background: #fff;
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 1rem;
     position: relative;
     border: 1px solid rgba(0,0,0,0.05);
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
@@ -152,7 +152,7 @@
 
 .service-icon {
     font-size: 3.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     display: inline-block;
     animation: floatIcon 3s ease-in-out infinite;
 }
@@ -165,7 +165,7 @@
 .service-title {
     font-family: 'Slackey', cursive;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #333;
 }
 
@@ -261,6 +261,56 @@
     line-height: 1.6;
     color: #555;
     font-family: 'Pangolin', monospace;
+}
+
+/* Responsive Adjustments for Small Heights (Landscape Mobile / Small Laptops) */
+@media (max-height: 800px) {
+    .why-choose-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .why-header {
+        margin-bottom: 1rem;
+    }
+    .services-title {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .services-subtitle {
+        font-size: 1rem;
+    }
+    .why-card {
+        height: 180px;
+        min-width: 160px;
+        padding: 1.5rem;
+    }
+    .why-card h3 {
+        font-size: 1.5rem;
+    }
+    .why-card p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-height: 600px) {
+    .why-choose-section {
+        height: auto; /* Allow scrolling if really short */
+        min-height: 100vh;
+        padding: 4rem 0;
+    }
+    .why-card {
+        height: 160px;
+        min-width: 160px;
+        padding: 1.2rem;
+    }
+    .why-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    .why-card p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
 }
 
 /* How We Work - Vertical Process */

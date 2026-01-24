@@ -66,16 +66,19 @@ const Services = () => {
                     // 1. Set Initial "Chaotic" State
                     gsap.set(cards, {
                         autoAlpha: 0,
-                        scale: 0.3, 
-                        x: (i) => (i % 2 === 0 ? -100 : 100), 
-                        y: (i) => Math.random() * 100 - 50,    
-                        rotation: () => Math.random() * 20 - 10 
+                        scale: 0.1, // Start very small
+                        // Random X from far left (-1000) to far right (1000)
+                        x: (i) => Math.random() * 2000 - 1000, 
+                        // Random Y from far top (-1000) to far bottom (1000)
+                        y: (i) => Math.random() * 2000 - 1000,    
+                        // Random rotation between -180 and 180 degrees
+                        rotation: () => Math.random() * 360 - 180 
                     });
 
                     const gridTl = gsap.timeline({
                         scrollTrigger: {
                             trigger: ".services-grid-container",
-                            start: "top 15%", 
+                            start: "top 10%", 
                             end: "+=800", 
                             pin: true,
                             scrub: 1, 
@@ -89,9 +92,9 @@ const Services = () => {
                         x: 0,
                         y: 0,
                         rotation: 0,
-                        duration: 1,
-                        stagger: 0.2, 
-                        ease: "power3.out"
+                        duration: 1.5,
+                        stagger: 0.1, 
+                        ease: "elastic.out(1, 0.75)"
                     });
 
                 } else if (isMobile) {
@@ -180,7 +183,7 @@ const Services = () => {
                 ease: "none",
                 scrollTrigger: {
                     trigger: whySectionRef.current,
-                    start: "top top",
+                    start: "top -10%",
                     end: () => `+=${Math.abs(getScrollAmount())}`, // Match scroll distance exactly
                     pin: true,
                     scrub: 1,
