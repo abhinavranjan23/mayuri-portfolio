@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect } from 'react';
+import {  useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { DotLottiePlayer } from '@dotlottie/react-player';
@@ -29,7 +29,7 @@ const ContentDesign = () => {
 
     // Mobile Scroll Trigger for Hover Effect
     useEffect(() => {
-        if (!isMobile) return;
+        if (!isMobile || isLoading) return;
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -40,14 +40,14 @@ const ContentDesign = () => {
                 }
             });
         }, {
-            threshold: 0.5 // Trigger when 50% of card is visible - slightly earlier/smoother
+            threshold: 0.7 // Trigger when 50% of card is visible
         });
 
         const cards = document.querySelectorAll('.grid-card');
         cards.forEach(card => observer.observe(card));
 
         return () => observer.disconnect();
-    }, [isMobile]);
+    }, [isMobile, isLoading]);
 
     
     // Animation Variants
