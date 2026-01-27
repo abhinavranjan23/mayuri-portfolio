@@ -135,6 +135,9 @@
     .books-grid {
         gap: 2rem;
     }
+    .books-section{
+        padding: 1rem 5%;
+    }
     .book-container {
         width: 140px;
         height: 210px;
