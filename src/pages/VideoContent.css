@@ -3,12 +3,13 @@
     min-height: 100vh;
     background-color:#FAF8F1;
     color: #111; /* Dark text */
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .header-section {
     width: 100%;
-    padding: 40px 20px 80px; /* Increased bottom padding */
+    padding: 40px 20px 5px; /* Increased bottom padding */
     text-align: center;
     position: relative;
     z-index: 10;
@@ -32,16 +33,18 @@
 /* The deck container - now static, centered */
 .deck-wrapper {
     width: 100%;
-    min-height: 600px;
+    min-height: 800px;
+    height: 800px;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     position: relative;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 5px;
+    margin-bottom: 10px;
     z-index: 5;
     perspective: 1200px;
-    overflow: visible;
+    overflow-x: visible;
+    overflow-y: hidden;
 }
 
 /* Container creating the scrollable height - NOT NEEDED for GSAP pin:true, 
@@ -194,7 +197,7 @@
         top: 15% !important;
     }
     .header-section{
-        padding: 40px 0px 40px;
+        padding: 40px 0px 20px;
 
     }
 }
@@ -276,9 +279,10 @@
     }
 
     .deck-wrapper {
-        height: 85vh; /* Match card height to prevent overflow/overlap */
-        margin-top: 80px; /* Adjust spacing if needed */
+        height: 90vh; /* Match card height to prevent overflow/overlap */
+        margin-top: 10px; /* Adjust spacing if needed */
         margin-bottom: 0px; 
+        min-height: 700px;
     }
 
     .marquee-section {
