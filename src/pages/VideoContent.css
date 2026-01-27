@@ -282,7 +282,7 @@
         height: 90vh; /* Match card height to prevent overflow/overlap */
         margin-top: 10px; /* Adjust spacing if needed */
         margin-bottom: 0px; 
-        min-height: 700px;
+        min-height: 800px;
     }
 
     .marquee-section {
