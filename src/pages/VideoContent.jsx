@@ -139,21 +139,29 @@ const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
 
 const VideoContent = () => {
     const mainContainerRef = useRef(null);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [cardOrder, setCardOrder] = useState([...Array(VIDEO_CONTENT_DATA.length).keys()]);
     const [isMuted, setIsMuted] = useState(false);
     
     const toggleMute = () => setIsMuted(!isMuted);
 
     const handlePrev = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1);
-        }
+        setCardOrder(prev => {
+            // Move last card to front
+            const newOrder = [...prev];
+            const lastCard = newOrder.pop();
+            newOrder.unshift(lastCard);
+            return newOrder;
+        });
     };
 
     const handleNext = () => {
-        if (currentIndex < VIDEO_CONTENT_DATA.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-        }
+        setCardOrder(prev => {
+            // Move first card to back
+            const newOrder = [...prev];
+            const firstCard = newOrder.shift();
+            newOrder.push(firstCard);
+            return newOrder;
+        });
     };
 
     // Floating stickers animation (simplified, no scroll trigger)
@@ -249,30 +257,19 @@ const VideoContent = () => {
 
             {/* Deck with Navigation */}
             <div className="deck-wrapper">
-                {VIDEO_CONTENT_DATA.map((item, index) => {
-                    const isActive = index === currentIndex;
-                    const distance = index - currentIndex;
-                    const shouldLoad = Math.abs(distance) <= 1 || index === 0;
+                {cardOrder.map((dataIndex, position) => {
+                    const item = VIDEO_CONTENT_DATA[dataIndex];
+                    const isActive = position === 0; // First card in order is always active
                     
-                    // Different behavior for cards before vs after current
+                    // Load current (0), next (1), and last (for prev navigation)
+                    const shouldLoad = position === 0 || position === 1 || position === cardOrder.length - 1;
+                    
+                    // Different behavior for cards based on position
                     let animateProps;
-                    if (index < currentIndex) {
-                        // Cards BEFORE current: Slide down with rotation (realistic swipe exit)
-                        // Keep the most recent exited card on top during animation
-                        const isJustExited = index === currentIndex - 1;
+                    if (position === 0) {
+                        // Active card: Front and center with entrance animation
                         animateProps = {
-                            zIndex: isJustExited ? VIDEO_CONTENT_DATA.length + 1 : 0,
-                            scale: 0.9,
-                            y: 1000,
-                            x: -50,
-                            rotateZ: -8,
-                            opacity: isJustExited ? 1 : 0,
-                            filter: "blur(2px) brightness(0.85)",
-                        };
-                    } else if (isActive) {
-                        // Active card: Front and center
-                        animateProps = {
-                            zIndex: VIDEO_CONTENT_DATA.length,
+                            zIndex: VIDEO_CONTENT_DATA.length + 10,
                             scale: 1,
                             y: 0,
                             x: 0,
@@ -280,30 +277,64 @@ const VideoContent = () => {
                             opacity: 1,
                             filter: "blur(0px) brightness(1)",
                         };
-                    } else {
-                        // Cards AFTER current: Stacked behind
+                    } else if (position === 1) {
+                        // Next card: Ready behind with subtle offset
                         animateProps = {
-                            zIndex: VIDEO_CONTENT_DATA.length - distance,
-                            scale: 1 - (distance * 0.05),
-                            y: -(distance * 30),
+                            zIndex: VIDEO_CONTENT_DATA.length - 1,
+                            scale: 0.95,
+                            y: -30,
                             x: 0,
                             rotateZ: 0,
-                            opacity: distance > 3 ? 0 : 1,
+                            opacity: 1,
+                            filter: "blur(0.5px) brightness(0.95)",
+                        };
+                    } else if (position === 2) {
+                        // Second in stack
+                        animateProps = {
+                            zIndex: VIDEO_CONTENT_DATA.length - 2,
+                            scale: 0.90,
+                            y: -60,
+                            x: 0,
+                            rotateZ: 0,
+                            opacity: 0.8,
                             filter: "blur(1px) brightness(0.9)",
+                        };
+                    } else if (position >= cardOrder.length - 1) {
+                        // Last card: Smooth exit below - ready for prev
+                        animateProps = {
+                            zIndex: VIDEO_CONTENT_DATA.length - 3,
+                            scale: 0.95,
+                            y: 100,
+                            x: 0,
+                            rotateZ: 0,
+                            opacity: 0,
+                            filter: "blur(1px) brightness(0.9)",
+                        };
+                    } else {
+                        // Cards further back: Hidden
+                        animateProps = {
+                            zIndex: VIDEO_CONTENT_DATA.length - position,
+                            scale: 0.85,
+                            y: -90,
+                            x: 0,
+                            rotateZ: 0,
+                            opacity: 0,
+                            filter: "blur(2px) brightness(0.85)",
                         };
                     }
                     
                     return (
                         <motion.div
-                            key={item.id}
+                            key={dataIndex}
                             className="video-card-wrapper"
                             initial={false}
                             animate={animateProps}
                             transition={{
-                                type: "spring",
-                                stiffness: 100,
-                                damping: 20,
-                                mass: 1
+                                duration: 0.5,
+                                ease: [0.25, 0.1, 0.25, 1],
+                                scale: { duration: 0.4 },
+                                opacity: { duration: 0.3 },
+                                y: { type: "spring", stiffness: 100, damping: 20 },
                             }}
                             style={{
                                 position: 'absolute',
@@ -324,13 +355,11 @@ const VideoContent = () => {
                 {/* Navigation Buttons - Desktop positioned on sides */}
                 <NavigationButton 
                     direction="prev" 
-                    onClick={handlePrev} 
-                    disabled={currentIndex === 0}
+                    onClick={handlePrev}
                 />
                 <NavigationButton 
                     direction="next" 
-                    onClick={handleNext} 
-                    disabled={currentIndex === VIDEO_CONTENT_DATA.length - 1}
+                    onClick={handleNext}
                 />
             </div>
 
@@ -338,18 +367,16 @@ const VideoContent = () => {
             <div className="mobile-nav-container">
                 <NavigationButton 
                     direction="prev" 
-                    onClick={handlePrev} 
-                    disabled={currentIndex === 0}
+                    onClick={handlePrev}
                 />
                 <NavigationButton 
                     direction="next" 
-                    onClick={handleNext} 
-                    disabled={currentIndex === VIDEO_CONTENT_DATA.length - 1}
+                    onClick={handleNext}
                 />
             </div>
             
             {/* Show marquee only when on first card */}
-            {currentIndex === 0 && (
+            {cardOrder[0] === 0 && (
                 <motion.div 
                     className="marquee-section"
                     initial={{ opacity: 0, y: 20 }}

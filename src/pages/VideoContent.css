@@ -254,6 +254,11 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
    
+    /* Hide floating stickers on mobile */
+    .cute-sticker-wrapper {
+        display: none !important;
+    }
+
     .header-section h1 {
         font-size: 2rem;
     }
@@ -281,21 +286,27 @@
         padding: 20px 0;
     }
     
-    /* Mobile Navigation Container - Below card */
+    /* Mobile Navigation - On Sides like Desktop */
     .mobile-nav-container {
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-        gap: 80px;
-        margin-top: 1px;
-        margin-bottom: 30px;
-        position: relative;
-        z-index: 100;
+        display: none !important; /* Hide bottom container */
     }
     
-    /* Hide desktop side buttons on mobile */
-    .deck-wrapper .nav-button {
-        display: none !important;
+    /* Show side buttons on mobile */
+    .deck-wrapper .nav-button-prev,
+    .deck-wrapper .nav-button-next {
+        display: flex !important;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+    }
+
+    .deck-wrapper .nav-button-prev {
+        left: 10px;
+    }
+
+    .deck-wrapper .nav-button-next {
+        right: 10px;
     }
 }
 
