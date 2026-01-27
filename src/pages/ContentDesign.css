@@ -144,16 +144,6 @@
     cursor: none;
 }
 
-.grid-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-}
-
-.grid-card.mobile-active {
-    /* No translateY on mobile to prevent jumpiness */
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-}
-
 .grid-card img {
     width: 100%;
     height: 100%;
@@ -161,17 +151,6 @@
     transition: transform 0.5s ease;
     will-change: transform; /* Performance hint */
     backface-visibility: hidden; /* Prevent flickering */
-}
-
-.grid-card:hover img {
-    transform: scale(1.1);
-    filter: blur(4px);
-}
-
-.grid-card.mobile-active img {
-    /* No blur or scale on mobile to prevent flickering/reloading feel */
-    transform: none;
-    filter: none;
 }
 
 /* Overlay for Reveal */
@@ -193,21 +172,6 @@
     will-change: opacity;
 }
 
-.grid-card:hover .image-overlay {
-    opacity: 1;
-}
-
-.grid-card.mobile-active .image-overlay {
-    opacity: 1;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
-    height: 40%; /* Only cover bottom part */
-    top: auto;
-    bottom: 0;
-    border-radius: 0 0 24px 24px;
-    align-items: flex-end;
-    padding-bottom: 1.5rem;
-}
-
 .explore-text {
     font-family: 'Pangolin', sans-serif;
     font-size: 2.5rem;
@@ -220,8 +184,54 @@
     will-change: transform;
 }
 
-.grid-card:hover .explore-text {
-    transform: translateY(0);
+/* =====================================================
+   DESKTOP HOVER EFFECTS - Only for devices with hover capability
+   This prevents tap/touch from triggering hover on mobile
+   ===================================================== */
+@media (hover: hover) {
+    .grid-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .grid-card:hover img {
+        transform: scale(1.1);
+        filter: blur(4px);
+    }
+
+    .grid-card:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .grid-card:hover .explore-text {
+        transform: translateY(0);
+    }
+}
+
+/* =====================================================
+   MOBILE SCROLL TRIGGER EFFECT - IntersectionObserver
+   Only triggered when card enters viewport (scroll)
+   ===================================================== */
+.grid-card.mobile-active {
+    /* No translateY on mobile to prevent jumpiness */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.grid-card.mobile-active img {
+    /* No blur or scale on mobile to prevent flickering/reloading feel */
+    transform: none;
+    filter: none;
+}
+
+.grid-card.mobile-active .image-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+    height: 40%; /* Only cover bottom part */
+    top: auto;
+    bottom: 0;
+    border-radius: 0 0 24px 24px;
+    align-items: flex-end;
+    padding-bottom: 1.5rem;
 }
 
 .grid-card.mobile-active .explore-text {

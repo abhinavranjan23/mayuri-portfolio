@@ -625,3 +625,166 @@
         font-size: 3rem;
     }
 }
+
+/* ------------------------------------------------------------------
+   MOBILE SHOWCASE - Vertical Stack with Horizontal Image Scroll
+   ------------------------------------------------------------------ */
+
+/* Hide desktop showcase on mobile */
+@media (max-width: 768px) {
+    .desktop-showcase {
+        display: none !important;
+    }
+}
+
+/* Hide mobile showcase on desktop/tablet */
+.mobile-showcase {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-showcase {
+        display: block;
+        width: 100%;
+        background: #FAF8F1;
+        padding: 2rem 0;
+        overflow-x: hidden;
+    }
+
+    .mobile-company-section {
+        width: 100%;
+        padding: 2rem 1rem;
+        margin-bottom: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .mobile-company-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .mobile-company-title {
+        font-family: 'Pangolin', cursive;
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 1px;
+    }
+
+    .mobile-iphone-wrapper {
+        position: relative;
+        width: 180px;
+        height: auto;
+        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2));
+    }
+
+    .mobile-iphone-frame {
+        width: 100%;
+        display: block;
+        position: relative;
+        z-index: 10;
+    }
+
+    .mobile-iphone-screen {
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        width: 90%;
+        height: 95%;
+        background: #000;
+        z-index: 5;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 4px;
+    }
+
+    .mobile-screen-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Horizontal Scrollable Images */
+    .mobile-images-scroll {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        padding: 0 1rem 1rem 1rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* Add extra space after last image */
+    .mobile-images-scroll::after {
+        content: '';
+        flex-shrink: 0;
+        width: 1rem;
+    }
+
+    .mobile-images-scroll::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    .mobile-image-item {
+        flex-shrink: 0;
+        width: 220px;
+        height: 280px;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 
+            0 6px 18px rgba(0,0,0,0.12),
+            0 3px 8px rgba(0,0,0,0.08);
+        scroll-snap-align: center;
+        transition: transform 0.2s ease;
+    }
+
+    .mobile-image-item:active {
+        transform: scale(0.97);
+    }
+
+    .mobile-image-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .mobile-image-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.8) 0%,
+            rgba(0,0,0,0.4) 50%,
+            transparent 100%
+        );
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+
+    .mobile-image-overlay span {
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+}
+

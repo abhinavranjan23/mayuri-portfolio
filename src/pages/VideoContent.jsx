@@ -2,17 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
     VIDEO_CONTENT_DATA, 
     PHOTO_CONTENT_STICKERS, 
     ANIMATION_STICKERS_DATA 
 } from '../utils/Constant';
 import BackButton from '../components/BackButton';
+import NavigationButton from '../components/NavigationButton';
 import './VideoContent.css';
-
 import Footer from '../components/Footer';
-gsap.registerPlugin(ScrollTrigger);
 
 import {
     IoHeart,
@@ -49,7 +47,6 @@ const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
     };
 
     useEffect(() => {
-        // Safe play/pause logic
         const video = videoRef.current;
         if (!video) return;
 
@@ -58,7 +55,7 @@ const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
             const playPromise = video.play();
             if (playPromise !== undefined) {
                 playPromise.catch(e => {
-                    // console.log("Autoplay blocked", e); // Silencing common autoplay logs
+                    // Autoplay blocked
                 });
             }
         } else {
@@ -66,14 +63,15 @@ const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
         }
     }, [isActive]);
 
-
-
     return (
-        // REMOVED style={{ zIndex }} to prevent React from overwriting GSAP styles on re-render
-        <div className="video-card">
+        <motion.div 
+            className="video-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+        >
             <div className="video-container">
-                {/* Placeholder for video - replacing with image for now if url is generic,
-                    but code uses video tag. user likely has real videos. */}
                  {shouldLoad ? (
                     <video
                         className="video-player"
@@ -88,7 +86,7 @@ const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
                     />
                 ) : (
                     <img
-                        src={item.videoUrl.replace('.mp4', '.jpg')} // Assuming cloud service can change extension or use a proper poster prop if available
+                        src={item.videoUrl.replace('.mp4', '.jpg')}
                         className="video-player"
                         style={{objectFit: 'cover'}}
                         alt={item.title}
@@ -135,219 +133,75 @@ const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
                     <p className="card-desc">{item.description}</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
 const VideoContent = () => {
-    const deckRef = useRef(null);
     const mainContainerRef = useRef(null);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [isMuted, setIsMuted] = useState(false);
-    
-    const lastSnapped = useRef(0);
     
     const toggleMute = () => setIsMuted(!isMuted);
 
+    const handlePrev = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+        }
+    };
+
+    const handleNext = () => {
+        if (currentIndex < VIDEO_CONTENT_DATA.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        }
+    };
+
+    // Floating stickers animation (simplified, no scroll trigger)
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            const cards = gsap.utils.toArray('.video-card');
-            const spacer = 30;
-              
+        const stickers = ANIMATION_STICKERS_DATA.slice(0, 3);
+        stickers.forEach((s, i) => {
+            const wrapperSelector = `.sticker-wrapper-${i}`;
+            const innerSelector = `.sticker-inner-${i}`;
 
-            // Initial setup (common)
-            cards.forEach((card, i) => {
-                gsap.set(card, {
-                    zIndex: cards.length - i,
-                    scale: 1 - (i * 0.05),
-                    y: -(i * spacer),
-                    transformOrigin: "center top",
-                    filter: i === 0 ? "blur(0px)" : "blur(1px) brightness(0.9)",
-                    opacity: i > 3 ? 0 : 1
-                });
+            // Initial State
+            gsap.set(wrapperSelector, {
+                scale: 0,
+                autoAlpha: 0,
+                x: 0,
+                y: 0
             });
 
-            let mm = gsap.matchMedia();
-            mm.add({
-                isDesktop: "(min-width: 769px)",
-                isMobile: "(max-width: 768px)",
-            }, (context) => {
-                let { isDesktop } = context.conditions;
-
-                // Master Timeline
-                const endValue = isDesktop ? `+=${cards.length * 2000}px` : `+=${cards.length * 1500}px`;
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: deckRef.current,
-                        start: "center center",
-                        end: endValue,
-                        pin: true,
-                        anticipatePin: 1, // Smooth out pinning
-                        scrub: 1, // Smooth scrubbing effect
-                        onRefresh: (self) => { 
-                            // Sync our tracker with actual progress on load/resiz/3e
-                             lastSnapped.current = self.progress; 
-                        },
-                        snap: {
-                            snapTo: (value) => {
-                                const step = 1 / (cards.length - 1);
-                                const prev = lastSnapped.current;
-                                const threshold = step * 0.05; // Sensitive enough to catch intent, but ignore tiny jitters
-
-                                let nextIndex = Math.round(prev / step);
-
-                                if (value > prev + threshold) {
-                                    nextIndex += 1; // Force exact next card
-                                } else if (value < prev - threshold) {
-                                    nextIndex -= 1; // Force exact prev card
-                                } 
-                                // Else stay (didn't scroll enough to justify swap)
-
-                                // Clamp
-                                nextIndex = Math.min(Math.max(nextIndex, 0), cards.length - 1);
-                                
-                                const nextProgress = nextIndex * step;
-                                lastSnapped.current = nextProgress; 
-                                return nextProgress;
-                            },
-                            duration: { min: 0.2, max: 0.5 },
-                            delay: 0,
-                            ease: "power1.inOut"
-                        },
-                        onUpdate: (self) => {
-                            const idx = Math.round(self.progress * (cards.length - 1));
-                            setActiveIndex(Math.min(Math.max(idx, 0), cards.length - 1));
-                        }
-                    }
-                });
-
-                // Initial Pause
-                tl.to({}, { duration: 2.5 });
-
-                for (let i = 0; i < cards.length - 1; i++) {
-                    const stepLabel = `step-${i}`;
-                    tl.addLabel(stepLabel);
-
-                    if (isDesktop) {
-                        tl.to(cards[i], {
-                            y: window.innerHeight * 1.5, // Move down further
-                            scale: 4, // Get much bigger
-                            rotationX: 95, // Lie down backward
-                            autoAlpha: 0, // VISIBILITY FIX: Hide it once it's down so it doesn't show below footer
-                            display: "none", // LAYOUT FIX: Remove from DOM layout to prevent extra scroll space
-                            duration: 1.5,
-                            ease: "power2.inOut"
-                        }, stepLabel);
-                    } else {
-                        // Mobile Animation
-                        tl.to(cards[i], {
-                            x: window.innerWidth * 1.5,
-                            scale: 0.5, 
-                            rotation: 2, // Reduced rotation for smoother feel
-                            autoAlpha: 0, 
-                            display: "none",
-                            duration: 1.5,
-                            ease: "power2.inOut"
-                        }, stepLabel);
-                    }
-
-                    if (cards[i+1]) {
-                        tl.to(cards[i+1], {
-                            y: 0,
-                            scale: 1,
-                            filter: "blur(0px) brightness(1)",
-                            opacity: 1,
-                            duration: 1,
-                            ease: "power2.inOut"
-                        }, stepLabel);
-                    }
-
-                    if (cards[i+2]) {
-                        tl.to(cards[i+2], {
-                            y: -spacer,
-                            scale: 0.95,
-                            filter: "blur(0px) brightness(1)",
-                            opacity: 1,
-                            duration: 1,
-                            ease: "power2.inOut"
-                        }, stepLabel);
-                    }
-
-                    if (cards[i+3]) {
-                        tl.to(cards[i+3], {
-                            y: -(2 * spacer),
-                            scale: 0.90,
-                            opacity: 1,
-                            duration: 1,
-                            ease: "power2.inOut"
-                        }, stepLabel);
-                    }
-                    tl.to({}, { duration: 2.5 });
-                }
-
-                // --- Sticker Animation ---
-                const stickers = ANIMATION_STICKERS_DATA.slice(0, 3);
-                stickers.forEach((s, i) => {
-                    const wrapperSelector = `.sticker-wrapper-${i}`;
-                    const innerSelector = `.sticker-inner-${i}`;
-
-                    // 1. Initial State
-                    gsap.set(wrapperSelector, {
-                        scale: 0,
-                        autoAlpha: 0,
-                        x: 0,
-                        y: 0
-                    });
-
-                    gsap.set(innerSelector, {
-                        rotation: -45,
-                        y: 0
-                    });
-
-                    // 2. Entrance
-                    gsap.to(wrapperSelector, {
-                        scale: 1,
-                        autoAlpha: 1,
-                        duration: 1.5,
-                        ease: "elastic.out(1, 0.5)",
-                        delay: 0.5 + (i * 0.2)
-                    });
-
-                    // 3. Idle Float
-                    gsap.to(innerSelector, {
-                        y: -20,
-                        rotation: 10,
-                        duration: 2 + (i * 0.2),
-                        repeat: -1,
-                        yoyo: true,
-                        ease: "sine.inOut",
-                        delay: i * 0.5
-                    });
-
-                    // 4. Scroll Wandering (Triggered by main container scroll)
-                    gsap.to(wrapperSelector, {
-                        scrollTrigger: {
-                            trigger: mainContainerRef.current,
-                            start: "top top",
-                            end: "bottom bottom",
-                            scrub: 1.5,
-                        },
-                        x: () => s.xMove, 
-                        y: () => s.yMove,
-                        ease: "none"
-                    });
-                });
+            gsap.set(innerSelector, {
+                rotation: -45,
+                y: 0
             });
 
-        }, mainContainerRef); // Scope to mainContainerRef to include deck and stickers
+            // Entrance
+            gsap.to(wrapperSelector, {
+                scale: 1,
+                autoAlpha: 1,
+                duration: 1.5,
+                ease: "elastic.out(1, 0.5)",
+                delay: 0.5 + (i * 0.2)
+            });
 
-        return () => ctx.revert();
+            // Idle Float
+            gsap.to(innerSelector, {
+                y: -20,
+                rotation: 10,
+                duration: 2 + (i * 0.2),
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                delay: i * 0.5
+            });
+        });
     }, []);
 
     return (
         <div className="reels-page-container" ref={mainContainerRef}>
             <Helmet>
-                <title>Video Editing & Reels | Shorts, Vlogs & Viral Content</title>
+                <title>Video Editing &amp; Reels | Shorts, Vlogs &amp; Viral Content</title>
                 <meta name="description" content="Expert video editing portfolio. Check out my engaging Reels, YouTube Shorts, and promotional videos designed to capture attention and drive views." />
             </Helmet>
             
@@ -362,7 +216,7 @@ const VideoContent = () => {
                         position: 'fixed', 
                         top: s.top, 
                         left: s.left, 
-                        zIndex: 4, // Behind deck but visible
+                        zIndex: 4,
                         pointerEvents: 'none',
                         width: '120px', 
                         height: 'auto'
@@ -383,7 +237,7 @@ const VideoContent = () => {
             ))}
 
             <div className="header-section">
-                <h1 className="header-title">Scroll Down The Shorts</h1>
+                <h1 className="header-title">Explore The Shorts</h1>
                 <p className="header-desc">
                     This section features my video content creations designed to <span className="highlight-text highlight-yellow">capture attention</span>, <span className="highlight-text highlight-pink">tell stories</span>, and drive <span className="highlight-text highlight-blue">meaningful engagement</span>. Each video is strategically crafted to <span className="highlight-text highlight-green">simplify messages</span>, <span className="highlight-text highlight-orange">build credibility</span>, and <span className="highlight-text highlight-yellow">connect with the audience</span> in seconds.<br/><br/>
 
@@ -393,52 +247,139 @@ const VideoContent = () => {
                 </p>
             </div>
 
-            {/* Deck Pinned Area - Normal Flow initially */}
-            <div ref={deckRef} className="deck-wrapper">
+            {/* Deck with Navigation */}
+            <div className="deck-wrapper">
                 {VIDEO_CONTENT_DATA.map((item, index) => {
-                    const isActive = index === activeIndex;
-                    const distance = Math.abs(index - activeIndex);
-                    // Load current, prev, and next (distance <= 1)
-                    // You might blindly load card 0 on load too.
-                    const shouldLoad = distance <= 1 || index === 0; 
+                    const isActive = index === currentIndex;
+                    const distance = index - currentIndex;
+                    const shouldLoad = Math.abs(distance) <= 1 || index === 0;
+                    
+                    // Different behavior for cards before vs after current
+                    let animateProps;
+                    if (index < currentIndex) {
+                        // Cards BEFORE current: Slide down with rotation (realistic swipe exit)
+                        // Keep the most recent exited card on top during animation
+                        const isJustExited = index === currentIndex - 1;
+                        animateProps = {
+                            zIndex: isJustExited ? VIDEO_CONTENT_DATA.length + 1 : 0,
+                            scale: 0.9,
+                            y: 1000,
+                            x: -50,
+                            rotateZ: -8,
+                            opacity: isJustExited ? 1 : 0,
+                            filter: "blur(2px) brightness(0.85)",
+                        };
+                    } else if (isActive) {
+                        // Active card: Front and center
+                        animateProps = {
+                            zIndex: VIDEO_CONTENT_DATA.length,
+                            scale: 1,
+                            y: 0,
+                            x: 0,
+                            rotateZ: 0,
+                            opacity: 1,
+                            filter: "blur(0px) brightness(1)",
+                        };
+                    } else {
+                        // Cards AFTER current: Stacked behind
+                        animateProps = {
+                            zIndex: VIDEO_CONTENT_DATA.length - distance,
+                            scale: 1 - (distance * 0.05),
+                            y: -(distance * 30),
+                            x: 0,
+                            rotateZ: 0,
+                            opacity: distance > 3 ? 0 : 1,
+                            filter: "blur(1px) brightness(0.9)",
+                        };
+                    }
                     
                     return (
-                        <VideoCard 
-                            key={item.id} 
-                            item={item} 
-                            isActive={isActive}
-                            shouldLoad={shouldLoad}
-                            isMuted={isMuted}
-                            toggleMute={toggleMute}
-                        />
+                        <motion.div
+                            key={item.id}
+                            className="video-card-wrapper"
+                            initial={false}
+                            animate={animateProps}
+                            transition={{
+                                type: "spring",
+                                stiffness: 100,
+                                damping: 20,
+                                mass: 1
+                            }}
+                            style={{
+                                position: 'absolute',
+                                pointerEvents: isActive ? 'auto' : 'none'
+                            }}
+                        >
+                            <VideoCard 
+                                item={item} 
+                                isActive={isActive}
+                                shouldLoad={shouldLoad}
+                                isMuted={isMuted}
+                                toggleMute={toggleMute}
+                            />
+                        </motion.div>
                     );
                 })}
+
+                {/* Navigation Buttons - Desktop positioned on sides */}
+                <NavigationButton 
+                    direction="prev" 
+                    onClick={handlePrev} 
+                    disabled={currentIndex === 0}
+                />
+                <NavigationButton 
+                    direction="next" 
+                    onClick={handleNext} 
+                    disabled={currentIndex === VIDEO_CONTENT_DATA.length - 1}
+                />
+            </div>
+
+            {/* Mobile Navigation Buttons - Below card */}
+            <div className="mobile-nav-container">
+                <NavigationButton 
+                    direction="prev" 
+                    onClick={handlePrev} 
+                    disabled={currentIndex === 0}
+                />
+                <NavigationButton 
+                    direction="next" 
+                    onClick={handleNext} 
+                    disabled={currentIndex === VIDEO_CONTENT_DATA.length - 1}
+                />
             </div>
             
-            <div className="marquee-section">
-                <div className="marquee-row left-to-right">
-                    {[...Array(6)].map((_, i) => (
-                        <React.Fragment key={i}>
-                             <div className="marquee-item pill-yellow">Shorts ⚡</div>
-                             <div className="marquee-item pill-pink">Reels 📸</div>
-                             <div className="marquee-item pill-blue">Videos 🎥</div>
-                             <div className="marquee-item pill-orange">Snap 👻</div>
-                             <div className="marquee-item pill-green">Vlogs 🏕️</div>
-                        </React.Fragment>
-                    ))}
-                </div>
-                <div className="marquee-row right-to-left">
-                     {[...Array(6)].map((_, i) => (
-                        <React.Fragment key={i}>
-                             <div className="marquee-item pill-blue">Strategies 🎯</div>
-                             <div className="marquee-item pill-green">Trends 🚀</div>
-                             <div className="marquee-item pill-yellow">Editing ✂️</div>
-                             <div className="marquee-item pill-pink">Viral 🔥</div>
-                             <div className="marquee-item pill-orange">Content 📝</div>
-                        </React.Fragment>
-                    ))}
-                </div>
-            </div>
+            {/* Show marquee only when on first card */}
+            {currentIndex === 0 && (
+                <motion.div 
+                    className="marquee-section"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <div className="marquee-row left-to-right">
+                        {[...Array(6)].map((_, i) => (
+                            <React.Fragment key={i}>
+                                 <div className="marquee-item pill-yellow">Shorts ⚡</div>
+                                 <div className="marquee-item pill-pink">Reels 📸</div>
+                                 <div className="marquee-item pill-blue">Videos 🎥</div>
+                                 <div className="marquee-item pill-orange">Snap 👻</div>
+                                 <div className="marquee-item pill-green">Vlogs 🏕️</div>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                    <div className="marquee-row right-to-left">
+                         {[...Array(6)].map((_, i) => (
+                            <React.Fragment key={i}>
+                                 <div className="marquee-item pill-blue">Strategies 🎯</div>
+                                 <div className="marquee-item pill-green">Trends 🚀</div>
+                                 <div className="marquee-item pill-yellow">Editing ✂️</div>
+                                 <div className="marquee-item pill-pink">Viral 🔥</div>
+                                 <div className="marquee-item pill-orange">Content 📝</div>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                </motion.div>
+            )}
           <Footer/>
         </div>
         

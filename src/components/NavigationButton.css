@@ -1,0 +1,63 @@
+.nav-button {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 0, 0, 0.9);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.nav-button:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.nav-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.nav-icon {
+    font-size: 1.8rem;
+}
+
+/* Desktop: Position on sides of centered card */
+@media (min-width: 769px) {
+    .nav-button-prev {
+        position: absolute;
+        left: calc(50% - 175px - 80px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .nav-button-next {
+        position: absolute;
+        right: calc(50% - 175px - 80px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+/* Mobile: Position below */
+@media (max-width: 768px) {
+    .nav-button {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .nav-icon {
+        font-size: 2rem;
+    }
+}

@@ -14,17 +14,30 @@ import useIsMobile from '../hooks/useIsMobile';
 
 const ContentDesign = () => {
     const isMobile = useIsMobile();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(() => {
+        // PERF: Check if user has already seen the intro in this session
+        return !sessionStorage.getItem('hasViewedContentDesignIntro');
+    });
 
     // Safety timeout in case Lottie takes too long or fails
     useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 500); // 3s max wait
+        if (!isLoading) return; // Skip if already loaded
+        
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+            sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
+        }, 3000); // 3s max wait
         return () => clearTimeout(timer);
-    }, []);
+    }, [isLoading]);
 
     const handleLottieLoad = () => {
+        if (!isLoading) return;
+
         // Add a small delay for smoothness
-        setTimeout(() => setIsLoading(false), 400);
+        setTimeout(() => {
+            setIsLoading(false);
+            sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
+        }, 400);
     };
 
     // Mobile Scroll Trigger for Hover Effect

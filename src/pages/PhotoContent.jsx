@@ -109,55 +109,57 @@ const PhotoContent = () => {
                 scrollTrigger: {
                     trigger: showcaseContainerRef.current,
                     start: "top top",
-                    end: "+=700%", // Increased scroll length for longer holds
+                    end: "+=300%",
                     pin: true,
-                    scrub: 1,
-                    snap: 1 / (companies.length - 1), // Snap to each card
+                    scrub: 1.5,
+                    snap: 1 / (companies.length - 1),
                 }
             });
 
             // Add initial pause (hold first card)
-            albumTl.to({}, { duration: 1.5 });
+            albumTl.to({}, { duration: 2 });
 
-            // Initial State: All panels hidden/positioned down except the first one?
-            // Actually, let's stack them. 
-            // First one is visible by default (CSS opacity: 0 needs override).
-            
+            // Initial State: First card visible at center, others start from right (scaled down)
             showcaseRefs.current.forEach((el, i) => {
                 if (el) {
                     gsap.set(el, { 
-                        zIndex: i + 1,
-                        opacity: i === 0 ? 1 : 0, // First visible, others start hidden
-                        yPercent: i === 0 ? 0 : 100, // Others start offscreen down
-                        scale: i === 0 ? 1 : 0.9,
-                        visibility: 'visible'
+                        zIndex: companies.length - i, // Reverse z-index so incoming is on top
+                        opacity: i === 0 ? 1 : 0,
+                        xPercent: i === 0 ? 0 : 120,
+                        scale: i === 0 ? 1 : 0.8,
+                        visibility: 'visible',
+                        filter: i === 0 ? "blur(0px)" : "blur(5px)"
                     });
                 }
             });
 
-            // Animation: Slide up next card
+            // Animation: Smooth overlapping transitions
             showcaseRefs.current.forEach((el, i) => {
                 if (i > 0) {
                     const prevEl = showcaseRefs.current[i - 1];
                     
-                    // Animate Current Card In
+                    // Exit Previous Card: Slide LEFT and SHRINK (starts first)
+                    albumTl.to(prevEl, {
+                        xPercent: -120,
+                        scale: 0.8,
+                        opacity: 0,
+                        filter: "blur(10px)",
+                        duration: 1.5,
+                        ease: "power2.in"
+                    }, "+=0");
+
+                    // Enter Current Card: Slide from RIGHT and GROW (starts 0.3s after exit begins)
                     albumTl.to(el, {
-                        yPercent: 0,
+                        xPercent: 0,
                         opacity: 1,
                         scale: 1,
-                        duration: 1,
+                        filter: "blur(0px)",
+                        duration: 1.5,
                         ease: "power2.out"
-                    });
+                    }, "-=1.2"); // Overlap: starts 0.3s after exit begins
 
-                    // Update Previous Card (Scale down slightly for depth)
-                    albumTl.to(prevEl, {
-                        scale: 0.9,
-                        filter: "blur(5px)", // Add blur for focus effect
-                        duration: 1
-                    }, "<"); // Run at same time
-
-                    // HOLD the card for a while before the next one comes
-                    albumTl.to({}, { duration: 0.5 });
+                    // HOLD the card before next transition
+                    albumTl.to({}, { duration: 1.5 });
                 }
             });
 
@@ -329,16 +331,14 @@ const PhotoContent = () => {
         </div>
 
             {/* ------------------------------------------------------------------
-                PINNED COMPANY SHOWCASE CONTAINER
+                PINNED COMPANY SHOWCASE CONTAINER (DESKTOP/TABLET)
                 - Height: 100vh (pinned)
-                - Background Color animates here
                 - Panels stack inside absolute
                ------------------------------------------------------------------ */}
             <div 
                 ref={showcaseContainerRef} 
-                className="showcase-pinned-wrapper"
+                className="showcase-pinned-wrapper desktop-showcase"
                 style={{ 
-                    // Main Scene Styling
                     width: '100%', 
                     height: '100vh', 
                     position: 'relative', 
@@ -366,6 +366,40 @@ const PhotoContent = () => {
                             height: '100%',
                         }}
                     />
+                ))}
+            </div>
+
+            {/* ------------------------------------------------------------------
+                MOBILE SHOWCASE - Vertical Scroll with Horizontal Image Rows
+               ------------------------------------------------------------------ */}
+            <div className="mobile-showcase">
+                {companies.map((company, index) => (
+                    <div key={index} className="mobile-company-section">
+                        <h2 className="mobile-company-title">{company.name}</h2>
+                        
+                        <div className="mobile-iphone-wrapper">
+                            <img src={IPHONE_FRAME_IMG} alt="iPhone Frame" className="mobile-iphone-frame" />
+                            <div className="mobile-iphone-screen">
+                                <img src={company.iphoneImg} alt={`${company.name} Profile`} className="mobile-screen-img" />
+                            </div>
+                        </div>
+
+                        <div className="mobile-images-scroll">
+                            {company.gridImages.map((imgSrc, imgIndex) => (
+                                <div 
+                                    key={imgIndex}
+                                    className="mobile-image-item"
+                                    onClick={() => setSelectedImage(imgSrc)}
+                                    data-cursor-button
+                                >
+                                    <img src={imgSrc} alt={`${company.name} Post ${imgIndex + 1}`} />
+                                    <div className="mobile-image-overlay">
+                                        <span>View</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 ))}
             </div>
 
