@@ -300,15 +300,15 @@ const VideoContent = () => {
                             filter: "blur(1px) brightness(0.9)",
                         };
                     } else if (position >= cardOrder.length - 1) {
-                        // Last card: Smooth exit below - ready for prev
+                        // Last card: Dramatic exit with HIGHEST z-index (stays on top)
                         animateProps = {
-                            zIndex: VIDEO_CONTENT_DATA.length - 3,
-                            scale: 0.95,
-                            y: 100,
-                            x: 0,
-                            rotateZ: 0,
+                            zIndex: VIDEO_CONTENT_DATA.length + 20,
+                            scale: 0.9,
+                            y: 1000,
+                            x: -50,
+                            rotateZ: -8,
                             opacity: 0,
-                            filter: "blur(1px) brightness(0.9)",
+                            filter: "blur(3px) brightness(0.8)",
                         };
                     } else {
                         // Cards further back: Hidden
@@ -334,7 +334,9 @@ const VideoContent = () => {
                                 ease: [0.25, 0.1, 0.25, 1],
                                 scale: { duration: 0.4 },
                                 opacity: { duration: 0.3 },
+                                rotateZ: { duration: 0.6, ease: "easeOut" },
                                 y: { type: "spring", stiffness: 100, damping: 20 },
+                                x: { type: "spring", stiffness: 100, damping: 20 },
                             }}
                             style={{
                                 position: 'absolute',
