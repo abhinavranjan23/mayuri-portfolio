@@ -26,18 +26,18 @@ const ContentDesign = () => {
         const timer = setTimeout(() => {
             setIsLoading(false);
             sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
-        }, 3000); // 3s max wait
+        }, 1500); // Reduced from 3s to 1.5s
         return () => clearTimeout(timer);
     }, [isLoading]);
 
     const handleLottieLoad = () => {
         if (!isLoading) return;
 
-        // Add a small delay for smoothness
+        // Reduced delay for faster transition
         setTimeout(() => {
             setIsLoading(false);
             sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
-        }, 400);
+        }, 200); // Reduced from 400ms to 200ms
     };
 
     // Mobile Scroll Trigger for Hover Effect
