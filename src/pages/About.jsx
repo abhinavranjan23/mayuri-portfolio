@@ -49,7 +49,7 @@ const About = () => {
                     setIsPlaying(true);
                 }
             } catch (err) {
-                
+            
                 const enableAudio = () => {
                    if (audioRef.current) {
                        audioRef.current.play().then(() => {
@@ -172,7 +172,7 @@ const About = () => {
                 <meta name="keywords" content="Mayuri Saitav, About Content Creator, Social Media Story, Influencer Journey, Creative Professional" />
                 <link rel="canonical" href="https://mayuri-portfolio.com/about" />
             </Helmet>
-            {!isMobile && <audio ref={audioRef} src="/music/lilies-on-lapse.mp3" loop />}
+            {!isMobile && <audio ref={audioRef} src="/music/aboutbg.mp3" loop />}
 
             {/* Top Bar Floating over everything (visually) or top of container */}
              <motion.div className="top-bar" variants={topBarVariants}>

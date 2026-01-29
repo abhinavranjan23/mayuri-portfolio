@@ -10,7 +10,7 @@ import {
     PHOTO_CONTENT_STICKERS, COMPANIES_DATA, 
     ANIMATION_STICKERS_DATA, PHOTO_CONTENT_POSTS
 } from '../utils/Constant';
-import { IoArrowDown } from "react-icons/io5";
+import { IoArrowDown, IoClose } from "react-icons/io5";
 import './PhotoContent.css';
 import Footer from '../components/Footer';
 
@@ -124,10 +124,9 @@ const PhotoContent = () => {
                 if (el) {
                     gsap.set(el, { 
                         zIndex: companies.length - i, // Reverse z-index so incoming is on top
-                        opacity: i === 0 ? 1 : 0,
+                        autoAlpha: i === 0 ? 1 : 0, // autoAlpha handles visibility + opacity
                         xPercent: i === 0 ? 0 : 120,
                         scale: i === 0 ? 1 : 0.8,
-                        visibility: 'visible',
                         filter: i === 0 ? "blur(0px)" : "blur(5px)"
                     });
                 }
@@ -142,7 +141,7 @@ const PhotoContent = () => {
                     albumTl.to(prevEl, {
                         xPercent: -120,
                         scale: 0.8,
-                        opacity: 0,
+                        autoAlpha: 0, // Fades out AND sets visibility: hidden
                         filter: "blur(10px)",
                         duration: 1.5,
                         ease: "power2.in"
@@ -151,7 +150,7 @@ const PhotoContent = () => {
                     // Enter Current Card: Slide from RIGHT and GROW (starts 0.3s after exit begins)
                     albumTl.to(el, {
                         xPercent: 0,
-                        opacity: 1,
+                        autoAlpha: 1, // Fades in AND sets visibility: visible
                         scale: 1,
                         filter: "blur(0px)",
                         duration: 1.5,
@@ -234,6 +233,17 @@ const PhotoContent = () => {
             showcaseRefs.current.push(el);
         }
     };
+
+    // Close Modal on Escape Key
+    useLayoutEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape' && selectedImage) {
+                setSelectedImage(null);
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedImage]);
 
     return (
         <div className="photo-content-page" ref={containerRef} >
@@ -367,6 +377,19 @@ const PhotoContent = () => {
                         }}
                     />
                 ))}
+            
+                {/* Focus Guard to prevent Tab jumping to footer */}
+                <div 
+                    tabIndex={0} 
+                    style={{ position: 'absolute', bottom: 0, width: '1px', height: '1px', opacity: 0 }}
+                    onFocus={() => {
+                        // Gently scroll slightly to hint user to scroll
+                         if(window.scrollY < window.innerHeight * 1.5) { // Only scroll if not already scrolled
+                             window.scrollBy({ top: 100, behavior: 'smooth' });
+                         }
+                    }}
+                    aria-label="End of showcase. Scroll down to see more visuals."
+                ></div>
             </div>
 
             {/* ------------------------------------------------------------------
@@ -390,6 +413,15 @@ const PhotoContent = () => {
                                     key={imgIndex}
                                     className="mobile-image-item"
                                     onClick={() => setSelectedImage(imgSrc)}
+                                    role="button"
+                                    tabIndex={0}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault(); // Prevent scroll on Space
+                                            setSelectedImage(imgSrc);
+                                        }
+                                    }}
+                                    aria-label={`View full size image ${imgIndex + 1} of ${company.name}`}
                                     data-cursor-button
                                 >
                                     <img src={imgSrc} alt={`${company.name} Post ${imgIndex + 1}`} />
@@ -408,8 +440,18 @@ const PhotoContent = () => {
                 <div 
                     className="lightbox-overlay" 
                     onClick={() => setSelectedImage(null)}
-                    data-cursor-text="Close" // Tells custom cursor to show "Close" text
+                    data-cursor-text="Close" 
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Image Fullscreen View"
                 >
+                    <button 
+                        className="lightbox-close-btn"
+                        onClick={() => setSelectedImage(null)}
+                        aria-label="Close Image"
+                    >
+                        <IoClose />
+                    </button>
                     <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
                         <img src={selectedImage} alt="Full Screen" className="lightbox-img" />
                     </div>

@@ -111,7 +111,7 @@ const Home = () => {
             Actually keep it rendered but controlled, OR remove it. 
             User said "music should not be played". remove it to be safe 
         */}
-        {!isMobile && <audio ref={audioRef} src="/music/time-travel.mp3" loop />}
+        {!isMobile && <audio ref={audioRef} src="/music/lilies-on-lapse.mp3" loop />}
 
         {/* Music Control Button */}
         {!isMobile && (

@@ -43,6 +43,15 @@ const CompanyShowcase = forwardRef(({
                                 onClick={() => onImageClick && onImageClick(imgSrc)}
                                 data-cursor-button 
                                 style={{ cursor: 'none' }}
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`View full size image ${index + 1} of ${companyName}`}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault();
+                                        onImageClick && onImageClick(imgSrc);
+                                    }
+                                }}
                             >
                                 {!loadedImages[`left-${index}`] && (
                                     <div className="image-skeleton"></div>
@@ -104,6 +113,15 @@ const CompanyShowcase = forwardRef(({
                                 onClick={() => onImageClick && onImageClick(imgSrc)}
                                 data-cursor-button 
                                 style={{ cursor: 'none' }}
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`View full size image ${index + 3} of ${companyName}`}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault();
+                                        onImageClick && onImageClick(imgSrc);
+                                    }
+                                }}
                             >
                                 {!loadedImages[`right-${index}`] && (
                                     <div className="image-skeleton"></div>
