@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { FaPaperPlane, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa';
 import './Footer.css';
 import { FOOTER_SOCIAL_DATA } from '../utils/Constant';
 
-const Footer = () => {
+const Footer = memo(() => {
     return (
         <div className="footer-container">
             {/* Background Watermark */}
@@ -37,10 +38,10 @@ const Footer = () => {
             </div>
         </div>
     );
-};
+});
 
 // Simple helper component for the styled icons
-const SocialIcon = ({ color, icon, href, label }) => (
+const SocialIcon = memo(({ color, icon, href, label }) => (
     <a 
         href={href} 
         aria-label={label}
@@ -64,6 +65,6 @@ const SocialIcon = ({ color, icon, href, label }) => (
     >
         {icon}
     </a>
-);
+));
 
 export default Footer;

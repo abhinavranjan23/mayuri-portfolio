@@ -1,4 +1,4 @@
-import {  useState, useEffect } from 'react';
+import {  useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { DotLottiePlayer } from '@dotlottie/react-player';
@@ -30,7 +30,7 @@ const ContentDesign = () => {
         return () => clearTimeout(timer);
     }, [isLoading]);
 
-    const handleLottieLoad = () => {
+    const handleLottieLoad = useCallback(() => {
         if (!isLoading) return;
 
         // Reduced delay for faster transition
@@ -38,7 +38,7 @@ const ContentDesign = () => {
             setIsLoading(false);
             sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
         }, 200); // Reduced from 400ms to 200ms
-    };
+    }, [isLoading]);
 
     // Mobile Scroll Trigger for Hover Effect
     useEffect(() => {

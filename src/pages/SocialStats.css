@@ -176,6 +176,10 @@
     position: relative;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .testimonial-card::before {
@@ -210,7 +214,14 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #ddd;
+    background: #FFD54F;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    flex-shrink: 0;
 }
 
 .client-name {
@@ -253,6 +264,15 @@
     
     .analytics-card {
         max-width: 100%; /* Full width on mobile */
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .testimonial-card {
+        height: auto; /* Allow auto height on mobile */
     }
 }
 

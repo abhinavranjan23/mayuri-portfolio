@@ -1,9 +1,10 @@
 
+import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './BackButton.css';
 
-const BackButton = ({ lightMode = false }) => {
+const BackButton = memo(({ lightMode = false }) => {
     const navigate = useNavigate();
 
     return (
@@ -22,6 +23,6 @@ const BackButton = ({ lightMode = false }) => {
             <span>Back</span>
         </motion.button>
     );
-};
+});
 
 export default BackButton;

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { DotLottiePlayer } from '@dotlottie/react-player';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';

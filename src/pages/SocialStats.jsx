@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import BackButton from '../components/BackButton';
 import Footer from '../components/Footer';
 import './SocialStats.css';
+import { SOCIAL_STATS_DATA } from '../utils/Constant';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,14 +57,7 @@ const SocialStats = () => {
         return () => ctx.revert();
     }, []);
 
-    // Placeholder data (Replace with constants or user uploads later)
-    const INTRO_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769193973/travelgram_vfqfau.png"; // Using existing
-    const CITY_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769194419/885a727276a1c613a7532e120c609974_yzhbc0.jpg";
-    const POST_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769194286/Screenshot_2026-01-24_002042_mfciak.png";
-    const RESULT_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769194726/ChatGPT_Image_Jan_24_2026_12_28_20_AM_fdlgrn.jpg";
-    const YOUTUBE_IMG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/social2_vzaorb.png"; // Placeholder for channel
-    const POST_IMG2 = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769195383/Screenshot_2026-01-24_003911_smsrgt.png";
-    const YoutubeProfileImg = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769195661/channels4_profile_lle6zw.jpg";
+    // Data imported from Constant.js
     return (
         <div className="social-stats-page" ref={pageRef}>
             <Helmet>
@@ -78,12 +72,9 @@ const SocialStats = () => {
                 {/* 1. Intro Section */}
                 <section className="stats-section intro-grid">
                     <div className="intro-text">
-                        <h1 className="section-title" style={{textAlign: 'left'}}>Travelgram</h1>
-                        <p>
-                        Travelgram was a platform on Twitter to showcase the travel beauty
-around the world. The platform aimed to focus on the tourism of Qatar
-involving all the wonders of the globe. I was part of strategising the content, content creation 
-and managing monthly calendar.
+                        <h1 className="section-title" style={{textAlign: 'left'}}>{SOCIAL_STATS_DATA.INTRO_TITLE}</h1>
+                        <p style={{whiteSpace: 'pre-line'}}>
+                            {SOCIAL_STATS_DATA.INTRO_DESC}
                         </p>
                         {/* <p>
                         From increasing engagement rates by <strong>200%</strong> to building loyal communities 
@@ -91,41 +82,43 @@ and managing monthly calendar.
                         </p> */}
                     </div>
                     <div className="intro-image-wrapper">
-                        <img src={INTRO_IMG} alt="Social Media Intro" className="intro-image" />
+                        <img src={SOCIAL_STATS_DATA.INTRO_IMG} alt="Social Media Intro" className="intro-image" />
                     </div>
                 </section>
 
                 {/* 2. Campaign Strategy 1 */}
                 <section className="stats-section">
-                    <h2 className="section-title">Campaign Strategy 1: <br/>Spotlight Lusail</h2>
+                    <h2 className="section-title" style={{whiteSpace: 'pre-line'}}>{SOCIAL_STATS_DATA.CAMPAIGN_1_TITLE}</h2>
                     <p className="section-subtitle">
-                        I was part of planning content strategy and the creative captions to be posted.
+                        {SOCIAL_STATS_DATA.CAMPAIGN_1_SUBTITLE}
                     </p>
                     
                     <div className="strategy-card">
                         <h3>Objective</h3>
-                        <p>To spotlight Lusail, Qatar as a thriving post-World Cup destination and modern urban marvel, reinforcing its appeal as a luxury travel and investment hotspot.</p>
+                        <p>{SOCIAL_STATS_DATA.CAMPAIGN_1_OBJECTIVE}</p>
                         
                         <br/>
                         <h3>Approach</h3>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
-                            <li style={{marginBottom: '0.5rem'}}><strong>1. Modern Urban Development:</strong> Showcasing futuristic architecture and city planning.</li>
-                            <li style={{marginBottom: '0.5rem'}}><strong>2. Event Legacy Tourism:</strong> Emphasizing Lusail’s vibrancy even after global events like the FIFA World Cup.</li>
-                            <li><strong>3. Visual Aesthetics:</strong> Highlighting a stunning panoramic cityscape.</li>
+                            {SOCIAL_STATS_DATA.CAMPAIGN_1_APPROACH.map((item, i) => (
+                                <li key={i} style={{marginBottom: '0.5rem'}}>
+                                    <strong>{i + 1}. {item.title}</strong> {item.desc}
+                                </li>
+                            ))}
                         </ul>
 
                         <div className="strategy-showcase">
                             <div className="strategy-img-box">
                                 <span className="strategy-label">Panoramic Cityscape</span>
-                                <img src={CITY_IMG} alt="Cityscape" />
+                                <img src={SOCIAL_STATS_DATA.CITY_IMG} alt="Cityscape" />
                             </div>
                             <div className="strategy-img-box">
                                 <span className="strategy-label">The Post</span>
-                                <img src={POST_IMG} alt="The Post" />
+                                <img src={SOCIAL_STATS_DATA.POST_IMG} alt="The Post" />
                             </div>
                             <div className="strategy-img-box">
                                 <span className="strategy-label">The Result</span>
-                                <img src={RESULT_IMG} alt="Result" />
+                                <img src={SOCIAL_STATS_DATA.RESULT_IMG} alt="Result" />
                             </div>
                         </div>
                     </div>
@@ -133,25 +126,27 @@ and managing monthly calendar.
 
                 {/* 3. Campaign Strategy 2 */}
                 <section className="stats-section">
-                    <h2 className="section-title">Campaign Strategy 2: <br/>Dive Into History</h2>
+                    <h2 className="section-title" style={{whiteSpace: 'pre-line'}}>{SOCIAL_STATS_DATA.CAMPAIGN_2_TITLE}</h2>
                     <p className="section-subtitle">
-                        In this campaign, I worked on content strategy, creative content and copy.
+                        {SOCIAL_STATS_DATA.CAMPAIGN_2_SUBTITLE}
                     </p>
                      <div className="strategy-card">
                         <div className="intro-grid"> 
                              <div>
                                 <h3>Objective</h3>
-                                <p style={{marginBottom: '1.5rem'}}>To captivate adventure and history enthusiasts by promoting scuba diving tourism in Egypt through the historical allure of the SS Thistlegorm shipwreck.</p>
+                                <p style={{marginBottom: '1.5rem'}}>{SOCIAL_STATS_DATA.CAMPAIGN_2_OBJECTIVE}</p>
 
                                 <h3>Approach</h3>
                                 <ul style={{ listStyle: 'none', padding: 0 }}>
-                                    <li style={{marginBottom: '0.5rem'}}><strong>1. Adventure & Exploration:</strong> Highlighting a thrilling dive site in Dahab.</li>
-                                    <li style={{marginBottom: '0.5rem'}}><strong>2. Historical Significance:</strong> Emphasizing the WWII history of the SS Thistlegorm.</li>
-                                    <li><strong>3. Visual Appeal:</strong> Leveraging powerful underwater imagery to spark curiosity.</li>
+                                    {SOCIAL_STATS_DATA.CAMPAIGN_2_APPROACH.map((item, i) => (
+                                        <li key={i} style={{marginBottom: '0.5rem'}}>
+                                            <strong>{i + 1}. {item.title}</strong> {item.desc}
+                                        </li>
+                                    ))}
                                 </ul>
                              </div>
                              <div className="intro-image-wrapper" style={{height: '350px', transform: 'rotate(-2deg)'}}>
-                                <img src={POST_IMG2} alt="Strategy 2" className="intro-image" />
+                                <img src={SOCIAL_STATS_DATA.POST_IMG2} alt="Strategy 2" className="intro-image" />
                              </div>
                         </div>
                      </div>
@@ -161,22 +156,22 @@ and managing monthly calendar.
                 <section className="stats-section youtube-section">
                     <h2 className="section-title">My YouTube Channel</h2>
                     <div className="intro-image-wrapper" style={{width: '150px', height: '150px', borderRadius: '50%', margin: '0 auto'}}>
-                        <img src={YoutubeProfileImg} alt="Mayuri Youtube" className="intro-image" />
+                        <img src={SOCIAL_STATS_DATA.YOUTUBE_PROFILE_IMG} alt="Mayuri Youtube" className="intro-image" />
                     </div>
                     
                     <div className="youtube-stats-wrapper">
                         {/* Views Graph Card */}
                         <div className="analytics-card">
-                            <div className="analytics-title">Views</div>
+                            <div className="analytics-title">{SOCIAL_STATS_DATA.ANALYTICS_VIEWS.title}</div>
                             <div className="analytics-value">
-                                19.8K 
+                                {SOCIAL_STATS_DATA.ANALYTICS_VIEWS.value} 
                                 <span className="analytics-icon-up" style={{ display: 'flex' }}>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H8l4-4 4 4h-3v4h-2z"/>
                                     </svg>
                                 </span>
                             </div>
-                            <div className="analytics-subtext">8.3K more than usual</div>
+                            <div className="analytics-subtext">{SOCIAL_STATS_DATA.ANALYTICS_VIEWS.subtext}</div>
                             
                             <div className="analytics-graph">
                                 <svg className="graph-svg" viewBox="0 0 100 50" preserveAspectRatio="none">
@@ -194,21 +189,21 @@ and managing monthly calendar.
                         </div>
 
                         <div className="intro-image-wrapper" style={{width: '300px', height: '350px', margin: '0 auto'}}>
-                            <img src={YOUTUBE_IMG} alt="Mayuri Youtube" className="intro-image" />
+                            <img src={SOCIAL_STATS_DATA.YOUTUBE_IMG} alt="Mayuri Youtube" className="intro-image" />
                         </div>
 
                         {/* Engaged Views Graph Card */}
                         <div className="analytics-card">
-                            <div className="analytics-title">Engaged views</div>
+                            <div className="analytics-title">{SOCIAL_STATS_DATA.ANALYTICS_ENGAGED.title}</div>
                             <div className="analytics-value">
-                                8.6K 
+                                {SOCIAL_STATS_DATA.ANALYTICS_ENGAGED.value} 
                                 <span className="analytics-icon-up" style={{ display: 'flex' }}>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H8l4-4 4 4h-3v4h-2z"/>
                                     </svg>
                                 </span>
                             </div>
-                            <div className="analytics-subtext">169% more than previous 28 days</div>
+                            <div className="analytics-subtext">{SOCIAL_STATS_DATA.ANALYTICS_ENGAGED.subtext}</div>
                             
                             <div className="analytics-graph">
                                 <svg className="graph-svg" viewBox="0 0 100 50" preserveAspectRatio="none">
@@ -229,28 +224,22 @@ and managing monthly calendar.
 
                 {/* 5. Testimonials */}
                 <section className="stats-section">
-                    <h2 className="section-title">What People Say</h2>
+                    <h2 className="section-title">{SOCIAL_STATS_DATA.TESTIMONIALS_TITLE}</h2>
                     <div className="testimonials-grid">
-                        <div className="testimonial-card">
-                            <p className="testimonial-text">"I’ve really enjoyed working with Mayuri as our Social Media and Content Creator. She’s creative, reliable, and has a great ability to turn complex ideas into clear, engaging content that fits our brand perfectly. She’s proactive, easy to work with, and always open to feedback. Mayuri consistently delivers high-quality work and brings a thoughtful approach to everything she does. I’d highly recommend her to any team looking for a strong content and social media professional."</p>
-                            <div className="client-info">
-                                <div className="client-avatar"></div>
-                                <div>
-                                    <div className="client-name">Bonnie Tyler</div>
-                                    <div className="client-role">General Manager at Doherty Fultz Immigration</div>
+                        {SOCIAL_STATS_DATA.TESTIMONIALS.map((testimonial, i) => (
+                            <div key={i} className="testimonial-card">
+                                <p className="testimonial-text">{testimonial.text}</p>
+                                <div className="client-info">
+                                    <div className="client-avatar">
+                                        {testimonial.name.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <div className="client-name">{testimonial.name}</div>
+                                        <div className="client-role">{testimonial.role}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="testimonial-card">
-                            <p className="testimonial-text">"I’ve had the pleasure of working with Mayuri, and I can confidently say she's an excellent social media content creator. She a sharp understanding of how to translate brand voice into engaging, platform-appropriate content that actually resonates. Mayuri combines creativity with strategy. Every piece of content is intentional, data-informed, and aligned with broader business goals. She's very responsive to feedback, and consistently bring fresh ideas to the table. Beyond her technical skills, Mayuri is reliable, collaborative, and easy to work with. I would not hesitate to recommend her."</p>
-                            <div className="client-info">
-                                <div className="client-avatar"></div>
-                                <div>
-                                    <div className="client-name">Cassandra Fultz, RCIC-IRB</div>
-                                    <div className="client-role">Founder - Doherty Fultz Immigration Inc.</div>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </section>
 

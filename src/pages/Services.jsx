@@ -5,35 +5,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import BackButton from '../components/BackButton';
 import Footer from '../components/Footer';
 import './Services.css';
-
+import {SERVICE_ITEMS, WHY_CHOOSE_US_DATA, HOW_WE_WORK_DATA, SERVICES_PAGE_DATA} from '../utils/Constant';
 gsap.registerPlugin(ScrollTrigger);
 
-const SERVICE_ITEMS = [
-    { title: "Social Media Management", icon: "📱", color: "pill-blue", cardColor: "card-blue", desc: "End-to-end management of your social presence, from scheduling to community engagement." },
-    { title: "Content Creation", icon: "🎨", color: "pill-pink", cardColor: "card-pink", desc: "Eye-catching visuals, reels, and posts designed to stop the scroll and tell your story." },
-    { title: "Facebook & Instagram Ads", icon: "📈", color: "pill-yellow", cardColor: "card-yellow", desc: "Targeted ad campaigns that drive traffic, leads, and measurable ROI." },
-    { title: "Google My Business", icon: "📍", color: "pill-green", cardColor: "card-green", desc: "Optimizing your local presence to ensure customers find you first." },
-    { title: "Account Setup", icon: "⚙️", color: "pill-purple", cardColor: "card-purple", desc: "Professional setup of profiles with SEO-optimized bios and highlights." },
-    { title: "Content Writing", icon: "✍️", color: "pill-orange", cardColor: "card-orange", desc: "Compelling captions, blogs, and copy that speak your brand's voice." }
-];
+// Create duplicated list for seamless marquee
+const MARQUEE_LIST = [...SERVICE_ITEMS, ...SERVICE_ITEMS, ...SERVICE_ITEMS];
 
-
-const WHY_CHOOSE_US_DATA = [
-    { title: "Experienced Team", desc: "Over 3 years of experience in helping brands grow online." },
-    { title: "Tailored Strategies", desc: "Every business is unique, so is our approach." },
-    { title: "Data-Driven Decisions", desc: "We focus on results, not just vanity metrics." },
-    { title: "Transparent Communication", desc: "Regular updates and clear reports." },
-    { title: "Affordable Packages", desc: "Quality marketing that fits your budget." }
-];
-
-const HOW_WE_WORK_DATA = [
-    { title: "Discovery & Consultation", desc: "We understand your business, goals, and target audience." },
-    { title: "Strategy Planning", desc: "A personalized content and ad plan designed for your brand." },
-    { title: "Execution", desc: "Content creation, posting, and ad campaign setup." },
-    { title: "Monitoring", desc: "We track performance metrics and audience insights." },
-    { title: "Optimization", desc: "Data-based adjustments to improve results continuously." },
-    { title: "Reporting", desc: "Monthly performance reports with clear insights and next steps." }
-];
 
 const Services = () => {
     const pageRef = useRef(null);
@@ -62,16 +39,12 @@ const Services = () => {
                 let { isDesktop, isMobile } = context.conditions;
 
                 if (isDesktop) {
-                    // --- DESKTOP: CHAOS GRID ---
-                    // 1. Set Initial "Chaotic" State
+                  
                     gsap.set(cards, {
                         autoAlpha: 0,
-                        scale: 0.1, // Start very small
-                        // Random X from far left (-1000) to far right (1000)
+                        scale: 0.1, 
                         x: (i) => Math.random() * 2000 - 1000, 
-                        // Random Y from far top (-1000) to far bottom (1000)
                         y: (i) => Math.random() * 2000 - 1000,    
-                        // Random rotation between -180 and 180 degrees
                         rotation: () => Math.random() * 360 - 180 
                     });
 
@@ -126,8 +99,8 @@ const Services = () => {
 
                     const mobileTl = gsap.timeline({
                         scrollTrigger: {
-                            trigger: ".services-grid-container",
-                            start: "top 15%",
+                            trigger: ".services-pinned-wrapper",
+                            start: "top top",
                             end: "+=2500", // Longer scroll for distinct steps
                             pin: true,
                             scrub: 1,
@@ -245,8 +218,7 @@ const Services = () => {
         return () => ctx.revert();
     }, []);
 
-    // Create duplicated list for seamless marquee
-    const MARQUEE_LIST = [...SERVICE_ITEMS, ...SERVICE_ITEMS, ...SERVICE_ITEMS]; 
+ 
 
     return (
         <div className="services-page" ref={pageRef}>
@@ -264,14 +236,16 @@ const Services = () => {
 
             {/* Header */}
             <div className="services-header">
-                <h1 className="services-title">What I Bring to the Table</h1>
+                <h1 className="services-title">{SERVICES_PAGE_DATA.serviceTitle}</h1>
                 <p className="services-subtitle">
-                    Transforming ideas into digital reality. I help brands grow with strategic content and management.
+                    {SERVICES_PAGE_DATA.serviceSubTitle}
                 </p>
             </div>
 
-            {/* Marquee Section */}
-            <div className="marquee-container">
+            {/* Combined Wrapper for Pinning */}
+            <div className="services-pinned-wrapper">
+                {/* Marquee Section */}
+                <div className="marquee-container">
                 {/* Row 1: Left to Right */}
                 <div className="marquee-track animate-left">
                     {MARQUEE_LIST.map((item, i) => (
@@ -303,12 +277,13 @@ const Services = () => {
                     ))}
                 </div>
             </div>
+            </div>
 
             {/* Why Choose Us - Pinned Horizontal Scroll */}
             <section className="why-choose-section" ref={whySectionRef}>
                 <div className="why-header">
-                    <h2 className="services-title">Why Choose Us?</h2>
-                    <p className="services-subtitle">So Many Choices, and a little time? Here's why.</p>
+                    <h2 className="services-title">{SERVICES_PAGE_DATA.whyChooseTitle}</h2>
+                    <p className="services-subtitle">{SERVICES_PAGE_DATA.whyChooseSubTitle}</p>
                 </div>
                 
                 <div className="why-track-wrapper">
@@ -325,7 +300,7 @@ const Services = () => {
 
              {/* How We Work - Vertical Process */}
              <section className="process-section">
-                <h2 className="services-title" style={{textAlign:'center', marginBottom: '3rem'}}>How We Work</h2>
+                <h2 className="services-title" style={{textAlign:'center', marginBottom: '3rem'}}>{SERVICES_PAGE_DATA.howWeWorkTitle}</h2>
                 
                 {HOW_WE_WORK_DATA.map((step, i) => (
                     <div key={i} className={`process-step step-${i+1}`}>

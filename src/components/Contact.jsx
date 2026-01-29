@@ -282,6 +282,8 @@ const Contact = () => {
                             variants={fadeVariants}
                             initial="hidden"
                             animate="visible"
+                            role="alert" 
+                            aria-live="assertive"
                         >
                             <h3 style={{fontSize: '2rem', marginBottom: '1rem'}}>Message Sent! ✨</h3>
                             <p>Thanks for reaching out, {formData.name}. I'll get back to you soon.</p>

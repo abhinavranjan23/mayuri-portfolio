@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 
@@ -6,7 +6,7 @@ import './Navbar.css';
 
 import { NAV_CONFIG_ABOUT, NAV_CONFIG_PHOTO, NAV_CONFIG_DEFAULT } from '../utils/Constant';
 
-const Navbar = () => {
+const Navbar = memo(() => {
     const location = useLocation();
     const [hoveredLink, setHoveredLink] = useState(null);
 
@@ -20,7 +20,7 @@ const Navbar = () => {
         : NAV_CONFIG_DEFAULT;
 
     return (
-        <nav className="navbar-container">
+        <nav className="navbar-container" aria-label="Main Navigation">
             {navItems.map((item, index) => (
                 <Link 
                     key={index}
@@ -37,6 +37,6 @@ const Navbar = () => {
             ))}
         </nav>
     );
-};
+});
 
 export default Navbar;

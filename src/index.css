@@ -21,6 +21,23 @@ body {
   overflow-x: hidden;
 }
 
+/* Accessibility: Global Focus Styles */
+:focus-visible {
+  outline: 3px solid #646cff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ensure focus is not lost on buttons/links */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #646cff;
+  outline-offset: 2px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

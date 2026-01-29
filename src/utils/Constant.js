@@ -336,3 +336,105 @@ export const WANDERING_MINDS_DATA = [
     image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/foodie_rxvwtg.jpg"
   }
 ];
+
+
+export const SERVICE_ITEMS = [
+    { title: "Social Media Management", icon: "📱", color: "pill-blue", cardColor: "card-blue", desc: "End-to-end management of your social presence, from scheduling to community engagement." },
+    { title: "Content Creation", icon: "🎨", color: "pill-pink", cardColor: "card-pink", desc: "Eye-catching visuals, reels, and posts designed to stop the scroll and tell your story." },
+    { title: "Facebook & Instagram Ads", icon: "📈", color: "pill-yellow", cardColor: "card-yellow", desc: "Targeted ad campaigns that drive traffic, leads, and measurable ROI." },
+    { title: "Google My Business", icon: "📍", color: "pill-green", cardColor: "card-green", desc: "Optimizing your local presence to ensure customers find you first." },
+    { title: "Account Setup", icon: "⚙️", color: "pill-purple", cardColor: "card-purple", desc: "Professional setup of profiles with SEO-optimized bios and highlights." },
+    { title: "Content Writing", icon: "✍️", color: "pill-orange", cardColor: "card-orange", desc: "Compelling captions, blogs, and copy that speak your brand's voice." }
+];
+
+
+export const WHY_CHOOSE_US_DATA = [
+    { title: "Experienced Team", desc: "Over 3 years of experience in helping brands grow online." },
+    { title: "Tailored Strategies", desc: "Every business is unique, so is our approach." },
+    { title: "Data-Driven Decisions", desc: "We focus on results, not just vanity metrics." },
+    { title: "Transparent Communication", desc: "Regular updates and clear reports." },
+    { title: "Affordable Packages", desc: "Quality marketing that fits your budget." }
+];
+
+export const HOW_WE_WORK_DATA = [
+    { title: "Discovery & Consultation", desc: "We understand your business, goals, and target audience." },
+    { title: "Strategy Planning", desc: "A personalized content and ad plan designed for your brand." },
+    { title: "Execution", desc: "Content creation, posting, and ad campaign setup." },
+    { title: "Monitoring", desc: "We track performance metrics and audience insights." },
+    { title: "Optimization", desc: "Data-based adjustments to improve results continuously." },
+    { title: "Reporting", desc: "Monthly performance reports with clear insights and next steps." }
+];
+
+export const SERVICES_PAGE_DATA = {
+     serviceTitle:"What I Bring to the Table",
+     serviceSubTitle:"Transforming ideas into digital reality. I help brands grow with strategic content and management.",
+    whyChooseTitle:"Why Choose Us?",
+    whyChooseSubTitle:"So Many Choices, and a little time? Here's why.",
+    howWeWorkTitle:"How We Work ?",
+    
+    
+}
+
+// Social Stats Page Data
+export const SOCIAL_STATS_DATA = {
+    INTRO_IMG: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769193973/travelgram_vfqfau.png",
+    CITY_IMG: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769194419/885a727276a1c613a7532e120c609974_yzhbc0.jpg",
+    POST_IMG: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769194286/Screenshot_2026-01-24_002042_mfciak.png",
+    RESULT_IMG: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769194726/ChatGPT_Image_Jan_24_2026_12_28_20_AM_fdlgrn.jpg",
+    YOUTUBE_IMG: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1766458313/social2_vzaorb.png",
+    POST_IMG2: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769195383/Screenshot_2026-01-24_003911_smsrgt.png",
+    YOUTUBE_PROFILE_IMG: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769195661/channels4_profile_lle6zw.jpg",
+    
+    // Text Content
+    INTRO_TITLE: "Travelgram",
+    INTRO_DESC: `Travelgram was a platform on Twitter to showcase the travel beauty
+around the world. The platform aimed to focus on the tourism of Qatar
+involving all the wonders of the globe. I was part of strategising the content, content creation 
+and managing monthly calendar.`,
+
+    CAMPAIGN_1_TITLE: "Campaign Strategy 1: \nSpotlight Lusail",
+    CAMPAIGN_1_SUBTITLE: "I was part of planning content strategy and the creative captions to be posted.",
+    CAMPAIGN_1_OBJECTIVE: "To spotlight Lusail, Qatar as a thriving post-World Cup destination and modern urban marvel, reinforcing its appeal as a luxury travel and investment hotspot.",
+    CAMPAIGN_1_APPROACH: [
+        { title: "Modern Urban Development:", desc: "Showcasing futuristic architecture and city planning." },
+        { title: "Event Legacy Tourism:", desc: "Emphasizing Lusail’s vibrancy even after global events like the FIFA World Cup." },
+        { title: "Visual Aesthetics:", desc: "Highlighting a stunning panoramic cityscape." }
+    ],
+
+    CAMPAIGN_2_TITLE: "Campaign Strategy 2: \nDive Into History",
+    CAMPAIGN_2_SUBTITLE: "In this campaign, I worked on content strategy, creative content and copy.",
+    CAMPAIGN_2_OBJECTIVE: "To captivate adventure and history enthusiasts by promoting scuba diving tourism in Egypt through the historical allure of the SS Thistlegorm shipwreck.",
+    CAMPAIGN_2_APPROACH: [
+        { title: "Adventure & Exploration:", desc: "Highlighting a thrilling dive site in Dahab." },
+        { title: "Historical Significance:", desc: "Emphasizing the WWII history of the SS Thistlegorm." },
+        { title: "Visual Appeal:", desc: "Leveraging powerful underwater imagery to spark curiosity." }
+    ],
+
+    YOUTUBE_TITLE: "My YouTube Channel",
+    
+    // Placeholder analytics data (simulated for now based on hardcoded values)
+    ANALYTICS_VIEWS: {
+        title: "Views",
+        value: "19.8K",
+        subtext: "8.3K more than usual"
+    },
+    ANALYTICS_ENGAGED: {
+        title: "Engaged views",
+        value: "8.6K",
+        subtext: "169% more than previous 28 days"
+    },
+
+    TESTIMONIALS_TITLE: "What People Say",
+    TESTIMONIALS: [
+        {
+            text: "\"I’ve really enjoyed working with Mayuri as our Social Media and Content Creator. She’s creative, reliable, and has a great ability to turn complex ideas into clear, engaging content that fits our brand perfectly. She’s proactive, easy to work with, and always open to feedback. Mayuri consistently delivers high-quality work and brings a thoughtful approach to everything she does. I’d highly recommend her to any team looking for a strong content and social media professional.\"",
+            name: "Bonnie Tyler",
+            role: "General Manager at Doherty Fultz Immigration"
+        },
+        {
+            text: "\"I’ve had the pleasure of working with Mayuri, and I can confidently say she's an excellent social media content creator. She a sharp understanding of how to translate brand voice into engaging, platform-appropriate content that actually resonates. Mayuri combines creativity with strategy. Every piece of content is intentional, data-informed, and aligned with broader business goals. She's very responsive to feedback, and consistently bring fresh ideas to the table. Beyond her technical skills, Mayuri is reliable, collaborative, and easy to work with. I would not hesitate to recommend her.\"",
+            name: "Cassandra Fultz, RCIC-IRB",
+            role: "Founder - Doherty Fultz Immigration Inc."
+        }
+    ]
+};

@@ -209,6 +209,26 @@
     }
 }
 
+/* Accessibility: Focus Support */
+.grid-card:focus-within {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    outline: 4px solid #646cff; /* Clear focus ring */
+}
+
+.grid-card:focus-within img {
+    transform: scale(1.1);
+    filter: blur(4px);
+}
+
+.grid-card:focus-within .image-overlay {
+    opacity: 1;
+}
+
+.grid-card:focus-within .explore-text {
+    transform: translateY(0);
+}
+
 /* =====================================================
    MOBILE SCROLL TRIGGER EFFECT - IntersectionObserver
    Only triggered when card enters viewport (scroll)

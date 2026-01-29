@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap';
@@ -20,7 +20,7 @@ import {
     IoVolumeMute
 } from "react-icons/io5";
 
-const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
+const VideoCard = React.memo(({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
     const videoRef = useRef(null);
     const [isLiked, setIsLiked] = useState(false);
     const [shareText, setShareText] = useState("Share");
@@ -135,34 +135,70 @@ const VideoCard = ({ item, isActive, toggleMute, isMuted, shouldLoad }) => {
             </div>
         </motion.div>
     );
-};
+});
 
 const VideoContent = () => {
     const mainContainerRef = useRef(null);
     const [cardOrder, setCardOrder] = useState([...Array(VIDEO_CONTENT_DATA.length).keys()]);
     const [isMuted, setIsMuted] = useState(false);
+    const [pressedKey, setPressedKey] = useState(null); // 'prev' | 'next' | null
+    const [announcement, setAnnouncement] = useState(''); // For screen readers
     
-    const toggleMute = () => setIsMuted(!isMuted);
+    const toggleMute = useCallback(() => setIsMuted(prev => !prev), []);
 
-    const handlePrev = () => {
+    const handlePrev = useCallback(() => {
         setCardOrder(prev => {
             // Move last card to front
             const newOrder = [...prev];
             const lastCard = newOrder.pop();
             newOrder.unshift(lastCard);
+            // Announce new active video for screen readers
+            const activeItem = VIDEO_CONTENT_DATA[newOrder[0]];
+            setAnnouncement(`Now playing: ${activeItem.title}`);
             return newOrder;
         });
-    };
+    }, []);
 
-    const handleNext = () => {
+    const handleNext = useCallback(() => {
         setCardOrder(prev => {
             // Move first card to back
             const newOrder = [...prev];
             const firstCard = newOrder.shift();
             newOrder.push(firstCard);
+            // Announce new active video for screen readers
+            const activeItem = VIDEO_CONTENT_DATA[newOrder[0]];
+            setAnnouncement(`Now playing: ${activeItem.title}`);
             return newOrder;
         });
-    };
+    }, []);
+
+    // Keyboard Navigation
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'ArrowLeft') {
+                setPressedKey('prev');
+                handlePrev();
+            }
+            if (e.key === 'ArrowRight') {
+                setPressedKey('next');
+                handleNext();
+            }
+        };
+
+        const handleKeyUp = (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                setPressedKey(null);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+        
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+        };
+    }, [handlePrev, handleNext]);
 
     // Floating stickers animation (simplified, no scroll trigger)
     useEffect(() => {
@@ -214,6 +250,11 @@ const VideoContent = () => {
             </Helmet>
             
             <BackButton  lightMode={true}/>
+
+            {/* Screen Reader Announcement Region */}
+            <div className="sr-only" role="status" aria-live="polite" style={{ position: 'absolute', width: '1px', height: '1px', overflow: 'hidden', clip: 'rect(0,0,0,0)' }}>
+                {announcement}
+            </div>
 
             {/* Floating Stickers */}
             {PHOTO_CONTENT_STICKERS.slice(0, 3).map((s, i) => (
@@ -358,10 +399,14 @@ const VideoContent = () => {
                 <NavigationButton 
                     direction="prev" 
                     onClick={handlePrev}
+                    isPressed={pressedKey === 'prev'}
+                    ariaLabel="Previous Video (Left Arrow)"
                 />
                 <NavigationButton 
                     direction="next" 
                     onClick={handleNext}
+                    isPressed={pressedKey === 'next'}
+                    ariaLabel="Next Video (Right Arrow)"
                 />
             </div>
 
@@ -370,10 +415,12 @@ const VideoContent = () => {
                 <NavigationButton 
                     direction="prev" 
                     onClick={handlePrev}
+                    isPressed={pressedKey === 'prev'}
                 />
                 <NavigationButton 
                     direction="next" 
                     onClick={handleNext}
+                    isPressed={pressedKey === 'next'}
                 />
             </div>
             

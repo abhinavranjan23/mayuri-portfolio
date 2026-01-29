@@ -1,0 +1,63 @@
+.error-boundary-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.error-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+}
+
+.error-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #e63946;
+}
+
+.error-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.error-reload-btn, .error-home-btn {
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.error-reload-btn {
+    background-color: #333;
+    color: white;
+}
+
+.error-reload-btn:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+}
+
+.error-home-btn {
+    background-color: transparent;
+    border: 2px solid #333;
+    color: #333;
+}
+
+.error-home-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
