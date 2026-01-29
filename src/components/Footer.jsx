@@ -62,16 +62,18 @@ const Footer = memo(() => {
                     </div>
                 </div>
                 
-                 {/* Credit Section */}
-                <a 
-                    href="https://abhinavranjan.me" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="footer-credit"
-                >
-                    Made with <span className="heart-icon">❤️</span> by my brother Abhinav
-                </a>
             </div>
+
+             {/* Credit Section - Moved outside pill for slimmer look */}
+            <a 
+                href="https://www.linkedin.com/in/dev-abhinav/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="footer-credit"
+
+            >
+                Made with <span className="heart-icon">❤️</span> by my brother. @Abhinav
+            </a>
         </div>
     );
 });
@@ -94,7 +96,7 @@ const SocialIcon = memo(({ color, icon, href, label }) => (
             borderRadius: '12px',
             fontSize: '1.2rem',
             transition: 'transform 0.2s',
-            cursor: 'pointer'
+            cursor: 'none' // Use custom cursor instead of default pointer
         }}
         onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
         onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}

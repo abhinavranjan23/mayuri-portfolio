@@ -3,20 +3,22 @@
     width: 100%;
     margin-top: auto;
     z-index: 25;
-    overflow: hidden;
     
-    /* Grid Layout for stacking */
-    display: grid;
-    grid-template-areas: "stack";
-    place-items: center; /* Center horizontally */
-    /* padding-bottom: 20px; Slight breathing room at bottom of page */
+    /* Flex Layout for stacking Pill and Credit */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 20px; /* Space for credit */
 }
 
 .footer-watermark {
-    grid-area: stack;
-    align-self: end; /* Fix to bottom of the grid cell */
+    position: absolute;
+    bottom: -15px; /* Partially cut off for effect */
+    left: 50%;
+    transform: translateX(-50%);
     
-    font-size: clamp(60px, 20vw, 200px); /* Adjusted size */
+    font-size: clamp(60px, 20vw, 200px);
     font-weight: 900;
     color: rgba(0, 0, 0, 0.05);
     white-space: nowrap;
@@ -26,29 +28,21 @@
     letter-spacing: 0.1em;
     margin: 0;
     line-height: 0.75;
-    
-    /* Ensure no transform interferes with grid self-alignment */
-    position: static; 
-    transform: none;
-    text-align: center;
 }
 
 .footer-pill {
-    grid-area: stack;
-    align-self: center;
-    
     background-color: white;
-    border-radius: 40px; /* Slightly less round to accommodate height */
-    padding: 15px 30px;
+    border-radius: 50px; /* Fully round again */
+    padding: 10px 25px; /* Reduced padding */
     display: flex;
-    flex-direction: column; /* Stack vertically */
+    flex-direction: row; 
     align-items: center;
     gap: 10px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     max-width: 95%;
     position: relative;
     z-index: 2;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Space between pill and credit */
 }
 
 .footer-content-row {
@@ -126,7 +120,7 @@
     border-radius: 0;
     box-shadow: none;
     font-size: 0.75rem; 
-    color: #888;
+    color: #131313;
     text-decoration: none;
     font-weight: 500;
     display: flex;
@@ -134,7 +128,8 @@
     gap: 4px;
     font-family: 'Poppins', sans-serif;
     transition: color 0.2s;
-    align-self: center; /* Center in flex column */
+    margin-top: 5px;
+    z-index: 2;
 }
 
 .footer-credit:hover {
