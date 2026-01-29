@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import './ContentDesign.css';
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
-import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION } from '../utils/Constant';
+import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION, CONTENT_DESIGN_MOBILE_BG } from '../utils/Constant';
 import Footer from '../components/Footer';
 import ShimmerLoader from '../components/ShimmerLoader';
 
@@ -26,18 +26,16 @@ const ContentDesign = () => {
         const timer = setTimeout(() => {
             setIsLoading(false);
             sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
-        }, 1500); // Reduced from 3s to 1.5s
+        }, 500); // Drastically reduced from 1500ms to 500ms to prevent white screen
         return () => clearTimeout(timer);
     }, [isLoading]);
 
     const handleLottieLoad = useCallback(() => {
         if (!isLoading) return;
 
-        // Reduced delay for faster transition
-        setTimeout(() => {
-            setIsLoading(false);
-            sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
-        }, 200); // Reduced from 400ms to 200ms
+        // Instant transition when Lottie is ready
+        setIsLoading(false);
+        sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
     }, [isLoading]);
 
     // Mobile Scroll Trigger for Hover Effect
@@ -142,23 +140,41 @@ const ContentDesign = () => {
             </motion.div>
 
             {/* Main Content Area with Background Lottie */}
-            <motion.div className="content-design-bg-container" variants={contentVariants}>
+            <motion.div 
+                className="content-design-bg-container" 
+                variants={contentVariants}
+                style={{ opacity: isLoading ? 0 : 1 }} // Manage opacity here if needed, but variants handle it
+            >
                 <div className="content-design-lottie-wrapper">
-                    <DotLottiePlayer
-                        key={isMobile ? 'mobile-bg' : 'desktop-bg'}
-                        src={CONTENT_BG_ANIMATION}
-                        autoplay={!isMobile}
-                        loop={!isMobile}
-                        rendererSettings={{
-                            preserveAspectRatio: 'xMidYMid slice'
-                        }}
-                        style={{ width: '100%', height: '100%' }}
-                        onEvent={(event) => {
-                            if (event === 'ready' || event === 'load') {
-                                handleLottieLoad();
-                            }
-                        }}
-                    />
+                    {!isMobile ? (
+                        <DotLottiePlayer
+                            key="desktop-bg"
+                            src={CONTENT_BG_ANIMATION}
+                            autoplay
+                            loop
+                            rendererSettings={{
+                                preserveAspectRatio: 'xMidYMid slice'
+                            }}
+                            style={{ width: '100%', height: '100%' }}
+                            onEvent={(event) => {
+                                if (event === 'ready' || event === 'load') {
+                                    handleLottieLoad();
+                                }
+                            }}
+                        />
+                    ) : (
+                        <img 
+                            src={CONTENT_DESIGN_MOBILE_BG} 
+                            alt="Background" 
+                            style={{ 
+                                width: '100%', 
+                                height: '100%', 
+                                objectFit: 'cover',
+                                opacity: 0.8 // Maintained readability
+                            }}
+                            onLoad={handleLottieLoad} // Trigger load complete
+                        />
+                    )}
                 </div>
             </motion.div>
 

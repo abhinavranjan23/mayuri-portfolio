@@ -191,6 +191,7 @@ export const ANIMATION_STICKERS_DATA = [
 
 // Content Design Page
 export const CONTENT_BG_ANIMATION = "https://res.cloudinary.com/dnt0xlngl/raw/upload/v1767024743/Background_fv3itj.json";
+export const CONTENT_DESIGN_MOBILE_BG = "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769671718/Untitled_design_srqway.webp"; // Using About BG as placeholder/style match
 
 export const CONTENT_DESIGN_CARDS = [
     { title: "Photo Content", image: "https://res.cloudinary.com/dnt0xlngl/image/upload/v1769284109/photoContent_wqorhg_i770wy.webp" , link: "/content-design/photo-content" },
