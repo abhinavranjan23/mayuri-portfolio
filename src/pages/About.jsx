@@ -49,19 +49,25 @@ const About = () => {
                     setIsPlaying(true);
                 }
             } catch (err) {
-                console.log("Autoplay blocked");
+                
                 const enableAudio = () => {
                    if (audioRef.current) {
-                       audioRef.current.play();
-                       setIsPlaying(true);
+                       audioRef.current.play().then(() => {
+                           setIsPlaying(true);
+                       }).catch(e => console.log("Audio still blocked", e));
                    }
-                   window.removeEventListener('click', enableAudio);
+                   ['click', 'keydown', 'touchstart', 'mousemove'].forEach(event => 
+                       window.removeEventListener(event, enableAudio)
+                   );
                 };
-                window.addEventListener('click', enableAudio);
+                
+                ['click', 'keydown', 'touchstart', 'mousemove'].forEach(event => 
+                    window.addEventListener(event, enableAudio)
+                );
             }
         };
         playAudio();
-    }, [isMobile]);
+    }, [isMobile, isLoading]);
 
     const toggleMusic = () => {
         if (isPlaying) {
