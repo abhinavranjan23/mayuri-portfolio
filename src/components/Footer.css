@@ -10,6 +10,7 @@
     align-items: center;
     justify-content: flex-end;
     padding-bottom: 20px; /* Space for credit */
+    overflow: hidden; /* Ensure watermark doesn't cause scroll or get clipped unexpectedly */
 }
 
 .footer-watermark {
@@ -71,47 +72,89 @@
 }
 
 /* Mobile Responsiveness */
+/* Mobile Responsiveness */
+/* Mobile Responsiveness - Force Row Layout */
 @media (max-width: 768px) {
     .footer-pill {
         gap: 15px;
-        padding: 7px 15px;
+        padding: 10px 20px;
+    }
+
+    .footer-content-row {
+        gap: 15px;
+        flex-direction: row; /* Ensure row layout */
+    }
+    
+    .footer-credit {
+         font-size: 0.7rem;
     }
 }
 
 @media (max-width: 550px) {
     .footer-pill {
         width: auto;
-        gap: 10px;
-        padding: 4px 8px;
-        transform-origin: center center;
+        max-width: 95%;
+        gap: 8px; 
+        padding: 8px 15px;
+        justify-content: center;
+        flex-direction: row; /* Force row */
     }
     
-    /* Scale down slightly on mobile to fit */
-    .footer-pill {
-        transform: scale(0.9);
+    .footer-content-row {
+        flex-direction: row; /* Force row */
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        gap: 10px;
     }
     
     .footer-email {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        gap: 6px;
     }
     
     .footer-email svg {
-        font-size: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .footer-icons {
+        gap: 8px; 
+    }
+
+    /* Raise watermark on mobile to prevent cut-off */
+    .footer-watermark {
+        bottom: 0px; 
+        font-size: 15vw; /* Adjust size to fit better */
     }
 }
 
 @media (max-width: 380px) {
-    /* Extreme small screen handling */
     .footer-pill {
-        transform: scale(0.8);
-        width: 100%;
-        justify-content: space-between;
+        padding: 6px 12px;
+        gap: 6px;
     }
+    
+    .footer-content-row {
+        gap: 6px;
+    }
+
     .footer-email span {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+    }
+    
+    .footer-icons {
+        gap: 6px;
+    }
+    
+    .footer-icons a {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 1rem !important;
+        border-radius: 8px !important;
     }
 }
 
+/* Shared Desktop/Mobile Styles for Credit & Heart (Restored) */
 .footer-credit {
     background: transparent;
     backdrop-filter: none;
@@ -125,17 +168,19 @@
     font-weight: 500;
     display: flex;
     align-items: center;
+    justify-content: center; /* Ensure centered */
     gap: 4px;
     font-family: 'Poppins', sans-serif;
     transition: color 0.2s;
     margin-top: 5px;
     z-index: 2;
+    width: 100%; /* Ensure full width for centering */
 }
 
 .footer-credit:hover {
     transform: none;
     background: transparent;
-    color: #e91e63; /* Pink hover */
+    color: #e91e63; 
 }
 
 .heart-icon {
@@ -147,19 +192,4 @@
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
-}
-
-@media (max-width: 768px) {
-    .footer-pill {
-        padding: 15px 20px;
-    }
-    
-    .footer-content-row {
-        gap: 15px;
-        flex-direction: column;
-    }
-    
-    .footer-credit {
-         font-size: 0.7rem;
-    }
 }
