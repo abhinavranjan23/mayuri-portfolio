@@ -1,14 +1,16 @@
-import {  useState, useEffect, useCallback } from 'react';
+import React, {  useState, useEffect, useCallback, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { DotLottiePlayer } from '@dotlottie/react-player';
+
+// Lazy load DotLottiePlayer for background to save initial bundle
+const DotLottiePlayer = React.lazy(() => import('@dotlottie/react-player').then(module => ({ default: module.DotLottiePlayer })));
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import './ContentDesign.css';
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
 import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION, CONTENT_DESIGN_MOBILE_BG, CONTENT_DESIGN_STRINGS } from '../utils/Constant';
-import Footer from '../components/Footer';
 import ShimmerLoader from '../components/ShimmerLoader';
+const Footer = React.lazy(() => import('../components/Footer'));
 
 import useIsMobile from '../hooks/useIsMobile';
 
@@ -126,13 +128,15 @@ const ContentDesign = () => {
             <motion.div className="content-design-top-bar" variants={topBarVariants}>
                  <Link to="/" aria-label="Home">
                     <div className="avatar-circle" style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', background: '#f0f0f0' }}>
-                        <DotLottiePlayer
-                            key={isMobile ? CONTENT_DESIGN_STRINGS.MOBILE_AVATAR_KEY : CONTENT_DESIGN_STRINGS.DESKTOP_AVATAR_KEY}
-                            src={avatarAnimation}
-                            autoplay={!isMobile}
-                            loop={!isMobile}
-                            style={{ width: '100%', height: '100%' }}
-                        />
+                        <Suspense fallback={<div style={{width:'100%', height:'100%', background:'#eee'}}></div>}>
+                            <DotLottiePlayer
+                                key={isMobile ? CONTENT_DESIGN_STRINGS.MOBILE_AVATAR_KEY : CONTENT_DESIGN_STRINGS.DESKTOP_AVATAR_KEY}
+                                src={avatarAnimation}
+                                autoplay={!isMobile}
+                                loop={!isMobile}
+                                style={{ width: '100%', height: '100%' }}
+                            />
+                        </Suspense>
                     </div>
                  </Link>
                  
@@ -147,21 +151,23 @@ const ContentDesign = () => {
             >
                 <div className="content-design-lottie-wrapper">
                     {!isMobile ? (
-                        <DotLottiePlayer
-                            key={CONTENT_DESIGN_STRINGS.DESKTOP_BG_KEY}
-                            src={CONTENT_BG_ANIMATION}
-                            autoplay
-                            loop
-                            rendererSettings={{
-                                preserveAspectRatio: 'xMidYMid slice'
-                            }}
-                            style={{ width: '100%', height: '100%' }}
-                            onEvent={(event) => {
-                                if (event === 'ready' || event === 'load') {
-                                    handleLottieLoad();
-                                }
-                            }}
-                        />
+                        <Suspense fallback={null}>
+                            <DotLottiePlayer
+                                key={CONTENT_DESIGN_STRINGS.DESKTOP_BG_KEY}
+                                src={CONTENT_BG_ANIMATION}
+                                autoplay
+                                loop
+                                rendererSettings={{
+                                    preserveAspectRatio: 'xMidYMid slice'
+                                }}
+                                style={{ width: '100%', height: '100%' }}
+                                onEvent={(event) => {
+                                    if (event === 'ready' || event === 'load') {
+                                        handleLottieLoad();
+                                    }
+                                }}
+                            />
+                        </Suspense>
                     ) : (
                         <img 
                             src={CONTENT_DESIGN_MOBILE_BG} 
@@ -197,7 +203,13 @@ const ContentDesign = () => {
                        
                         <motion.div className="grid-card" variants={cardVariants} key={index}>
                              <Link to={card.link}>
-                            <img src={card.image} alt={card.title} />
+                            <img 
+                                src={card.image} 
+                                alt={card.title} 
+                                loading="lazy" 
+                                width="438" 
+                                height="438" 
+                            />
                             <div className="image-overlay">
                                 <span className="explore-text">{CONTENT_DESIGN_STRINGS.EXPLORE_TEXT}</span>
                             </div>
@@ -210,7 +222,9 @@ const ContentDesign = () => {
 
                 {/* Bottom spacer for scrolling */}
                 <div style={{ height: '100px' }}></div>
-                <Footer/>
+                <Suspense fallback={null}>
+                    <Footer/>
+                </Suspense>
             </div>
 
         </motion.div>

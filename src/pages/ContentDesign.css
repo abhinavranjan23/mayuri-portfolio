@@ -181,8 +181,9 @@
     letter-spacing: 1px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     transform: translateY(20px);
-    transition: transform 0.3s ease;
-    will-change: transform;
+    opacity: 0; /* Hidden by default */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    will-change: transform, opacity;
 }
 
 /* =====================================================
@@ -206,6 +207,7 @@
 
     .grid-card:hover .explore-text {
         transform: translateY(0);
+        opacity: 1; /* Make visible on hover */
     }
 }
 
@@ -227,6 +229,7 @@
 
 .grid-card:focus-within .explore-text {
     transform: translateY(0);
+    opacity: 1;
 }
 
 /* =====================================================
@@ -244,20 +247,14 @@
     filter: none;
 }
 
+/* Mobile scroll trigger opacity only - Layout handled in media query */
 .grid-card.mobile-active .image-overlay {
     opacity: 1;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
-    height: 40%; /* Only cover bottom part */
-    top: auto;
-    bottom: 0;
-    border-radius: 0 0 24px 24px;
-    align-items: flex-end;
-    padding-bottom: 1.5rem;
 }
 
 .grid-card.mobile-active .explore-text {
     transform: translateY(0);
-    font-size: 1.8rem; /* Slightly smaller on mobile */
+    opacity: 1; /* Fade in text */
 }
 
 .card-badge {
@@ -304,5 +301,20 @@
     
     .content-scroll-overlay {
         padding-top: 90px;
+    }
+
+    /* Mobile Overlay - Pre-positioned to avoid jumping */
+    .image-overlay {
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+        height: 40%;
+        top: auto;
+        bottom: 0;
+        border-radius: 0 0 24px 24px;
+        align-items: flex-end;
+        padding-bottom: 1.5rem;
+    }
+    
+    .explore-text {
+        font-size: 1.8rem;
     }
 }
