@@ -47,9 +47,13 @@ const Services = () => {
                 <div className="marquee-container">
                 {/* Row 1: Left to Right */}
                 <div className="marquee-track animate-left">
-                    {MARQUEE_LIST.map((item, i) => (
-                        <div key={`l-${i}`} className={`service-marquee-item ${item.color}`}>
-                            {item.title} {item.icon}
+                    {[...Array(6)].map((_, i) => (
+                        <div key={`l-${i}`} style={{ display: 'flex', gap: '20px' }}>
+                             <div className="service-marquee-item pill-yellow">Shorts ⚡</div>
+                             <div className="service-marquee-item pill-pink">Reels 📸</div>
+                             <div className="service-marquee-item pill-blue">Videos 🎥</div>
+                             <div className="service-marquee-item pill-orange">Snap 👻</div>
+                             <div className="service-marquee-item pill-green">Vlogs 🏕️</div>
                         </div>
                     ))}
                 </div>

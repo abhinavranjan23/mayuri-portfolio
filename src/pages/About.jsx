@@ -12,6 +12,7 @@ import playIcon from '../assets/play.svg';
 import { Link } from 'react-router-dom';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import TypewriterText from '../components/TypewriterText';
 // Lazy load WhatIBring
 const WhatIBring = lazy(() => import('../components/WhatIBring'));
 const BooksSection = lazy(() => import('../components/BooksSection'));
@@ -42,40 +43,7 @@ const About = () => {
         img.onerror = () => setIsLoading(false); // Fallback
     }, []);
 
-    const TypewriterText = ({ text }) => {
-        // Split text into words to handle wrapping better, or chars for pure typewriter
-        const characters = text.split("");
-        
-        const sentenceVariants = {
-            hidden: { opacity: 1 },
-            visible: {
-                opacity: 1,
-                transition: {
-                    staggerChildren: 0.03, // Speed of typing
-                }
-            }
-        };
 
-        const charVariants = {
-            hidden: { opacity: 0 },
-            visible: { opacity: 1 }
-        };
-
-        return (
-            <motion.p 
-                variants={sentenceVariants}
-                initial="hidden"
-                animate="visible"
-                style={{ display: 'inline' }}
-            >
-                {characters.map((char, index) => (
-                    <motion.span key={index} variants={charVariants}>
-                        {char}
-                    </motion.span>
-                ))}
-            </motion.p>
-        );
-    };
 
     if (isLoading) return <ShimmerLoader />;
 
