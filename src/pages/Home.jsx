@@ -73,17 +73,15 @@ const Home = () => {
                   if (audioRef.current) {
                       audioRef.current.play().then(() => {
                           setIsPlaying(true);
+                          // Only remove listeners if play succeeds
+                          window.removeEventListener('click', enableAudio);
+                          window.removeEventListener('keydown', enableAudio);
+                          window.removeEventListener('touchstart', enableAudio);
                       }).catch((e) => console.log("Audio still blocked", e));
                   }
-                  window.removeEventListener('click', enableAudio);
-                  window.removeEventListener('keydown', enableAudio);
-                  window.removeEventListener('mousemove', enableAudio);
-                  window.removeEventListener('touchstart', enableAudio);
               };
               window.addEventListener('click', enableAudio);
               window.addEventListener('keydown', enableAudio);
-              window.removeEventListener('mousemove', enableAudio); // Ensure no dupes? No, just add.
-              window.addEventListener('mousemove', enableAudio);
               window.addEventListener('touchstart', enableAudio);
           }
       };
@@ -111,7 +109,7 @@ const Home = () => {
             Actually keep it rendered but controlled, OR remove it. 
             User said "music should not be played". remove it to be safe 
         */}
-        {!isMobile && <audio ref={audioRef} src="/music/lilies-on-lapse.mp3" loop />}
+        {!isMobile && <audio ref={audioRef} src="/music/lilies-on-lapse.mp3" loop autoPlay />}
 
         {/* Music Control Button */}
         {!isMobile && (
