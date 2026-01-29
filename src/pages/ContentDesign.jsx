@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import './ContentDesign.css';
 import avatarAnimation from '../assets/Avatar-woman-short-hair.lottie';
-import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION, CONTENT_DESIGN_MOBILE_BG } from '../utils/Constant';
+import { CONTENT_DESIGN_CARDS, CONTENT_BG_ANIMATION, CONTENT_DESIGN_MOBILE_BG, CONTENT_DESIGN_STRINGS } from '../utils/Constant';
 import Footer from '../components/Footer';
 import ShimmerLoader from '../components/ShimmerLoader';
 
@@ -16,7 +16,7 @@ const ContentDesign = () => {
     const isMobile = useIsMobile();
     const [isLoading, setIsLoading] = useState(() => {
         // PERF: Check if user has already seen the intro in this session
-        return !sessionStorage.getItem('hasViewedContentDesignIntro');
+        return !sessionStorage.getItem(CONTENT_DESIGN_STRINGS.SESSION_KEY);
     });
 
     // Safety timeout in case Lottie takes too long or fails
@@ -25,7 +25,7 @@ const ContentDesign = () => {
         
         const timer = setTimeout(() => {
             setIsLoading(false);
-            sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
+            sessionStorage.setItem(CONTENT_DESIGN_STRINGS.SESSION_KEY, 'true');
         }, 500); // Drastically reduced from 1500ms to 500ms to prevent white screen
         return () => clearTimeout(timer);
     }, [isLoading]);
@@ -35,7 +35,7 @@ const ContentDesign = () => {
 
         // Instant transition when Lottie is ready
         setIsLoading(false);
-        sessionStorage.setItem('hasViewedContentDesignIntro', 'true');
+        sessionStorage.setItem(CONTENT_DESIGN_STRINGS.SESSION_KEY, 'true');
     }, [isLoading]);
 
     // Mobile Scroll Trigger for Hover Effect
@@ -120,14 +120,14 @@ const ContentDesign = () => {
             animate="visible"
         >
             <Helmet>
-                <title>Content Design Portfolio | Visuals & Creative Work</title>
-                <meta name="description" content="Browse the creative content design portfolio of Mayuri Saitav. High-quality visuals, graphics, and layouts tailored for social media success." />
+                <title>{CONTENT_DESIGN_STRINGS.HELMET_TITLE}</title>
+                <meta name="description" content={CONTENT_DESIGN_STRINGS.HELMET_DESCRIPTION} />
             </Helmet>
             <motion.div className="content-design-top-bar" variants={topBarVariants}>
                  <Link to="/" aria-label="Home">
                     <div className="avatar-circle" style={{ width: '60px', height: '60px', borderRadius: '50%', overflow: 'hidden', background: '#f0f0f0' }}>
                         <DotLottiePlayer
-                            key={isMobile ? 'mobile-avatar' : 'desktop-avatar'}
+                            key={isMobile ? CONTENT_DESIGN_STRINGS.MOBILE_AVATAR_KEY : CONTENT_DESIGN_STRINGS.DESKTOP_AVATAR_KEY}
                             src={avatarAnimation}
                             autoplay={!isMobile}
                             loop={!isMobile}
@@ -148,7 +148,7 @@ const ContentDesign = () => {
                 <div className="content-design-lottie-wrapper">
                     {!isMobile ? (
                         <DotLottiePlayer
-                            key="desktop-bg"
+                            key={CONTENT_DESIGN_STRINGS.DESKTOP_BG_KEY}
                             src={CONTENT_BG_ANIMATION}
                             autoplay
                             loop
@@ -184,12 +184,10 @@ const ContentDesign = () => {
                 {/* Intro Section */}
                 <motion.div className="content-intro-section" variants={gridVariants}>
                     <h2 className="content-quote">
-                        &quot;Posting meaningful is important rather than posting daily&quot;
+                        &quot;{CONTENT_DESIGN_STRINGS.QUOTE}&quot;
                     </h2>
                     <p className="content-description">
-                        I consider content is a way to vocalize one&apos;s social account. 
-                        I absolutely love when being part of strategizing content and bringing volume to those ideas through graphic. 
-                        I&apos;ve strategized and shaped those ideas across D2C, B2C companies.
+                        {CONTENT_DESIGN_STRINGS.DESCRIPTION}
                     </p>
                 </motion.div>
 
@@ -201,7 +199,7 @@ const ContentDesign = () => {
                              <Link to={card.link}>
                             <img src={card.image} alt={card.title} />
                             <div className="image-overlay">
-                                <span className="explore-text">Click to Explore</span>
+                                <span className="explore-text">{CONTENT_DESIGN_STRINGS.EXPLORE_TEXT}</span>
                             </div>
                             <div className="card-badge">{card.title}</div>
                             </Link>

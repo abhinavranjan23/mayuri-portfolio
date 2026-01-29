@@ -1,4 +1,4 @@
-import { useRef, useState, Suspense, lazy , useEffect } from 'react';
+import { useState, Suspense, lazy , useEffect } from 'react';
 import { motion } from 'framer-motion'; 
 import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
@@ -20,13 +20,16 @@ import { ABOUT_BG_IMG, ABOUT_TYPEWRITER_TEXT } from '../utils/Constant';
 import ShimmerLoader from '../components/ShimmerLoader';
 
 import useIsMobile from '../hooks/useIsMobile';
+import useAudioController from '../hooks/useAudioController';
+import useAboutAnimation from '../hooks/useAboutAnimation';
 
 const About = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(null);
     const isMobile = useIsMobile();
-
     const [isLoading, setIsLoading] = useState(true);
+    
+    // Use custom Hooks
+    const { audioRef, isPlaying, toggleAudio } = useAudioController(isMobile, isLoading);
+    const { containerVariants, topBarVariants, headingVariants, imageVariants } = useAboutAnimation();
 
     useEffect(() => {
         // Preload Background Image
@@ -38,89 +41,6 @@ const About = () => {
         };
         img.onerror = () => setIsLoading(false); // Fallback
     }, []);
-
-    useEffect(() => {
-        if (isMobile || isLoading) return; // Don't play if loading
-
-        const playAudio = async () => {
-            try {
-                if (audioRef.current) {
-                    await audioRef.current.play();
-                    setIsPlaying(true);
-                }
-            } catch (err) {
-            
-                const enableAudio = () => {
-                   if (audioRef.current) {
-                       audioRef.current.play().then(() => {
-                           setIsPlaying(true);
-                       }).catch(e => console.log("Audio still blocked", e));
-                   }
-                   ['click', 'keydown', 'touchstart', 'mousemove'].forEach(event => 
-                       window.removeEventListener(event, enableAudio)
-                   );
-                };
-                
-                ['click', 'keydown', 'touchstart', 'mousemove'].forEach(event => 
-                    window.addEventListener(event, enableAudio)
-                );
-            }
-        };
-        playAudio();
-    }, [isMobile, isLoading]);
-
-    const toggleMusic = () => {
-        if (isPlaying) {
-            audioRef.current.pause();
-            setIsPlaying(false);
-        } else {
-            audioRef.current.play().catch(() => {});
-            setIsPlaying(true);
-        }
-    };
-
-    // Animation Variants
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.3,
-                delayChildren: 0.2,
-                when: "beforeChildren"
-            }
-        }
-    };
-
-    const topBarVariants = {
-        hidden: { y: -20, opacity: 0, x: "-50%" },
-        visible: {
-            y: 0,
-            opacity: 1,
-            x: "-50%",
-            transition: { type: "spring", stiffness: 50, damping: 20, delay: 1.5 } // Delay until after main entrance
-        }
-    };
-
-    // Heading comes from below
-    const headingVariants = {
-        hidden: { y: 100, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: { type: "spring", stiffness: 60, damping: 20, duration: 1 }
-        }
-    };
-
-    // Image comes from above
-    const imageVariants = {
-        hidden: { y: "-100%", opacity: 0 }, // Start fully above off-screen
-        visible: {
-            y: "0%",
-            opacity: 1,
-            transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] } // Custom easing for "heavy drop" feel
-        }
-    };
 
     const TypewriterText = ({ text }) => {
         // Split text into words to handle wrapping better, or chars for pure typewriter
@@ -197,7 +117,7 @@ const About = () => {
                 {!isMobile && (
                     <div 
                         className="music-circle" 
-                        onClick={toggleMusic}
+                        onClick={toggleAudio}
                         style={{ cursor: 'none' }}
                         data-cursor-spin="true"
                     >

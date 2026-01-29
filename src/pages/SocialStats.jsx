@@ -1,63 +1,16 @@
-import  { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import BackButton from '../components/BackButton';
 import Footer from '../components/Footer';
 import './SocialStats.css';
 import { SOCIAL_STATS_DATA } from '../utils/Constant';
-
-gsap.registerPlugin(ScrollTrigger);
+import useSocialStatsAnimation from '../hooks/useSocialStatsAnimation';
 
 const SocialStats = () => {
     const pageRef = useRef(null);
 
-    useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            // Animate Sections on scroll
-            const sections = gsap.utils.toArray('.stats-section');
-            
-            sections.forEach(section => {
-                gsap.to(section, {
-                    autoAlpha: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
-                        end: "top 50%",
-                        toggleActions: "play none none reverse"
-                    }
-                });
-            });
+    useSocialStatsAnimation(pageRef);
 
-            // Number Counter Animation for YouTube
-            const stats = gsap.utils.toArray('.stat-number');
-            stats.forEach(stat => {
-                const value = parseInt(stat.getAttribute('data-value'));
-                gsap.from(stat, {
-                    textContent: 0,
-                    duration: 2,
-                    ease: "power1.out",
-                    snap: { textContent: 1 },
-                    stagger: 1,
-                    scrollTrigger: {
-                        trigger: stat,
-                        start: "top 85%",
-                    },
-                    onUpdate: function() {
-                        this.targets()[0].innerHTML = Math.ceil(this.targets()[0].textContent) + (stat.dataset.suffix || "");
-                    }
-                });
-            });
-
-        }, pageRef);
-
-        return () => ctx.revert();
-    }, []);
-
-    // Data imported from Constant.js
     return (
         <div className="social-stats-page" ref={pageRef}>
             <Helmet>
@@ -69,24 +22,21 @@ const SocialStats = () => {
 
             <div className="stats-container">
                 
-                {/* 1. Intro Section */}
+                
                 <section className="stats-section intro-grid">
                     <div className="intro-text">
                         <h1 className="section-title" style={{textAlign: 'left'}}>{SOCIAL_STATS_DATA.INTRO_TITLE}</h1>
                         <p style={{whiteSpace: 'pre-line'}}>
                             {SOCIAL_STATS_DATA.INTRO_DESC}
                         </p>
-                        {/* <p>
-                        From increasing engagement rates by <strong>200%</strong> to building loyal communities 
-                        from scratch, these case studies highlight the power of purpose-driven content.
-                        </p> */}
+                      
                     </div>
                     <div className="intro-image-wrapper">
                         <img src={SOCIAL_STATS_DATA.INTRO_IMG} alt="Social Media Intro" className="intro-image" />
                     </div>
                 </section>
 
-                {/* 2. Campaign Strategy 1 */}
+                
                 <section className="stats-section">
                     <h2 className="section-title" style={{whiteSpace: 'pre-line'}}>{SOCIAL_STATS_DATA.CAMPAIGN_1_TITLE}</h2>
                     <p className="section-subtitle">

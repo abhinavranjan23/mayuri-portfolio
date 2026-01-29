@@ -439,3 +439,41 @@ and managing monthly calendar.`,
         }
     ]
 };
+
+// Magic Strings for Home Page
+export const HOME_STRINGS = {
+    AUDIO_SRC: "/music/lilies-on-lapse.mp3",
+    HERO_TITLE_SMALL: "Content Creator",
+    HERO_TITLE_MAIN_1: "CREATIVE",
+    HERO_TITLE_MAIN_2: "THAT",
+    HERO_TITLE_MAIN_3: "PERFORMS",
+    PLAY_ICON_ALT: "Play",
+    PAUSE_ICON_ALT: "Pause",
+    AVATAR_ALT: "Mayuri Character"
+};
+
+export const ANIMATION_CONFIG = {
+    HERO_ANIM_DURATION: 1,
+    HERO_ANIM_STAGGER: 0.1,
+    STRIP_ANIM_DURATION: 1,
+    STRIP_ANIM_DELAY: 0.5,
+    FLOAT_ANIM_DURATION: 4,
+    FLOAT_ANIM_Y: [0, -20, 0],
+    FLOAT_MOBILE_ANIM_Y: [0, -10, 0],
+    EASE_POWER3: "power3.out",
+    EASE_CIRC: "circ.out",
+    EASE_IN_OUT: "easeInOut"
+};
+
+// Magic Strings for Content Design Page
+export const CONTENT_DESIGN_STRINGS = {
+    SESSION_KEY: 'hasViewedContentDesignIntro',
+    HELMET_TITLE: "Content Design Portfolio | Visuals & Creative Work",
+    HELMET_DESCRIPTION: "Browse the creative content design portfolio of Mayuri Saitav. High-quality visuals, graphics, and layouts tailored for social media success.",
+    QUOTE: "Posting meaningful is important rather than posting daily",
+    DESCRIPTION: "I consider content is a way to vocalize one's social account. I absolutely love when being part of strategizing content and bringing volume to those ideas through graphic. I've strategized and shaped those ideas across D2C, B2C companies.",
+    EXPLORE_TEXT: "Click to Explore",
+    MOBILE_AVATAR_KEY: "mobile-avatar",
+    DESKTOP_AVATAR_KEY: "desktop-avatar",
+    DESKTOP_BG_KEY: "desktop-bg"
+};

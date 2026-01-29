@@ -102,86 +102,7 @@
 
 
 
-/* Individual Card */
-.video-card {
-    position: relative;
-    width: 350px;
-    height: 600px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-    background: #000;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-}
 
-.video-card-wrapper {
-    transform-origin: center top;
-}
-
-.video-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.video-player {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Overlay Content on the card */
-.card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 2;
-    color: white;
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.card-header h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.follow-btn {
-    background: white;
-    color: black;
-    border: none;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    width: fit-content;
-}
-
-.card-desc {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    color: #eee;
-    margin: 0;
-    /* Limit lines? */
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
 
 /* Sticker Responsiveness */
 @media (max-width: 768px) {
@@ -202,51 +123,7 @@
     }
 }
 
-.card-actions {
-    position: absolute;
-    right: 15px;
-    bottom: 100px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    z-index: 3;
-    color: white;
-}
 
-.action-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-.icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px; /* Bigger touch target */
-    height: 40px;
-    background: rgba(255, 255, 255, 0.15); /* Glass effect */
-    backdrop-filter: blur(10px);
-    border-radius: 50%;
-    border: 0.5px solid rgba(255, 255, 255, 0.2);
-    font-size: 1.5rem; /* Bigger icon size */
-    transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.icon-container:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-}
-
-.action-item span {
-    font-size: 0.85rem;
-    font-weight: 500;
-}
 
 @media (max-width: 1400px) {
     .reels-page-container{
@@ -273,10 +150,7 @@
         box-sizing: border-box;
     }
     
-    .video-card {
-        width: 90vw;
-        height: 85vh;
-    }
+
 
     .deck-wrapper {
         height: 90vh; /* Match card height to prevent overflow/overlap */
