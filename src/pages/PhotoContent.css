@@ -293,6 +293,28 @@
     display: block;
 }
 
+/* Ensure scrolling if content is still too big */
+/* Ensure scrolling if content is still too big */
+.details-overlay {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll */
+    padding: 10px 0 50px 0; /* Fixed top spacing + bottom breathing room */
+    
+    /* Flexbox Safe Centering Logic */
+    display: flex !important;
+    flex-direction: column; 
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Start from top, not center */
+    overflow: hidden;
+}
+
+.overlay-content {
+    margin: 0 auto; /* Horizontal center only */
+    width: 90%;
+    max-width: 800px;
+}
+
+
 
 
 @media (max-width: 1440px) {
@@ -413,6 +435,9 @@
         left: 0% !important; /* Move more to the left */
         top: 22% !important; /* Move down slightly */
     }
+    .details-overlay {
+        padding: 40px 0 10px 0; /* Fixed top spacing + bottom breathing room */
+    }
 }
 
 /* Small Mobile (iPhone SE etc) - Fix Cutoff */
@@ -467,26 +492,6 @@
          left: -50px;
          top: -10px;
     }
-}
-
-/* Ensure scrolling if content is still too big */
-/* Ensure scrolling if content is still too big */
-.details-overlay {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scroll */
-    padding: 40px 0 50px 0; /* Fixed top spacing + bottom breathing room */
-    
-    /* Flexbox Safe Centering Logic */
-    display: flex !important;
-    flex-direction: column; 
-    align-items: center; /* Center horizontally */
-    justify-content: flex-start; /* Start from top, not center */
-}
-
-.overlay-content {
-    margin: 0 auto; /* Horizontal center only */
-    width: 90%;
-    max-width: 800px;
 }
 
 @keyframes bounce {
