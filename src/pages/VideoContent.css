@@ -33,8 +33,8 @@
 /* The deck container - now static, centered */
 .deck-wrapper {
     width: 100%;
-    min-height: 800px;
-    height: 800px;
+
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +43,7 @@
     margin-bottom: 10px;
     z-index: 5;
     perspective: 1200px;
-    overflow-x: visible;
+    overflow-x: hidden;
     overflow-y: hidden;
 }
 
@@ -130,6 +130,27 @@
         overflow-x: hidden;
     }
 }
+@media (max-height: 667px){
+      .deck-wrapper {
+        height: 90vh; /* Match card height to prevent overflow/overlap */
+        margin-top: 10px; /* Adjust spacing if needed */
+        margin-bottom: 0px; 
+        height: 700px;
+    
+    }
+    
+}
+@media (min-height: 700px){
+   .deck-wrapper {
+        height: 90vh; /* Match card height to prevent overflow/overlap */
+        margin-top: 10px; /* Adjust spacing if needed */
+        margin-bottom: 0px; 
+        min-height: 900px;
+    
+    }
+    
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -152,12 +173,7 @@
     
 
 
-    .deck-wrapper {
-        height: 90vh; /* Match card height to prevent overflow/overlap */
-        margin-top: 10px; /* Adjust spacing if needed */
-        margin-bottom: 0px; 
-        min-height: 800px;
-    }
+  
 
     .marquee-section {
         margin-bottom: 0px;

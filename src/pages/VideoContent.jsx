@@ -211,38 +211,36 @@ const VideoContent = () => {
                 />
             </div>
             
-            {/* Show marquee only when on first card */}
-            {cardOrder[0] === 0 && (
-                <motion.div 
-                    className="marquee-section"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className="marquee-row left-to-right">
+            {/* Show marquee always */}
+            <motion.div 
+                className="marquee-section"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <div className="marquee-row left-to-right">
+                    {[...Array(6)].map((_, i) => (
+                        <React.Fragment key={i}>
+                                <div className="marquee-item pill-yellow">Shorts ⚡</div>
+                                <div className="marquee-item pill-pink">Reels 📸</div>
+                                <div className="marquee-item pill-blue">Videos 🎥</div>
+                                <div className="marquee-item pill-orange">Snap 👻</div>
+                                <div className="marquee-item pill-green">Vlogs 🏕️</div>
+                        </React.Fragment>
+                    ))}
+                </div>
+                <div className="marquee-row right-to-left">
                         {[...Array(6)].map((_, i) => (
-                            <React.Fragment key={i}>
-                                 <div className="marquee-item pill-yellow">Shorts ⚡</div>
-                                 <div className="marquee-item pill-pink">Reels 📸</div>
-                                 <div className="marquee-item pill-blue">Videos 🎥</div>
-                                 <div className="marquee-item pill-orange">Snap 👻</div>
-                                 <div className="marquee-item pill-green">Vlogs 🏕️</div>
-                            </React.Fragment>
-                        ))}
-                    </div>
-                    <div className="marquee-row right-to-left">
-                         {[...Array(6)].map((_, i) => (
-                            <React.Fragment key={i}>
-                                 <div className="marquee-item pill-blue">Strategies 🎯</div>
-                                 <div className="marquee-item pill-green">Trends 🚀</div>
-                                 <div className="marquee-item pill-yellow">Editing ✂️</div>
-                                 <div className="marquee-item pill-pink">Viral 🔥</div>
-                                 <div className="marquee-item pill-orange">Content 📝</div>
-                            </React.Fragment>
-                        ))}
-                    </div>
-                </motion.div>
-            )}
+                        <React.Fragment key={i}>
+                                <div className="marquee-item pill-blue">Strategies 🎯</div>
+                                <div className="marquee-item pill-green">Trends 🚀</div>
+                                <div className="marquee-item pill-yellow">Editing ✂️</div>
+                                <div className="marquee-item pill-pink">Viral 🔥</div>
+                                <div className="marquee-item pill-orange">Content 📝</div>
+                        </React.Fragment>
+                    ))}
+                </div>
+            </motion.div>
           <Footer/>
         </div>
         

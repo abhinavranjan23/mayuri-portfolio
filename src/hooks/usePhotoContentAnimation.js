@@ -67,6 +67,64 @@ const usePhotoContentAnimation = (containerRef, heroRef, iphoneRef, showcaseCont
                   .to({}, { duration: 0.5 })
                   .to(".scroll-indicator-wrapper", { y: 200, duration: 1 }, 0);
 
+                 // --- DESKTOP ALBUM PINNED SEQUENCE ---
+                 const albumTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: showcaseContainerRef.current,
+                        start: "top top",
+                        end: "+=300%",
+                        pin: true,
+                        scrub: 1.5,
+                        snap: 1 / (companies.length - 1),
+                    }
+                });
+
+                // Add initial pause (hold first card)
+                albumTl.to({}, { duration: 2 });
+
+                // Initial State: First card visible at center, others start from right (scaled down)
+                showcaseRefs.current.forEach((el, i) => {
+                    if (el) {
+                        gsap.set(el, { 
+                            zIndex: companies.length - i, // Reverse z-index so incoming is on top
+                            autoAlpha: i === 0 ? 1 : 0, // autoAlpha handles visibility + opacity
+                            xPercent: i === 0 ? 0 : 120,
+                            scale: i === 0 ? 1 : 0.8,
+                            filter: i === 0 ? "blur(0px)" : "blur(5px)"
+                        });
+                    }
+                });
+
+                // Animation: Smooth overlapping transitions
+                showcaseRefs.current.forEach((el, i) => {
+                    if (i > 0) {
+                        const prevEl = showcaseRefs.current[i - 1];
+                        
+                        // Exit Previous Card: Slide LEFT and SHRINK (starts first)
+                        albumTl.to(prevEl, {
+                            xPercent: -120,
+                            scale: 0.8,
+                            autoAlpha: 0, // Fades out AND sets visibility: hidden
+                            filter: "blur(10px)",
+                            duration: 1.5,
+                            ease: "power2.in"
+                        }, "+=0");
+
+                        // Enter Current Card: Slide from RIGHT and GROW (starts 0.3s after exit begins)
+                        albumTl.to(el, {
+                            xPercent: 0,
+                            autoAlpha: 1, // Fades in AND sets visibility: visible
+                            scale: 1,
+                            filter: "blur(0px)",
+                            duration: 1.5,
+                            ease: "power2.out"
+                        }, "-=1.2"); // Overlap: starts 0.3s after exit begins
+
+                        // HOLD the card before next transition
+                        albumTl.to({}, { duration: 1.5 });
+                    }
+                });
+
             } else {
                  // --- MOBILE: SKIP ANIMATION ---
                  // Hide iPhone and Hero Text
@@ -85,62 +143,7 @@ const usePhotoContentAnimation = (containerRef, heroRef, iphoneRef, showcaseCont
 
 
             
-            const albumTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: showcaseContainerRef.current,
-                    start: "top top",
-                    end: "+=300%",
-                    pin: true,
-                    scrub: 1.5,
-                    snap: 1 / (companies.length - 1),
-                }
-            });
 
-            // Add initial pause (hold first card)
-            albumTl.to({}, { duration: 2 });
-
-            // Initial State: First card visible at center, others start from right (scaled down)
-            showcaseRefs.current.forEach((el, i) => {
-                if (el) {
-                    gsap.set(el, { 
-                        zIndex: companies.length - i, // Reverse z-index so incoming is on top
-                        autoAlpha: i === 0 ? 1 : 0, // autoAlpha handles visibility + opacity
-                        xPercent: i === 0 ? 0 : 120,
-                        scale: i === 0 ? 1 : 0.8,
-                        filter: i === 0 ? "blur(0px)" : "blur(5px)"
-                    });
-                }
-            });
-
-            // Animation: Smooth overlapping transitions
-            showcaseRefs.current.forEach((el, i) => {
-                if (i > 0) {
-                    const prevEl = showcaseRefs.current[i - 1];
-                    
-                    // Exit Previous Card: Slide LEFT and SHRINK (starts first)
-                    albumTl.to(prevEl, {
-                        xPercent: -120,
-                        scale: 0.8,
-                        autoAlpha: 0, // Fades out AND sets visibility: hidden
-                        filter: "blur(10px)",
-                        duration: 1.5,
-                        ease: "power2.in"
-                    }, "+=0");
-
-                    // Enter Current Card: Slide from RIGHT and GROW (starts 0.3s after exit begins)
-                    albumTl.to(el, {
-                        xPercent: 0,
-                        autoAlpha: 1, // Fades in AND sets visibility: visible
-                        scale: 1,
-                        filter: "blur(0px)",
-                        duration: 1.5,
-                        ease: "power2.out"
-                    }, "-=1.2"); // Overlap: starts 0.3s after exit begins
-
-                    // HOLD the card before next transition
-                    albumTl.to({}, { duration: 1.5 });
-                }
-            });
 
             
             // ----------------------------------------------------

@@ -206,28 +206,55 @@ const PhotoContent = () => {
                         </div>
 
                         <div className="mobile-images-scroll">
-                            {company.gridImages.map((imgSrc, imgIndex) => (
-                                <div 
-                                    key={imgIndex}
-                                    className="mobile-image-item"
-                                    onClick={() => setSelectedImage(imgSrc)}
-                                    role="button"
-                                    tabIndex={0}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            e.preventDefault(); // Prevent scroll on Space
-                                            setSelectedImage(imgSrc);
-                                        }
-                                    }}
-                                    aria-label={`View full size image ${imgIndex + 1} of ${company.name}`}
-                                    data-cursor-button
-                                >
-                                    <img src={imgSrc} alt={`${company.name} Post ${imgIndex + 1}`} />
-                                    <div className="mobile-image-overlay">
-                                        <span>View</span>
+                            <div className="mobile-scroll-track">
+                                {/* First Set */ }
+                                {company.gridImages.map((imgSrc, imgIndex) => (
+                                    <div 
+                                        key={`set1-${imgIndex}`}
+                                        className="mobile-image-item"
+                                        onClick={() => setSelectedImage(imgSrc)}
+                                        role="button"
+                                        tabIndex={0}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault(); 
+                                                setSelectedImage(imgSrc);
+                                            }
+                                        }}
+                                        aria-label={`View full size image ${imgIndex + 1} of ${company.name}`}
+                                        data-cursor-button
+                                    >
+                                        <img src={imgSrc} alt={`${company.name} Post ${imgIndex + 1}`} />
+                                        <div className="mobile-image-overlay">
+                                            <span>View</span>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+
+                                {/* Second Set (Duplicate for Loop) */}
+                                {company.gridImages.map((imgSrc, imgIndex) => (
+                                    <div 
+                                        key={`set2-${imgIndex}`}
+                                        className="mobile-image-item"
+                                        onClick={() => setSelectedImage(imgSrc)}
+                                        role="button"
+                                        tabIndex={0}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault(); 
+                                                setSelectedImage(imgSrc);
+                                            }
+                                        }}
+                                        aria-label={`View full size image ${imgIndex + 1} of ${company.name} (duplicate)`}
+                                        data-cursor-button
+                                    >
+                                        <img src={imgSrc} alt={`${company.name} Post ${imgIndex + 1} Duplicate`} />
+                                        <div className="mobile-image-overlay">
+                                            <span>View</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 ))}
