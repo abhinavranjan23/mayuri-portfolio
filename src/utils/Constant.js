@@ -443,10 +443,10 @@ and managing monthly calendar.`,
 // Magic Strings for Home Page
 export const HOME_STRINGS = {
     AUDIO_SRC: "/music/lilies-on-lapse.mp3",
-    HERO_TITLE_SMALL: "Content Creator",
-    HERO_TITLE_MAIN_1: "CREATIVE",
-    HERO_TITLE_MAIN_2: "THAT",
-    HERO_TITLE_MAIN_3: "PERFORMS",
+    HERO_TITLE_SMALL: "Social Media Expert",
+    HERO_TITLE_MAIN_1: "SOCIAL",
+    HERO_TITLE_MAIN_2: "BUT",
+    HERO_TITLE_MAIN_3: "STRATEGIC",
     PLAY_ICON_ALT: "Play",
     PAUSE_ICON_ALT: "Pause",
     AVATAR_ALT: "Mayuri Character"
